@@ -33,6 +33,19 @@ function loadThemeData() {
  */
 function generateThemeVariables(themeData) {
   const { themes, colors } = themeData;
+  const categories = colors.categories;
+  
+  // Auto-generate category colors in themes from categories section
+  if (categories) {
+    Object.keys(categories).forEach(categoryKey => {
+      if (categories[categoryKey].light) {
+        themes.light[categoryKey] = categories[categoryKey].light;
+      }
+      if (categories[categoryKey].dark) {
+        themes.dark[categoryKey] = categories[categoryKey].dark;
+      }
+    });
+  }
   
   let css = `/* Color Design Tokens */
 /* AUTO-GENERATED from app-theme.json - DO NOT EDIT MANUALLY */

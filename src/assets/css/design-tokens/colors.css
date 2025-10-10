@@ -13,9 +13,9 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
-  --color-science: #059669;
-  --color-policy: #7c3aed;
-  --color-tech: #dc2626;
+  --color-science: #D2E4FF;
+  --color-policy: #DFF5E1;
+  --color-tech: #E6D8FF;
 
   /* Neutral colors - consistent across themes */
   --color-neutral-50: #f9fafb;
@@ -41,9 +41,9 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
-  --color-science: #059669;
-  --color-policy: #7c3aed;
-  --color-tech: #dc2626;
+  --color-science: #D2E4FF;
+  --color-policy: #DFF5E1;
+  --color-tech: #E6D8FF;
 
   /* Navigation-specific colors for sidebar visibility */
   --color-nav-text: #2D3748;
@@ -71,9 +71,9 @@
   --color-warning: #fbbf24;
   --color-error: #f87171;
   --color-info: #60a5fa;
-  --color-science: #10b981;
-  --color-policy: #a78bfa;
-  --color-tech: #f87171;
+  --color-science: #0D47A1;
+  --color-policy: #1B5E20;
+  --color-tech: #5B2E90;
 
   /* Navigation-specific colors for sidebar visibility */
   --color-nav-text: #E2E8F0;
@@ -109,9 +109,9 @@
     --color-warning: #fbbf24;
     --color-error: #f87171;
     --color-info: #60a5fa;
-    --color-science: #10b981;
-    --color-policy: #a78bfa;
-    --color-tech: #f87171;
+    --color-science: #0D47A1;
+    --color-policy: #1B5E20;
+    --color-tech: #5B2E90;
 
     /* Navigation-specific colors for sidebar visibility */
     --color-nav-text: #E2E8F0;
