@@ -92,8 +92,8 @@
         {% if not work.featured and not (showImg and work.media) %}
           <div class="work-item-card__type flex-shrink-0">
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                         {% if work.type == 'publication' %}bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-20
-                         {% else %}bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20{% endif %}">
+                         {% if work.type == 'publication' %}bg-secondary bg-opacity-10 text-text border border-secondary border-opacity-20
+                         {% else %}bg-primary bg-opacity-10 text-text border border-primary border-opacity-20{% endif %}">
               {{ work.type | capitalize }}
             </span>
           </div>
