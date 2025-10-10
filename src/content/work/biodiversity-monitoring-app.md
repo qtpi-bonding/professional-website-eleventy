@@ -12,9 +12,6 @@ links:
   demo: "https://biodiversity-app-demo.example.com"
   github: "https://github.com/username/biodiversity-monitoring"
   external: "https://biodiversity-institute.example.org/citizen-science"
-media:
-  screenshot: "/assets/images/biodiversity-app-screenshot.jpg"
-  alt: "Mobile app interface showing species identification and data collection features"
 ---
 
 Developed a mobile application that empowers citizen scientists to contribute to biodiversity monitoring efforts through automated species identification and data collection. The app uses machine learning to identify species from photos and integrates with research databases.

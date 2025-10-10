@@ -11,9 +11,6 @@ featured: false
 links:
   github: "https://github.com/username/environmental-monitoring"
   demo: "https://env-monitor-demo.example.com"
-media:
-  screenshot: "/assets/images/env-monitoring-dashboard.jpg"
-  alt: "Environmental monitoring dashboard showing sensor data"
 ---
 
 Designed and deployed a network of IoT sensors for continuous environmental monitoring across multiple field sites. The system collects real-time data on air quality, temperature, humidity, and soil conditions to support environmental research and policy decisions.

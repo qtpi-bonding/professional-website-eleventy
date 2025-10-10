@@ -12,9 +12,6 @@ links:
   demo: "https://smart-city-demo.example.com"
   live: "https://austin-dashboard.example.gov"
   github: "https://github.com/username/smart-city-dashboard"
-media:
-  screenshot: "/assets/images/smart-city-dashboard.jpg"
-  alt: "Smart city dashboard showing traffic, energy, and public services data"
 ---
 
 Built a comprehensive analytics dashboard that aggregates real-time data from city infrastructure to support evidence-based urban planning and policy decisions. The platform integrates data from traffic sensors, energy grids, public transportation, and citizen services.

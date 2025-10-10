@@ -12,9 +12,6 @@ links:
   github: "https://github.com/username/policy-simulation"
   demo: "https://policy-sim-demo.example.com"
   external: "https://policy-modeling-lab.example.edu/projects/simulation"
-media:
-  screenshot: "/assets/images/policy-simulation-interface.jpg"
-  alt: "Policy simulation interface showing agent interactions and outcome predictions"
 ---
 
 Developed a sophisticated agent-based modeling framework that enables policymakers to simulate the potential impacts of proposed policies before implementation. The system models complex interactions between different stakeholder groups and predicts policy outcomes with quantified uncertainty.

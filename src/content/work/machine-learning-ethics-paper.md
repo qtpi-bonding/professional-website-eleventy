@@ -11,9 +11,6 @@ featured: false
 links:
   doi: "10.1007/s00146-022-01234-5"
   external: "https://link.springer.com/article/ai-society-ml-ethics"
-media:
-  tocImage: "/assets/images/ml-ethics-paper-toc.jpg"
-  alt: "Table of contents from machine learning ethics paper"
 ---
 
 This paper provides a comprehensive analysis of ethical frameworks for deploying machine learning systems in government contexts. We examine case studies from multiple countries and propose guidelines for responsible AI implementation in public services.
