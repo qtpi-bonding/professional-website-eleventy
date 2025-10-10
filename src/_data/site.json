@@ -1,13 +1,13 @@
 {
   "title": "Personal Portfolio",
   "description": "A professional portfolio showcasing expertise across science, policy, and technology domains",
-  "url": "https://username.github.io",
-  "baseUrl": "/",
+  "url": "https://qtpi-bonding.github.io",
+  "baseUrl": "/professional-website-eleventy/",
   "github": {
-    "repository": "username/repository-name",
+    "repository": "qtpi-bonding/professional-website-eleventy",
     "pages": {
-      "url": "https://username.github.io/repository-name",
-      "baseUrl": "/repository-name/"
+      "url": "https://qtpi-bonding.github.io/professional-website-eleventy",
+      "baseUrl": "/professional-website-eleventy/"
     }
   },
   "language": "en",

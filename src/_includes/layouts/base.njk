@@ -29,21 +29,21 @@
     <meta property="twitter:image" content="{{ site.url }}{{ site.seo.ogImage }}">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="{{ '/static/favicon.ico' | url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/static/apple-touch-icon.png' | url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/static/favicon-32x32.png' | url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/static/favicon-16x16.png' | url }}">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="/assets/css/main.css?v={{ cacheBuster }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}?v={{ cacheBuster }}">
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="/assets/js/theme-system.js?v={{ cacheBuster }}" as="script">
-    <link rel="preload" href="/assets/js/navigation-system.js?v={{ cacheBuster }}" as="script">
-    <link rel="preload" href="/assets/js/content-filter.js?v={{ cacheBuster }}" as="script">
+    <link rel="preload" href="{{ '/assets/js/theme-system.js' | url }}?v={{ cacheBuster }}" as="script">
+    <link rel="preload" href="{{ '/assets/js/navigation-system.js' | url }}?v={{ cacheBuster }}" as="script">
+    <link rel="preload" href="{{ '/assets/js/content-filter.js' | url }}?v={{ cacheBuster }}" as="script">
     
     <!-- Theme system script (load early to prevent flash) -->
-    <script src="/assets/js/theme-system.js?v={{ cacheBuster }}"></script>
+    <script src="{{ '/assets/js/theme-system.js' | url }}?v={{ cacheBuster }}"></script>
     
     <!-- Initialize theme toggle -->
     <script>
