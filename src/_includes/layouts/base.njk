@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="{{ site.language or 'en' }}" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="title" content="{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta name="description" content="{{ description or site.description }}">
+    <meta name="author" content="{{ site.author.name }}">
+    <meta name="keywords" content="{{ site.seo.keywords | join(', ') }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{{ description or site.description }}">
+    <meta property="og:image" content="{{ site.url }}{{ site.seo.ogImage }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="{{ site.seo.twitterCard }}">
+    <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="twitter:title" content="{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="twitter:description" content="{{ description or site.description }}">
+    <meta property="twitter:image" content="{{ site.url }}{{ site.seo.ogImage }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css?v={{ cacheBuster }}">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/js/theme-system.js?v={{ cacheBuster }}" as="script">
+    <link rel="preload" href="/assets/js/navigation-system.js?v={{ cacheBuster }}" as="script">
+    <link rel="preload" href="/assets/js/content-filter.js?v={{ cacheBuster }}" as="script">
+    
+    <!-- Theme system script (load early to prevent flash) -->
+    <script src="/assets/js/theme-system.js?v={{ cacheBuster }}"></script>
+    
+    <!-- Initialize theme toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme toggle buttons (only for header theme toggle)
+            const headerThemeToggle = document.getElementById('theme-toggle');
+            if (headerThemeToggle && window.themeSystem) {
+                headerThemeToggle.addEventListener('click', function() {
+                    window.themeSystem.toggleTheme();
+                });
+            }
+        });
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "{{ site.author.name }}",
+      "url": "{{ site.url }}",
+      "sameAs": [
+        "{{ site.social.linkedin }}",
+        "{{ site.social.github }}",
+        "{{ site.social.orcid }}"
+      ],
+      "jobTitle": "{{ site.author.bio }}",
+      "email": "{{ site.author.email }}"
+    }
+    </script>
+</head>
+<body class="bg-surface text-text font-body antialiased">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-surface px-4 py-2 rounded-md z-50">
+        Skip to main content
+    </a>
+    
+    <!-- Mobile menu button for sidebar layout -->
+    <button id="mobile-menu-button" 
+            class="mobile-menu-button fixed top-4 left-4 z-50 p-2 bg-neutral-900 text-white rounded-md lg:hidden hidden"
+            aria-label="Toggle navigation menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+    
+    <!-- Header (hidden for homepage with sidebar layout) -->
+    {% if not hideHeader %}
+    <header class="bg-surface border-b border-secondary border-opacity-20" role="banner">
+        <div class="container mx-auto px-4 py-6">
+            <nav class="flex items-center justify-between" role="navigation" aria-label="Main navigation">
+                <!-- Site title/logo -->
+                <div class="flex items-center">
+                    <a href="/" class="text-xl font-headline font-bold text-primary hover:text-secondary transition-colors duration-200">
+                        {{ site.title }}
+                    </a>
+                </div>
+                
+                <!-- Navigation menu -->
+                <div class="flex items-center space-x-6">
+                    {% for item in navigation.main %}
+                        {% if item.active %}
+                            <a href="{{ item.url }}" 
+                               class="text-text hover:text-primary transition-colors duration-200 font-medium"
+                               {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}
+                               {% if item.description %}aria-label="{{ item.description }}"{% endif %}>
+                                {{ item.title }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <!-- Theme toggle button -->
+                    <button id="theme-toggle" 
+                            class="p-2 rounded-md bg-neutral-100 hover:bg-neutral-200 transition-colors duration-200"
+                            aria-label="Toggle theme">
+                        <svg class="w-5 h-5 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    {% endif %}
+    
+    <!-- Main content -->
+    <main id="main-content" class="min-h-screen" role="main">
+        {{ content | safe }}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary border-opacity-20 mt-16" role="contentinfo">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <!-- Copyright -->
+                <div class="text-textSecondary text-sm">
+                    © {{ "" | currentYear }} {{ site.author.name }}. All rights reserved.
+                </div>
+                
+                <!-- Social links -->
+                <div class="flex items-center space-x-4">
+                    {% for item in navigation.footer %}
+                        <a href="{{ item.url }}" 
+                           class="text-textSecondary hover:text-primary transition-colors duration-200"
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="{{ item.title }}">
+                            <span class="sr-only">{{ item.title }}</span>
+                            <!-- Icon placeholder - will be replaced with actual icons -->
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                            </svg>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

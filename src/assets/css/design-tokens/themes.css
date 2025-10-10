@@ -1,0 +1,102 @@
+/* Theme System */
+/* Automatic light/dark mode detection and manual theme switching */
+
+/* Theme transition for smooth switching */
+:root {
+  --theme-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+* {
+  transition: var(--theme-transition);
+}
+
+/* Disable transitions during theme initialization to prevent flash */
+.theme-loading * {
+  transition: none !important;
+}
+
+/* Focus ring styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary: #0066CC;
+    --color-secondary: #004499;
+  }
+  
+  .dark {
+    --color-primary: #66B3FF;
+    --color-secondary: #99CCFF;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  :root {
+    --color-primary: #000000;
+    --color-secondary: #666666;
+    --color-surface: #ffffff;
+    --color-text: #000000;
+    --color-textSecondary: #666666;
+  }
+  
+  * {
+    transition: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Theme-aware selection colors */
+::selection {
+  background-color: var(--color-secondary);
+  color: var(--color-surface);
+}
+
+::-moz-selection {
+  background-color: var(--color-secondary);
+  color: var(--color-surface);
+}
+
+/* Scrollbar theming for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-100);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-neutral-800);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-500);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-600);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-500);
+}

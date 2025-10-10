@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import design tokens */
+@import './design-tokens/index.css';
+
+/* Base styles */
+@layer base {
+  html {
+    font-family: var(--font-body, 'Source Sans 3', system-ui, sans-serif);
+  }
+  
+  body {
+    @apply bg-surface text-text;
+  }
+}
+
+/* Component styles */
+@layer components {
+  .prose {
+    @apply text-text;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-text font-headline;
+  }
+  
+  .prose a {
+    @apply text-secondary hover:text-primary;
+  }
+}

@@ -1,0 +1,622 @@
+---
+layout: layouts/base.njk
+hideHeader: true
+---
+
+{# Sidebar Portfolio Layout #}
+<div class="portfolio-layout flex min-h-screen bg-surface">
+  
+  {# Left Sidebar - Fixed Navigation #}
+  <aside class="sidebar fixed left-0 top-0 h-screen w-80 bg-nav-background text-nav-text overflow-y-auto z-10 border-r border-secondary border-opacity-20">
+    <div class="sidebar-content p-8">
+      
+      {# Personal Information Header #}
+      <header class="sidebar-header mb-12">
+        <h1 class="text-3xl font-headline font-bold text-nav-text mb-2">
+          {{ site.author.name }}
+        </h1>
+        <p class="text-lg text-nav-text mb-4 font-medium">
+          {{ site.author.title or "Professional Title" }}
+        </p>
+        <p class="text-sm text-textSecondary leading-relaxed mb-6">
+          {{ site.author.description or site.author.bio }}
+        </p>
+        
+        {# Social Links and Theme Toggle #}
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <a href="{{ site.social.github }}" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-textSecondary hover:text-nav-hover transition-colors duration-200"
+               aria-label="GitHub profile">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+            
+            <a href="{{ site.social.linkedin }}" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-textSecondary hover:text-nav-hover transition-colors duration-200"
+               aria-label="LinkedIn profile">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            
+            <a href="{{ site.social.orcid }}" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-textSecondary hover:text-nav-hover transition-colors duration-200"
+               aria-label="ORCID profile">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.881-1.303 3.881-3.722 0-2.016-1.522-3.722-3.881-3.722h-2.297z"/>
+              </svg>
+            </a>
+          </div>
+          
+          {# Theme toggle button in sidebar #}
+          <button id="sidebar-theme-toggle" 
+                  data-theme-toggle
+                  class="p-2 rounded-md bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 transition-colors duration-200"
+                  aria-label="Toggle theme">
+            <svg class="w-5 h-5 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+      
+      {# Navigation Menu #}
+      <nav class="sidebar-nav mb-8" role="navigation" aria-label="Main navigation">
+        <ul class="space-y-2">
+          <li>
+            <a href="#about-section" 
+               class="nav-link block px-4 py-2 text-nav-text hover:text-nav-hover hover:bg-secondary hover:bg-opacity-10 rounded-md transition-colors duration-200 scroll-smooth">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#experience-section" 
+               class="nav-link block px-4 py-2 text-nav-text hover:text-nav-hover hover:bg-secondary hover:bg-opacity-10 rounded-md transition-colors duration-200 scroll-smooth">
+              Experience
+            </a>
+          </li>
+          <li>
+            <a href="#projects-section" 
+               class="nav-link block px-4 py-2 text-nav-text hover:text-nav-hover hover:bg-secondary hover:bg-opacity-10 rounded-md transition-colors duration-200 scroll-smooth">
+              Projects
+            </a>
+          </li>
+          <li>
+            <a href="#publications-section" 
+               class="nav-link block px-4 py-2 text-nav-text hover:text-nav-hover hover:bg-secondary hover:bg-opacity-10 rounded-md transition-colors duration-200 scroll-smooth">
+              Publications
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      {# Filter System in Sidebar #}
+      <div class="sidebar-filters">
+        <h3 class="text-sm font-semibold text-textSecondary uppercase tracking-wide mb-4">
+          Filter by Area
+        </h3>
+        {% set sidebarFilters = [
+          { id: 'all', label: 'All', ariaLabel: 'Show all content' },
+          { id: 'science', label: 'Science', ariaLabel: 'Show science content only' },
+          { id: 'policy', label: 'Policy', ariaLabel: 'Show policy content only' },
+          { id: 'tech', label: 'Technology', ariaLabel: 'Show technology content only' }
+        ] %}
+        {% set filters = sidebarFilters %}
+        {% set activeFilter = 'all' %}
+        {% set class = "sidebar-filter-system" %}
+        {% include "components/filter-system.njk" %}
+      </div>
+      
+      {# Resume Download #}
+      <div class="sidebar-resume mt-8 pt-8 border-t border-secondary border-opacity-20">
+        <a href="{{ site.resume.path }}" 
+           class="inline-flex items-center justify-center w-full px-4 py-3 bg-primary text-surface rounded-md font-medium hover:bg-secondary transition-colors duration-200"
+           aria-label="Download resume PDF">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Download Resume
+        </a>
+      </div>
+    </div>
+  </aside>
+  
+  {# Main Content Area - Scrollable #}
+  <main class="main-content flex-1 ml-80 min-h-screen" role="main">
+    <div class="content-wrapper max-w-4xl mx-auto px-8 py-12">
+      
+      {# About Section #}
+      <section id="about-section" class="content-section mb-16">
+        <header class="section-header mb-8">
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">About</h2>
+        </header>
+        
+        <div class="prose prose-lg max-w-none text-textSecondary">
+          <p class="text-xl leading-relaxed mb-6">{{ site.description }}</p>
+          <p class="leading-relaxed">{{ site.author.bio }}</p>
+          
+          <div class="mt-8 p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
+            <h3 class="text-lg font-semibold text-text mb-4">Current Focus</h3>
+            <p class="text-textSecondary">
+              Working at the intersection of science, policy, and technology to create meaningful impact 
+              through interdisciplinary collaboration and evidence-based solutions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {# Experience Section #}
+      <section id="experience-section" class="content-section mb-16" data-section-tags="{{ collections.experience | getAllTags | join(',') }}">
+        <header class="section-header mb-8">
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">Experience</h2>
+          <p class="text-textSecondary">Professional journey across science, policy, and technology domains</p>
+        </header>
+        
+        <div class="experience-grid space-y-6">
+          {% for experience in collections.experience %}
+            {% set class = "experience-item" %}
+            {% include "components/experience-card.njk" %}
+          {% endfor %}
+        </div>
+      </section>
+
+      {# Projects Section #}
+      <section id="projects-section" class="content-section mb-16" data-section-tags="{{ collections.work | filterByType('project') | getAllTags | join(',') }}">
+        <header class="section-header mb-8">
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">Projects</h2>
+          <p class="text-textSecondary">Technical projects and implementations</p>
+        </header>
+        
+        <div class="projects-grid grid gap-6 md:grid-cols-2">
+          {% for workItem in collections.work %}
+            {% if workItem.data.type == 'project' %}
+              {% set class = "work-item project-item" %}
+              {% include "components/work-item-card.njk" %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      {# Publications Section #}
+      <section id="publications-section" class="content-section mb-16" data-section-tags="{{ collections.work | filterByType('publication') | getAllTags | join(',') }}">
+        <header class="section-header mb-8">
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">Publications</h2>
+          <p class="text-textSecondary">Research publications and academic work</p>
+        </header>
+        
+        <div class="publications-grid space-y-6">
+          {% for workItem in collections.work %}
+            {% if workItem.data.type == 'publication' %}
+              {% set class = "work-item publication-item" %}
+              {% include "components/work-item-card.njk" %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      {# Contact Section #}
+      <section id="contact-section" class="content-section">
+        <header class="section-header mb-8">
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">Contact</h2>
+          <p class="text-textSecondary">Let's connect and explore collaboration opportunities</p>
+        </header>
+        
+        <div class="contact-content">
+          <div class="grid gap-6 md:grid-cols-2">
+            <a href="mailto:{{ site.author.email }}" 
+               class="contact-card flex items-center p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200">
+              <div class="contact-icon mr-4">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-text mb-1">Email</h3>
+                <p class="text-textSecondary">{{ site.author.email }}</p>
+              </div>
+            </a>
+            
+            <a href="{{ site.social.linkedin }}" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="contact-card flex items-center p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200">
+              <div class="contact-icon mr-4">
+                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-text mb-1">LinkedIn</h3>
+                <p class="text-textSecondary">Professional Network</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+{# JavaScript for sidebar layout and section-based filtering #}
+<script src="/assets/js/navigation-system.js?v={{ cacheBuster }}"></script>
+<script src="/assets/js/content-filter.js?v={{ cacheBuster }}"></script>
+<script>
+  // Sidebar portfolio layout functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    // Initialize theme toggle for sidebar (with retry mechanism)
+    function initializeThemeToggle() {
+      const sidebarThemeToggle = document.getElementById('sidebar-theme-toggle');
+      if (sidebarThemeToggle && window.themeSystem) {
+        sidebarThemeToggle.addEventListener('click', function() {
+          console.log('Theme toggle clicked'); // Debug log
+          window.themeSystem.toggleTheme();
+        });
+        console.log('Theme toggle initialized'); // Debug log
+      } else if (sidebarThemeToggle) {
+        // Retry after a short delay if themeSystem isn't ready
+        setTimeout(initializeThemeToggle, 100);
+      }
+    }
+    
+    // Initialize theme toggle
+    initializeThemeToggle();
+    
+    // Initialize smooth scrolling navigation
+    function initializeSmoothScrolling() {
+      const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
+      const mainContent = document.querySelector('.main-content');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href').substring(1);
+          const targetSection = document.getElementById(targetId);
+          
+          if (targetSection && mainContent) {
+            // Calculate offset for better positioning
+            const offset = 80; // Adjust this value as needed
+            const targetPosition = targetSection.offsetTop - offset;
+            
+            // Smooth scroll to target
+            mainContent.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+            
+            // Update active nav link
+            navLinks.forEach(navLink => navLink.classList.remove('active'));
+            this.classList.add('active');
+            
+            console.log('Scrolling to:', targetId); // Debug log
+          }
+        });
+      });
+      
+      console.log('Smooth scrolling initialized for', navLinks.length, 'links'); // Debug log
+    }
+    
+    // Initialize smooth scrolling
+    initializeSmoothScrolling();
+    
+    // Section-based filtering system
+    const sections = document.querySelectorAll('.content-section');
+    
+    // Enhanced content filter for section-based filtering
+    if (window.contentFilter) {
+      // Override the default filtering to work with sections
+      const originalSetFilter = window.contentFilter.setFilter;
+      
+      window.contentFilter.setFilter = function(filter) {
+        // Call original filter logic
+        originalSetFilter.call(this, filter);
+        
+        // Section-based filtering logic
+        sections.forEach(section => {
+          const sectionTags = section.dataset.sectionTags;
+          if (!sectionTags) {
+            // Always show sections without tags (like About, Contact)
+            section.style.display = '';
+            return;
+          }
+          
+          const tags = sectionTags.split(',').map(tag => tag.trim()).filter(tag => tag);
+          const shouldShow = filter === 'all' || tags.includes(filter);
+          
+          if (shouldShow) {
+            section.style.display = '';
+            section.setAttribute('aria-hidden', 'false');
+          } else {
+            section.style.display = 'none';
+            section.setAttribute('aria-hidden', 'true');
+          }
+        });
+      };
+    }
+    
+    // Mobile menu functionality
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (mobileMenuButton && sidebar) {
+      // Show mobile menu button on homepage
+      mobileMenuButton.classList.remove('hidden');
+      
+      mobileMenuButton.addEventListener('click', function() {
+        sidebar.classList.toggle('sidebar--mobile-open');
+        
+        // Update button icon
+        const icon = this.querySelector('svg');
+        if (sidebar.classList.contains('sidebar--mobile-open')) {
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+          this.setAttribute('aria-label', 'Close navigation menu');
+        } else {
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+          this.setAttribute('aria-label', 'Open navigation menu');
+        }
+      });
+      
+      // Close sidebar when clicking outside on mobile
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth < 1024 && 
+            !sidebar.contains(e.target) && 
+            !mobileMenuButton.contains(e.target) &&
+            sidebar.classList.contains('sidebar--mobile-open')) {
+          sidebar.classList.remove('sidebar--mobile-open');
+          mobileMenuButton.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+          mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+        }
+      });
+    }
+    
+    // Mobile responsiveness
+    function handleResize() {
+      const mainContent = document.querySelector('.main-content');
+      
+      if (window.innerWidth < 1024) {
+        // Mobile layout adjustments
+        if (sidebar) sidebar.classList.add('sidebar--mobile');
+        if (mainContent) mainContent.classList.add('main-content--mobile');
+      } else {
+        // Desktop layout
+        if (sidebar) {
+          sidebar.classList.remove('sidebar--mobile', 'sidebar--mobile-open');
+        }
+        if (mainContent) mainContent.classList.remove('main-content--mobile');
+        
+        // Reset mobile menu button
+        if (mobileMenuButton) {
+          mobileMenuButton.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+          mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+        }
+      }
+    }
+    
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial call
+  });
+</script>
+
+<style>
+  /* Sidebar Portfolio Layout Styles */
+  
+  /* Portfolio layout container */
+  .portfolio-layout {
+    @apply min-h-screen;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    @apply bg-nav-background text-nav-text;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar-content {
+    @apply p-8;
+  }
+  
+  .sidebar-header h1 {
+    @apply text-3xl font-headline font-bold text-nav-text mb-2;
+  }
+  
+  .sidebar-nav .nav-link {
+    @apply block px-4 py-2 text-nav-text hover:text-nav-hover hover:bg-secondary hover:bg-opacity-10 rounded-md transition-colors duration-200;
+  }
+  
+  .sidebar-nav .nav-link.active {
+    @apply bg-nav-active text-surface font-semibold;
+  }
+  
+  /* Sidebar filter system styling */
+  .sidebar-filter-system .filter-button {
+    @apply w-full justify-start mb-2 bg-filter-inactive text-filter-inactive-text hover:bg-filter-hover hover:text-filter-hover-text border border-secondary border-opacity-20;
+    min-height: auto;
+    padding: 0.5rem 1rem;
+  }
+  
+  .sidebar-filter-system .filter-button--active {
+    @apply bg-filter-active text-filter-active-text border-filter-active;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  .sidebar-filter-system .filter-button--inactive {
+    @apply bg-filter-inactive text-filter-inactive-text border-secondary border-opacity-20;
+  }
+  
+  /* Main content area */
+  .main-content {
+    @apply flex-1 min-h-screen overflow-y-auto;
+    margin-left: 20rem; /* 320px sidebar width */
+  }
+  
+  .content-wrapper {
+    @apply max-w-4xl mx-auto px-8 py-12;
+  }
+  
+  /* Content sections */
+  .content-section {
+    @apply mb-16;
+  }
+  
+  .section-header {
+    @apply mb-8;
+  }
+  
+  .section-header h2 {
+    @apply text-3xl font-headline font-bold text-text mb-4;
+  }
+  
+  .section-header p {
+    @apply text-textSecondary;
+  }
+  
+  /* Grid layouts for content */
+  .experience-grid {
+    @apply space-y-6;
+  }
+  
+  .projects-grid {
+    @apply grid gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+  
+  .publications-grid {
+    @apply space-y-6;
+  }
+  
+  /* Contact cards */
+  .contact-card {
+    @apply flex items-center p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200;
+  }
+  
+  .contact-icon {
+    @apply mr-4;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 1024px) {
+    .sidebar {
+      @apply fixed inset-y-0 left-0 z-50 w-80 transform -translate-x-full transition-transform duration-300;
+    }
+    
+    .sidebar--mobile-open {
+      @apply translate-x-0;
+    }
+    
+    .main-content {
+      @apply ml-0;
+    }
+    
+    .main-content--mobile {
+      @apply ml-0;
+    }
+    
+    /* Add mobile menu button */
+    .mobile-menu-button {
+      @apply fixed top-4 left-4 z-50 p-2 bg-nav-background text-nav-text rounded-md lg:hidden border border-secondary border-opacity-20;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      @apply w-full;
+    }
+    
+    .content-wrapper {
+      @apply px-4 py-8;
+    }
+    
+    .projects-grid {
+      @apply grid-cols-1;
+    }
+    
+    .contact-content .grid {
+      @apply grid-cols-1;
+    }
+  }
+  
+  /* Smooth scrolling */
+  .main-content {
+    scroll-behavior: smooth;
+  }
+  
+  /* Section visibility transitions */
+  .content-section {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .content-section[aria-hidden="true"] {
+    @apply opacity-0;
+    transform: translateY(-10px);
+  }
+  
+  /* Print styles */
+  @media print {
+    .sidebar {
+      display: none;
+    }
+    
+    .main-content {
+      @apply ml-0;
+    }
+    
+    .content-wrapper {
+      @apply max-w-none px-0;
+    }
+    
+    .content-section {
+      @apply mb-8;
+      break-inside: avoid;
+    }
+    
+    .projects-grid,
+    .publications-grid {
+      @apply grid-cols-1 space-y-4;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .sidebar {
+      @apply border-r-2 border-secondary;
+    }
+    
+    .sidebar-nav .nav-link {
+      @apply border border-transparent;
+    }
+    
+    .sidebar-nav .nav-link:hover,
+    .sidebar-nav .nav-link.active {
+      @apply border-secondary;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .sidebar,
+    .main-content,
+    .content-section,
+    .nav-link,
+    .contact-card {
+      @apply transition-none;
+    }
+    
+    .main-content {
+      scroll-behavior: auto;
+    }
+    
+    .content-section[aria-hidden="true"] {
+      transform: none;
+    }
+  }
+</style>

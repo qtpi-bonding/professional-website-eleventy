@@ -1,0 +1,47 @@
+{
+  "name": "personal-portfolio-website",
+  "version": "1.0.0",
+  "description": "Personal portfolio website showcasing expertise across science, policy, and technology",
+  "main": ".eleventy.js",
+  "scripts": {
+    "build": "npm run build:validate && npm run clean && npm run build:css && npm run build:html && npm run optimize:images && npm run optimize:js",
+    "build:css": "tailwindcss -i ./src/assets/css/main.css -o ./_site/assets/css/main.css --minify",
+    "build:html": "eleventy",
+    "optimize:css": "npx postcss ./_site/assets/css/main.css --use cssnano --output ./_site/assets/css/main.css",
+    "optimize:images": "node scripts/optimize-images.js",
+    "optimize:js": "node scripts/optimize-js.js",
+    "serve": "npm run build:css && eleventy --serve --port=8080",
+    "watch": "npm run build:css && eleventy --serve --watch --port=8080",
+    "clean": "rm -rf _site",
+    "validate": "node scripts/validate-content.js",
+    "validate:fix": "npm run validate && echo '\n💡 Run npm run validate again after fixing errors'",
+    "build:validate": "node scripts/build-validation.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:workflow": "node scripts/test-content-workflow.js",
+    "verify:deployment": "node scripts/verify-deployment.js",
+    "deploy:check": "npm run build && npm run verify:deployment"
+  },
+  "keywords": [
+    "portfolio",
+    "eleventy",
+    "tailwindcss",
+    "static-site"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@tailwindcss/typography": "^0.5.10",
+    "cssnano": "^6.0.1",
+    "gray-matter": "^4.0.3",
+    "jest": "^29.7.0",
+    "jsdom": "^23.0.1",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "sharp": "^0.32.6",
+    "tailwindcss": "^3.4.0",
+    "terser": "^5.24.0"
+  }
+}

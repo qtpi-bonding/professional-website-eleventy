@@ -1,0 +1,68 @@
+{
+  "main": [
+    {
+      "title": "Home",
+      "url": "/",
+      "active": true,
+      "description": "Portfolio homepage with work overview"
+    },
+    {
+      "title": "Contact",
+      "url": "/contact/",
+      "active": true,
+      "description": "Professional contact information and social links"
+    },
+    {
+      "title": "Resume",
+      "url": "/resume/",
+      "active": true,
+      "description": "Download comprehensive CV and resume"
+    }
+  ],
+  "footer": [
+    {
+      "title": "LinkedIn",
+      "url": "{{ site.social.linkedin }}",
+      "external": true,
+      "icon": "linkedin"
+    },
+    {
+      "title": "GitHub",
+      "url": "{{ site.social.github }}",
+      "external": true,
+      "icon": "github"
+    },
+    {
+      "title": "ORCID",
+      "url": "{{ site.social.orcid }}",
+      "external": true,
+      "icon": "orcid"
+    }
+  ],
+  "filters": [
+    {
+      "id": "all",
+      "title": "All",
+      "description": "Show all work across science, policy, and technology",
+      "default": true
+    },
+    {
+      "id": "science",
+      "title": "Science",
+      "description": "Research and scientific work",
+      "tag": "science"
+    },
+    {
+      "id": "policy",
+      "title": "Policy",
+      "description": "Policy analysis and advocacy work",
+      "tag": "policy"
+    },
+    {
+      "id": "tech",
+      "title": "Tech",
+      "description": "Technology projects and development",
+      "tag": "tech"
+    }
+  ]
+}

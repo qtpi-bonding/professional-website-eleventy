@@ -1,0 +1,126 @@
+{
+  "experience": {
+    "description": "Schema for professional experience entries",
+    "required": ["title", "organization", "dateRange", "tags"],
+    "optional": ["location", "featured", "type", "status"],
+    "fields": {
+      "title": {
+        "type": "string",
+        "description": "Position or role title"
+      },
+      "organization": {
+        "type": "string", 
+        "description": "Organization or company name"
+      },
+      "dateRange": {
+        "type": "string",
+        "description": "Date range in format 'YYYY - YYYY' or 'YYYY - Present'"
+      },
+      "location": {
+        "type": "string",
+        "description": "City, State/Country"
+      },
+      "tags": {
+        "type": "array",
+        "description": "Array of tags from: science, policy, tech",
+        "validValues": ["science", "policy", "tech"]
+      },
+      "featured": {
+        "type": "boolean",
+        "description": "Whether to highlight this entry",
+        "default": false
+      },
+      "type": {
+        "type": "string",
+        "description": "Type of experience entry",
+        "default": "experience"
+      },
+      "status": {
+        "type": "string",
+        "description": "Current status",
+        "validValues": ["current", "completed", "ongoing"]
+      }
+    }
+  },
+  "work": {
+    "description": "Schema for work items (projects and publications)",
+    "required": ["title", "description", "type", "tags"],
+    "optional": ["collaborators", "technologies", "journal", "year", "status", "featured", "links", "media"],
+    "fields": {
+      "title": {
+        "type": "string",
+        "description": "Project or publication title"
+      },
+      "description": {
+        "type": "string",
+        "description": "Brief description of the work"
+      },
+      "type": {
+        "type": "string",
+        "description": "Type of work item",
+        "validValues": ["project", "publication"]
+      },
+      "tags": {
+        "type": "array",
+        "description": "Array of tags from: science, policy, tech",
+        "validValues": ["science", "policy", "tech"]
+      },
+      "collaborators": {
+        "type": "array",
+        "description": "Array of collaborator names or co-authors"
+      },
+      "technologies": {
+        "type": "array",
+        "description": "Array of technologies used (for projects only)"
+      },
+      "journal": {
+        "type": "string",
+        "description": "Journal name (for publications only)"
+      },
+      "year": {
+        "type": "number",
+        "description": "Year of completion or publication"
+      },
+      "status": {
+        "type": "string",
+        "description": "Current status",
+        "validValues": ["completed", "ongoing", "archived", "published"]
+      },
+      "featured": {
+        "type": "boolean",
+        "description": "Whether to highlight this entry",
+        "default": false
+      },
+      "links": {
+        "type": "object",
+        "description": "Object containing relevant links",
+        "properties": {
+          "demo": "Demo URL (for projects)",
+          "github": "GitHub repository URL",
+          "live": "Live site URL (for projects)",
+          "doi": "DOI URL (for publications)",
+          "external": "External link URL"
+        }
+      },
+      "media": {
+        "type": "object",
+        "description": "Object containing media references",
+        "properties": {
+          "screenshot": "Screenshot image path (for projects)",
+          "tocImage": "Table of contents image path (for publications)",
+          "alt": "Alt text for accessibility"
+        }
+      }
+    }
+  },
+  "validation": {
+    "tags": {
+      "validValues": ["science", "policy", "tech"],
+      "description": "Only these three tags are allowed for content filtering"
+    },
+    "workTypes": {
+      "validValues": ["project", "publication"],
+      "description": "Work items must be either projects or publications"
+    }
+  }
+}

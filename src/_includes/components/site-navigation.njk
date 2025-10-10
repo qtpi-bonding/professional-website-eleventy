@@ -1,0 +1,56 @@
+{% set navItems = navigation.main %}
+{% set currentUrl = page.url %}
+
+<nav class="site-navigation" role="navigation" aria-label="Main navigation">
+    <ul class="flex flex-col space-y-2">
+        {% for item in navItems %}
+            {% if item.active %}
+                {% set isActive = (currentUrl == item.url) or (currentUrl.startsWith(item.url) and item.url != "/") %}
+                <li>
+                    <a href="{{ item.url }}" 
+                       class="flex items-center px-4 py-3 rounded-lg transition-all duration-200 group
+                              {% if isActive %}
+                                bg-primary text-surface font-medium
+                              {% else %}
+                                text-text hover:bg-secondary hover:bg-opacity-10 hover:text-secondary
+                              {% endif %}"
+                       {% if item.description %}title="{{ item.description }}"{% endif %}
+                       {% if isActive %}aria-current="page"{% endif %}>
+                        
+                        <!-- Navigation Icon (optional) -->
+                        {% if item.title == "Home" %}
+                            <svg class="w-5 h-5 mr-3 {% if isActive %}text-surface{% else %}text-secondary group-hover:text-secondary{% endif %}" 
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                        {% elif item.title == "Contact" %}
+                            <svg class="w-5 h-5 mr-3 {% if isActive %}text-surface{% else %}text-secondary group-hover:text-secondary{% endif %}" 
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        {% elif item.title == "Resume" %}
+                            <svg class="w-5 h-5 mr-3 {% if isActive %}text-surface{% else %}text-secondary group-hover:text-secondary{% endif %}" 
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        {% endif %}
+                        
+                        <span class="font-medium">{{ item.title }}</span>
+                        
+                        <!-- Active indicator -->
+                        {% if isActive %}
+                            <span class="ml-auto">
+                                <svg class="w-4 h-4 text-surface" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                        {% endif %}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

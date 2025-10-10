@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  eleventy-dev:
+    container_name: eleventy-landing-dev
+    build:
+      context: .
+      target: development
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run serve
+    
+  eleventy-prod:
+    container_name: eleventy-landing-prod
+    build:
+      context: .
+      target: production
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  node_modules:

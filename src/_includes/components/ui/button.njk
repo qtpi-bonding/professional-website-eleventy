@@ -1,0 +1,56 @@
+{#
+  Button Component
+  
+  Parameters:
+  - label: button text (required)
+  - variant: primary, secondary, outline, ghost (optional, defaults to primary)
+  - size: sm, md, lg (optional, defaults to md)
+  - href: URL for link buttons (optional)
+  - type: button, submit, reset (optional, defaults to button)
+  - class: additional CSS classes (optional)
+  - disabled: boolean (optional)
+  - ariaLabel: accessibility label (optional)
+  - id: element ID (optional)
+#}
+
+{% set variant = variant or "primary" %}
+{% set size = size or "md" %}
+{% set type = type or "button" %}
+
+{% set baseClasses = "inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed" %}
+
+{% set variantClasses = {
+  primary: "bg-primary text-surface hover:bg-secondary focus:ring-primary",
+  secondary: "bg-secondary text-surface hover:bg-primary focus:ring-secondary",
+  outline: "border-2 border-primary text-primary hover:bg-primary hover:text-surface focus:ring-primary",
+  ghost: "text-primary hover:bg-primary hover:bg-opacity-10 focus:ring-primary"
+} %}
+
+{% set sizeClasses = {
+  sm: "px-3 py-1.5 text-sm",
+  md: "px-4 py-2 text-base",
+  lg: "px-6 py-3 text-lg"
+} %}
+
+{% set elementClass = baseClasses + " " + variantClasses[variant] + " " + sizeClasses[size] %}
+{% if class %}
+  {% set elementClass = elementClass + " " + class %}
+{% endif %}
+
+{% if href %}
+  <a href="{{ href }}" 
+     class="{{ elementClass }}"
+     {% if ariaLabel %}aria-label="{{ ariaLabel }}"{% endif %}
+     {% if id %}id="{{ id }}"{% endif %}
+     {% if disabled %}aria-disabled="true" tabindex="-1"{% endif %}>
+    {{ label }}
+  </a>
+{% else %}
+  <button type="{{ type }}" 
+          class="{{ elementClass }}"
+          {% if ariaLabel %}aria-label="{{ ariaLabel }}"{% endif %}
+          {% if id %}id="{{ id }}"{% endif %}
+          {% if disabled %}disabled{% endif %}>
+    {{ label }}
+  </button>
+{% endif %}
