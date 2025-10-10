@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 /* Import design tokens */
-@import './design-tokens/colors.css';
 @import './design-tokens/typography.css';
 @import './design-tokens/spacing.css';
 
