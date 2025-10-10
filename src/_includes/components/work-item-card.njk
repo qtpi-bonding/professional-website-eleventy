@@ -194,9 +194,9 @@
         <div class="work-item-card__tags flex flex-wrap gap-2" role="list" aria-label="Work categories">
           {% for tag in work.tags %}
             <span class="work-item-card__tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-text
-                         {% if tag == 'science' %}bg-primary bg-opacity-10 border border-primary border-opacity-20
-                         {% elif tag == 'policy' %}bg-secondary bg-opacity-10 border border-secondary border-opacity-20
-                         {% elif tag == 'tech' %}bg-info bg-opacity-10 border border-info border-opacity-20
+                         {% if tag == 'science' %}bg-science bg-opacity-10 border border-science border-opacity-20
+                         {% elif tag == 'policy' %}bg-policy bg-opacity-10 border border-policy border-opacity-20
+                         {% elif tag == 'tech' %}bg-tech bg-opacity-10 border border-tech border-opacity-20
                          {% else %}bg-neutral-100{% endif %}"
                   role="listitem"
                   itemprop="keywords">

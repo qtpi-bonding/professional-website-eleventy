@@ -42,6 +42,20 @@
         "dark": "#60a5fa"
       }
     },
+    "categories": {
+      "science": {
+        "light": "#059669",
+        "dark": "#10b981"
+      },
+      "policy": {
+        "light": "#7c3aed",
+        "dark": "#a78bfa"
+      },
+      "tech": {
+        "light": "#dc2626",
+        "dark": "#f87171"
+      }
+    },
     "neutral": {
       "50": "#f9fafb",
       "100": "#f3f4f6",
@@ -125,7 +139,10 @@
       "success": "#10b981",
       "warning": "#f59e0b", 
       "error": "#ef4444",
-      "info": "#3b82f6"
+      "info": "#3b82f6",
+      "science": "#059669",
+      "policy": "#7c3aed",
+      "tech": "#dc2626"
     },
     "dark": {
       "primary": "#006280",
@@ -136,7 +153,10 @@
       "success": "#34d399",
       "warning": "#fbbf24",
       "error": "#f87171", 
-      "info": "#60a5fa"
+      "info": "#60a5fa",
+      "science": "#10b981",
+      "policy": "#a78bfa",
+      "tech": "#f87171"
     }
   },
   "accessibility": {
