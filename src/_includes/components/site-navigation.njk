@@ -12,7 +12,7 @@
                               {% if isActive %}
                                 bg-primary text-surface font-medium
                               {% else %}
-                                text-text hover:bg-secondary hover:bg-opacity-10 hover:text-secondary
+                                text-textSecondary hover:text-surface border-2 border-transparent hover:border-surface
                               {% endif %}"
                        {% if item.description %}title="{{ item.description }}"{% endif %}
                        {% if isActive %}aria-current="page"{% endif %}>

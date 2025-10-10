@@ -4,9 +4,10 @@
   "description": "Personal portfolio website showcasing expertise across science, policy, and technology",
   "main": ".eleventy.js",
   "scripts": {
-    "build": "npm run build:validate && npm run clean && npm run build:css && npm run build:html && npm run optimize:images && npm run optimize:js",
+    "build": "npm run build:validate && npm run clean && npm run generate:theme && npm run build:css && npm run build:html && npm run optimize:images && npm run optimize:js",
     "build:css": "tailwindcss -i ./src/assets/css/main.css -o ./_site/assets/css/main.css --minify",
     "build:html": "eleventy",
+    "generate:theme": "node scripts/generate-theme-css.js",
     "optimize:css": "npx postcss ./_site/assets/css/main.css --use cssnano --output ./_site/assets/css/main.css",
     "optimize:images": "node scripts/optimize-images.js",
     "optimize:js": "node scripts/optimize-js.js",

@@ -75,46 +75,44 @@
   /* Sidebar filter system specific styles */
   .sidebar-filter-system .filter-button {
     @apply w-full justify-start mb-2 text-sm;
-    @apply bg-filter-inactive text-filter-inactive-text border border-secondary border-opacity-20;
-    @apply hover:bg-filter-hover hover:text-filter-hover-text;
+    @apply border-2 border-secondary border-opacity-20;
+    background-color: var(--color-neutral-100);
+    color: var(--color-textSecondary);
     min-height: auto;
     padding: 0.5rem 1rem;
   }
   
   .sidebar-filter-system .filter-button--active {
-    @apply bg-filter-active text-filter-active-text border-filter-active;
-    box-shadow: none;
-    transform: none;
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border-color: var(--color-primary);
   }
   
   .sidebar-filter-system .filter-button--inactive {
-    @apply bg-filter-inactive text-filter-inactive-text border-secondary border-opacity-20;
+    background-color: var(--color-neutral-100);
+    color: var(--color-textSecondary);
+    border-color: var(--color-secondary);
+    border-opacity: 0.2;
   }
   
   .sidebar-filter-system .filter-button--inactive:hover {
-    @apply bg-filter-hover text-filter-hover-text;
-    transform: none;
-    box-shadow: none;
+    background-color: var(--color-neutral-100);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
   }
   
-  /* Inactive filter button state */
-  .filter-button--inactive {
-    @apply bg-surface border border-neutral-200;
+  /* Inactive filter button state - only for non-sidebar filters */
+  .filter-system:not(.sidebar-filter-system) .filter-button--inactive {
+    @apply bg-surface border-2 border-neutral-200;
     @apply text-textSecondary;
-    @apply hover:bg-neutral-50;
+    @apply hover:bg-neutral-100;
     @apply hover:text-text hover:border-secondary;
-    @apply active:scale-95;
   }
   
   /* Active filter button state */
   .filter-button--active {
     @apply bg-primary text-surface;
-    @apply border border-primary;
-    @apply shadow-sm;
-    
-    /* Subtle animation for active state */
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 195, 255, 0.2);
+    @apply border-2 border-primary;
   }
   
   /* Filter button label */
@@ -133,17 +131,9 @@
     @apply ring-2 ring-offset-2 ring-secondary;
   }
   
-  /* Hover animations */
-  .filter-button--inactive:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Active button hover (subtle) */
-  .filter-button--active:hover {
-    @apply bg-secondary;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 195, 255, 0.3);
+  /* Active button hover (subtle) - only for non-sidebar filters */
+  .filter-system:not(.sidebar-filter-system) .filter-button--active:hover {
+    @apply bg-secondary border-secondary;
   }
   
   /* Responsive adjustments */
@@ -177,11 +167,6 @@
   @media (prefers-reduced-motion: reduce) {
     .filter-button {
       @apply transition-none;
-    }
-    
-    .filter-button--inactive:hover,
-    .filter-button--active:hover {
-      transform: none;
     }
   }
 </style>

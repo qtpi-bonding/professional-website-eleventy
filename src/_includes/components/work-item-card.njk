@@ -129,7 +129,7 @@
             <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
                          {% if work.status == 'published' or work.status == 'completed' %}bg-success bg-opacity-10 text-success
                          {% elif work.status == 'ongoing' %}bg-info bg-opacity-10 text-info
-                         {% else %}bg-neutral-100 text-neutral-700{% endif %}">
+                         {% else %}bg-neutral-100 text-textSecondary{% endif %}">
               {{ work.status | capitalize }}
             </span>
           </div>
@@ -158,7 +158,7 @@
             </h4>
             <div class="flex flex-wrap gap-2">
               {% for collaborator in work.collaborators %}
-                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-neutral-700"
+                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-textSecondary"
                       itemprop="{% if work.type == 'publication' %}author{% else %}contributor{% endif %}">
                   {{ collaborator }}
                 </span>
@@ -187,7 +187,7 @@
     {% endif %}
     
     {# Footer with tags and links #}
-    <footer class="work-item-card__footer px-6 py-4 bg-neutral-50 border-t border-neutral-200">
+    <footer class="work-item-card__footer px-6 py-4 bg-neutral-100 border-t border-neutral-200">
       <div class="flex items-center justify-between gap-4">
         
         {# Tags #}
@@ -197,7 +197,7 @@
                          {% if tag == 'science' %}bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20
                          {% elif tag == 'policy' %}bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-20
                          {% elif tag == 'tech' %}bg-info bg-opacity-10 text-info border border-info border-opacity-20
-                         {% else %}bg-neutral-100 text-neutral-700{% endif %}"
+                         {% else %}bg-neutral-100 text-textSecondary{% endif %}"
                   role="listitem"
                   itemprop="keywords">
               {{ tag | capitalize }}

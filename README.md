@@ -158,9 +158,87 @@ src/
 
 ### Theme System
 
-The site uses a centralized theme system defined in `src/_data/app-theme.json`. All colors, typography, and spacing are configured here and automatically generate CSS custom properties and Tailwind utility classes.
+This project uses a **centralized, automated theme system** that provides a "Flutter-like experience" where all design values are controlled from a single source.
 
-**Important**: Never use hardcoded colors like `text-gray-900` or `bg-white`. Always use theme classes like `text-text`, `bg-surface`, or `text-primary`.
+#### How It Works
+
+```
+app-theme.json → generate-theme-css.js → colors.css → Tailwind → Final CSS
+```
+
+1. **Single Source of Truth**: `src/_data/app-theme.json` defines ALL colors, typography, and spacing
+2. **Automatic Generation**: `scripts/generate-theme-css.js` converts JSON to CSS custom properties
+3. **Build Integration**: Theme generation runs automatically during `npm run build`
+4. **Theme Switching**: JavaScript handles light/dark mode with user preference persistence
+
+#### Changing Colors
+
+To change the site's color scheme:
+
+1. **Edit the source**: Only modify `src/_data/app-theme.json`
+   ```json
+   {
+     "themes": {
+       "light": {
+         "primary": "#FF6B35",     // Your new primary color
+         "secondary": "#004225",   // Your new secondary color
+         "surface": "#ffffff",     // Background color
+         "text": "#000000"         // Text color
+       },
+       "dark": {
+         "primary": "#004225",     // Colors swap in dark mode
+         "secondary": "#FF6B35",   
+         "surface": "#000000",
+         "text": "#ffffff"
+       }
+     }
+   }
+   ```
+
+2. **Rebuild**: Run `npm run build` (or `docker exec -it eleventy-landing-dev npm run build`)
+
+3. **Verify**: Check both light and dark modes work correctly
+
+#### Using Theme Colors
+
+**✅ CORRECT - Use theme utility classes:**
+```html
+<div class="bg-surface text-text">Content</div>
+<button class="bg-primary text-surface">Primary Button</button>
+<h1 class="text-text font-headline">Heading</h1>
+```
+
+**❌ WRONG - Never use hardcoded colors:**
+```html
+<div class="bg-white text-black">Content</div>
+<div class="bg-gray-100 text-gray-900">Content</div>
+<div class="dark:bg-gray-800 dark:text-white">Content</div>
+```
+
+#### Available Theme Classes
+
+- **Backgrounds**: `bg-surface`, `bg-primary`, `bg-secondary`
+- **Text**: `text-text`, `text-textSecondary`, `text-primary`, `text-secondary`
+- **Borders**: `border-primary`, `border-secondary`
+- **States**: `text-success`, `text-warning`, `text-error`, `text-info`
+- **Neutrals**: `bg-neutral-100`, `text-neutral-700`, etc.
+
+#### Theme Toggle
+
+The site automatically includes a theme toggle button that:
+- Switches between light and dark modes
+- Remembers user preference in localStorage
+- Respects system preference (`prefers-color-scheme`)
+- Provides smooth transitions between themes
+
+#### Key Files
+
+- `src/_data/app-theme.json` - **Edit this to change colors**
+- `scripts/generate-theme-css.js` - Generates CSS from JSON
+- `src/assets/css/design-tokens/colors.css` - **Auto-generated, don't edit**
+- `src/assets/js/theme-system.js` - Theme switching logic
+
+**Important**: Never edit generated CSS files or use hardcoded colors. The theme system ensures consistent theming across the entire site.
 
 ### Adding New Content Types
 

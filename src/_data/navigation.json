@@ -19,26 +19,6 @@
       "description": "Download comprehensive CV and resume"
     }
   ],
-  "footer": [
-    {
-      "title": "LinkedIn",
-      "url": "{{ site.social.linkedin }}",
-      "external": true,
-      "icon": "linkedin"
-    },
-    {
-      "title": "GitHub",
-      "url": "{{ site.social.github }}",
-      "external": true,
-      "icon": "github"
-    },
-    {
-      "title": "ORCID",
-      "url": "{{ site.social.orcid }}",
-      "external": true,
-      "icon": "orcid"
-    }
-  ],
   "filters": [
     {
       "id": "all",
