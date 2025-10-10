@@ -1,0 +1,194 @@
+/* Color Design Tokens */
+/* Generated from app-theme.json - Brand and semantic colors with theme switching */
+
+:root {
+  /* Light theme colors (default) */
+  --color-primary: #00C3FF;
+  --color-secondary: #006280;
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-textSecondary: #666666;
+  
+  /* State colors - light theme */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  /* Neutral colors - consistent across themes */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+}
+
+/* Light theme (default) */
+[data-theme="light"] {
+  --color-primary: #00C3FF;
+  --color-secondary: #006280;
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-textSecondary: #4A5568;
+  
+  /* Navigation-specific colors for sidebar visibility */
+  --color-nav-text: #2D3748;
+  --color-nav-hover: #00C3FF;
+  --color-nav-active: #006280;
+  --color-nav-background: rgba(255, 255, 255, 0.95);
+  
+  /* Filter button colors - HIGH CONTRAST */
+  --color-filter-inactive: #E2E8F0;
+  --color-filter-inactive-text: #2D3748;
+  --color-filter-active: #006280;
+  --color-filter-active-text: #FFFFFF;
+  --color-filter-hover: #00C3FF;
+  --color-filter-hover-text: #FFFFFF;
+  
+  /* State colors - light theme */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --color-primary: #006280;
+  --color-secondary: #00C3FF;
+  --color-surface: #000000;
+  --color-text: #ffffff;
+  --color-textSecondary: #A0AEC0;
+  
+  /* Navigation-specific colors for sidebar visibility */
+  --color-nav-text: #E2E8F0;
+  --color-nav-hover: #00C3FF;
+  --color-nav-active: #006280;
+  --color-nav-background: rgba(0, 0, 0, 0.95);
+  
+  /* Filter button colors - HIGH CONTRAST */
+  --color-filter-inactive: #2D3748;
+  --color-filter-inactive-text: #E2E8F0;
+  --color-filter-active: #00C3FF;
+  --color-filter-active-text: #000000;
+  --color-filter-hover: #006280;
+  --color-filter-hover-text: #FFFFFF;
+  
+  /* State colors - dark theme */
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
+}
+
+/* System preference fallback */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-primary: #006280;
+    --color-secondary: #00C3FF;
+    --color-surface: #000000;
+    --color-text: #ffffff;
+    --color-textSecondary: #A0AEC0;
+    --color-nav-text: #E2E8F0;
+    --color-nav-hover: #00C3FF;
+    --color-nav-active: #006280;
+    --color-nav-background: rgba(0, 0, 0, 0.95);
+    --color-filter-inactive: #2D3748;
+    --color-filter-inactive-text: #E2E8F0;
+    --color-filter-active: #00C3FF;
+    --color-filter-active-text: #000000;
+    --color-filter-hover: #006280;
+    --color-filter-hover-text: #FFFFFF;
+    --color-success: #34d399;
+    --color-warning: #fbbf24;
+    --color-error: #f87171;
+    --color-info: #60a5fa;
+  }
+}
+
+/* Tailwind utility classes for theme colors */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-surface { color: var(--color-surface); }
+.text-text { color: var(--color-text); }
+.text-textSecondary { color: var(--color-textSecondary); }
+
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+.text-info { color: var(--color-info); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-text { background-color: var(--color-text); }
+.bg-textSecondary { background-color: var(--color-textSecondary); }
+
+.bg-success { background-color: var(--color-success); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-error { background-color: var(--color-error); }
+.bg-info { background-color: var(--color-info); }
+
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-surface { border-color: var(--color-surface); }
+.border-text { border-color: var(--color-text); }
+.border-textSecondary { border-color: var(--color-textSecondary); }
+
+.border-success { border-color: var(--color-success); }
+.border-warning { border-color: var(--color-warning); }
+.border-error { border-color: var(--color-error); }
+.border-info { border-color: var(--color-info); }
+
+/* Neutral color utilities */
+.text-neutral-50 { color: var(--color-neutral-50); }
+.text-neutral-100 { color: var(--color-neutral-100); }
+.text-neutral-200 { color: var(--color-neutral-200); }
+.text-neutral-300 { color: var(--color-neutral-300); }
+.text-neutral-400 { color: var(--color-neutral-400); }
+.text-neutral-500 { color: var(--color-neutral-500); }
+.text-neutral-600 { color: var(--color-neutral-600); }
+.text-neutral-700 { color: var(--color-neutral-700); }
+.text-neutral-800 { color: var(--color-neutral-800); }
+.text-neutral-900 { color: var(--color-neutral-900); }
+
+.bg-neutral-50 { background-color: var(--color-neutral-50); }
+.bg-neutral-100 { background-color: var(--color-neutral-100); }
+.bg-neutral-200 { background-color: var(--color-neutral-200); }
+.bg-neutral-300 { background-color: var(--color-neutral-300); }
+.bg-neutral-400 { background-color: var(--color-neutral-400); }
+.bg-neutral-500 { background-color: var(--color-neutral-500); }
+.bg-neutral-600 { background-color: var(--color-neutral-600); }
+.bg-neutral-700 { background-color: var(--color-neutral-700); }
+.bg-neutral-800 { background-color: var(--color-neutral-800); }
+.bg-neutral-900 { background-color: var(--color-neutral-900); }
+
+.border-neutral-50 { border-color: var(--color-neutral-50); }
+.border-neutral-100 { border-color: var(--color-neutral-100); }
+.border-neutral-200 { border-color: var(--color-neutral-200); }
+.border-neutral-300 { border-color: var(--color-neutral-300); }
+.border-neutral-400 { border-color: var(--color-neutral-400); }
+.border-neutral-500 { border-color: var(--color-neutral-500); }
+.border-neutral-600 { border-color: var(--color-neutral-600); }
+.border-neutral-700 { border-color: var(--color-neutral-700); }
+.border-neutral-800 { border-color: var(--color-neutral-800); }
+.border-neutral-900 { border-color: var(--color-neutral-900); }
+
+/* Navigation-specific utility classes */
+.text-nav-text { color: var(--color-nav-text); }
+.text-nav-hover { color: var(--color-nav-hover); }
+.text-nav-active { color: var(--color-nav-active); }
+.bg-nav-background { background-color: var(--color-nav-background); }
+
+/* Filter button utility classes */
+.bg-filter-inactive { background-color: var(--color-filter-inactive); }
+.text-filter-inactive-text { color: var(--color-filter-inactive-text); }
+.bg-filter-active { background-color: var(--color-filter-active); }
+.text-filter-active-text { color: var(--color-filter-active-text); }
+.bg-filter-hover { background-color: var(--color-filter-hover); }
+.text-filter-hover-text { color: var(--color-filter-hover-text); }

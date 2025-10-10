@@ -1,0 +1,37 @@
+{#
+  Heading Component
+  
+  Parameters:
+  - level: h1, h2, h3, h4, h5, h6 (required)
+  - text: heading text content (required)
+  - class: additional CSS classes (optional)
+  - id: element ID for anchor links (optional)
+#}
+
+{% set headingClasses = {
+  h1: "text-4xl md:text-5xl font-headline font-bold text-text leading-tight",
+  h2: "text-3xl md:text-4xl font-headline font-bold text-text leading-tight",
+  h3: "text-2xl md:text-3xl font-headline font-semibold text-text leading-tight",
+  h4: "text-xl md:text-2xl font-headline font-semibold text-text leading-tight",
+  h5: "text-lg md:text-xl font-headline font-medium text-text leading-tight",
+  h6: "text-base md:text-lg font-headline font-medium text-text leading-tight"
+} %}
+
+{% set elementClass = headingClasses[level] %}
+{% if class %}
+  {% set elementClass = elementClass + " " + class %}
+{% endif %}
+
+{% if level == "h1" %}
+  <h1 class="{{ elementClass }}"{% if id %} id="{{ id }}"{% endif %}>{{ text }}</h1>
+{% elif level == "h2" %}
+  <h2 class="{{ elementClass }}"{% if id %} id="{{ id }}"{% endif %}>{{ text }}</h2>
+{% elif level == "h3" %}
+  <h3 class="{{ elementClass }}"{% if id %} id="{{ id }}"{% endif %}>{{ text }}</h3>
+{% elif level == "h4" %}
+  <h4 class="{{ elementClass }}"{% if id %} id="{{ id }}"{% endif %}>{{ text }}</h4>
+{% elif level == "h5" %}
+  <h5 class="{{ elementClass }}"{% if id %} id="{{ id }}"{% endif %}>{{ text }}</h5>
+{% elif level == "h6" %}
+  <h6 class="{{ elementClass }}"{% if id %} id="{{ id }}"{% endif %}>{{ text }}</h6>
+{% endif %}

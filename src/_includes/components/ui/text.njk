@@ -1,0 +1,32 @@
+{#
+  Text Component
+  
+  Parameters:
+  - text: text content (required)
+  - variant: body, lead, small, caption (optional, defaults to body)
+  - class: additional CSS classes (optional)
+  - element: p, span, div (optional, defaults to p)
+#}
+
+{% set variant = variant or "body" %}
+{% set element = element or "p" %}
+
+{% set textClasses = {
+  body: "text-base font-body text-text leading-relaxed",
+  lead: "text-lg md:text-xl font-body text-text leading-relaxed font-medium",
+  small: "text-sm font-body text-textSecondary leading-relaxed",
+  caption: "text-xs font-body text-textSecondary leading-relaxed uppercase tracking-wide"
+} %}
+
+{% set elementClass = textClasses[variant] %}
+{% if class %}
+  {% set elementClass = elementClass + " " + class %}
+{% endif %}
+
+{% if element == "p" %}
+  <p class="{{ elementClass }}">{{ text }}</p>
+{% elif element == "span" %}
+  <span class="{{ elementClass }}">{{ text }}</span>
+{% elif element == "div" %}
+  <div class="{{ elementClass }}">{{ text }}</div>
+{% endif %}

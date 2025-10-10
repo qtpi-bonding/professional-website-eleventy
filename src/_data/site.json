@@ -1,0 +1,49 @@
+{
+  "title": "Personal Portfolio",
+  "description": "A professional portfolio showcasing expertise across science, policy, and technology domains",
+  "url": "https://username.github.io",
+  "baseUrl": "/",
+  "github": {
+    "repository": "username/repository-name",
+    "pages": {
+      "url": "https://username.github.io/repository-name",
+      "baseUrl": "/repository-name/"
+    }
+  },
+  "language": "en",
+  "author": {
+    "name": "Your Name",
+    "title": "Science, Policy & Technology Professional",
+    "description": "Professional working at the intersection of science, policy, and technology to create meaningful impact through interdisciplinary collaboration and evidence-based solutions.",
+    "email": "your.email@example.com",
+    "orcid": "0000-0000-0000-0000",
+    "bio": "Professional working at the intersection of science, policy, and technology"
+  },
+  "social": {
+    "linkedin": "https://linkedin.com/in/username",
+    "twitter": "https://twitter.com/username",
+    "github": "https://github.com/username",
+    "orcid": "https://orcid.org/0000-0000-0000-0000"
+  },
+  "resume": {
+    "filename": "resume.pdf",
+    "lastUpdated": "2024-01-15",
+    "path": "/static/resume.pdf"
+  },
+  "seo": {
+    "keywords": ["science", "policy", "technology", "research", "portfolio"],
+    "ogImage": "/assets/images/og-image.jpg",
+    "twitterCard": "summary_large_image"
+  },
+  "analytics": {
+    "enabled": false,
+    "plausible": {
+      "domain": "",
+      "enabled": false
+    }
+  },
+  "build": {
+    "environment": "development",
+    "timestamp": "{{ page.date | date: '%Y-%m-%d' }}"
+  }
+}

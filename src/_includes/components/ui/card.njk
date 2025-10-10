@@ -1,0 +1,46 @@
+{#
+  Card Component
+  
+  Parameters:
+  - title: card title (optional)
+  - content: card content (required)
+  - footer: card footer content (optional)
+  - variant: default, elevated, bordered (optional, defaults to default)
+  - class: additional CSS classes (optional)
+  - headerClass: additional header CSS classes (optional)
+  - bodyClass: additional body CSS classes (optional)
+  - footerClass: additional footer CSS classes (optional)
+#}
+
+{% set variant = variant or "default" %}
+
+{% set baseClasses = "bg-surface rounded-lg overflow-hidden" %}
+
+{% set variantClasses = {
+  default: "border border-secondary border-opacity-20",
+  elevated: "shadow-lg",
+  bordered: "border-2 border-secondary border-opacity-30"
+} %}
+
+{% set cardClass = baseClasses + " " + variantClasses[variant] %}
+{% if class %}
+  {% set cardClass = cardClass + " " + class %}
+{% endif %}
+
+<div class="{{ cardClass }}">
+  {% if title %}
+    <header class="px-6 py-4 border-b border-secondary border-opacity-20 {{ headerClass }}">
+      {% include "components/ui/heading.njk", level: "h3", text: title %}
+    </header>
+  {% endif %}
+  
+  <div class="px-6 py-4 {{ bodyClass }}">
+    {{ content | safe }}
+  </div>
+  
+  {% if footer %}
+    <footer class="px-6 py-4 border-t border-secondary border-opacity-20 bg-neutral-50 dark:bg-neutral-800 {{ footerClass }}">
+      {{ footer | safe }}
+    </footer>
+  {% endif %}
+</div>

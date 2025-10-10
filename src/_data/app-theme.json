@@ -1,0 +1,154 @@
+{
+  "colors": {
+    "brand": {
+      "primary": {
+        "light": "#00C3FF",
+        "dark": "#006280"
+      },
+      "secondary": {
+        "light": "#006280", 
+        "dark": "#00C3FF"
+      }
+    },
+    "semantic": {
+      "surface": {
+        "light": "#ffffff",
+        "dark": "#000000"
+      },
+      "text": {
+        "light": "#000000",
+        "dark": "#ffffff"
+      },
+      "textSecondary": {
+        "light": "#666666",
+        "dark": "#cccccc"
+      }
+    },
+    "states": {
+      "success": {
+        "light": "#10b981",
+        "dark": "#34d399"
+      },
+      "warning": {
+        "light": "#f59e0b",
+        "dark": "#fbbf24"
+      },
+      "error": {
+        "light": "#ef4444",
+        "dark": "#f87171"
+      },
+      "info": {
+        "light": "#3b82f6",
+        "dark": "#60a5fa"
+      }
+    },
+    "neutral": {
+      "50": "#f9fafb",
+      "100": "#f3f4f6",
+      "200": "#e5e7eb",
+      "300": "#d1d5db",
+      "400": "#9ca3af",
+      "500": "#6b7280",
+      "600": "#4b5563",
+      "700": "#374151",
+      "800": "#1f2937",
+      "900": "#111827"
+    }
+  },
+  "typography": {
+    "fonts": {
+      "headline": {
+        "family": "Geologica",
+        "fallback": "system-ui, sans-serif",
+        "weights": [400, 500, 600, 700, 800, 900]
+      },
+      "body": {
+        "family": "Source Sans 3",
+        "fallback": "system-ui, sans-serif", 
+        "weights": [300, 400, 500, 600, 700]
+      },
+      "mono": {
+        "family": "JetBrains Mono",
+        "fallback": "monospace",
+        "weights": [400, 500, 600, 700]
+      }
+    },
+    "sizes": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem"
+    },
+    "lineHeights": {
+      "tight": "1.25",
+      "normal": "1.5",
+      "relaxed": "1.75"
+    }
+  },
+  "spacing": {
+    "scale": {
+      "0": "0",
+      "1": "0.25rem",
+      "2": "0.5rem", 
+      "3": "0.75rem",
+      "4": "1rem",
+      "5": "1.25rem",
+      "6": "1.5rem",
+      "8": "2rem",
+      "10": "2.5rem",
+      "12": "3rem",
+      "16": "4rem",
+      "20": "5rem",
+      "24": "6rem"
+    },
+    "semantic": {
+      "section": "3rem",
+      "page": "4rem",
+      "normal": "1rem",
+      "tight": "0.5rem",
+      "loose": "2rem"
+    }
+  },
+  "themes": {
+    "light": {
+      "primary": "#00C3FF",
+      "secondary": "#006280",
+      "surface": "#ffffff",
+      "text": "#000000",
+      "textSecondary": "#666666",
+      "success": "#10b981",
+      "warning": "#f59e0b", 
+      "error": "#ef4444",
+      "info": "#3b82f6"
+    },
+    "dark": {
+      "primary": "#006280",
+      "secondary": "#00C3FF", 
+      "surface": "#000000",
+      "text": "#ffffff",
+      "textSecondary": "#cccccc",
+      "success": "#34d399",
+      "warning": "#fbbf24",
+      "error": "#f87171", 
+      "info": "#60a5fa"
+    }
+  },
+  "accessibility": {
+    "contrastRatios": {
+      "aa": 4.5,
+      "aaa": 7
+    },
+    "focusRing": {
+      "width": "2px",
+      "style": "solid",
+      "color": "var(--color-secondary)",
+      "offset": "2px"
+    }
+  }
+}

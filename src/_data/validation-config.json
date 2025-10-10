@@ -1,0 +1,78 @@
+{
+  "validation": {
+    "enabled": true,
+    "strictMode": false,
+    "failOnWarnings": false,
+    "rules": {
+      "requiredFields": {
+        "enabled": true,
+        "severity": "error"
+      },
+      "tagValidation": {
+        "enabled": true,
+        "severity": "error",
+        "allowedTags": ["science", "policy", "tech"]
+      },
+      "typeValidation": {
+        "enabled": true,
+        "severity": "error"
+      },
+      "imagePathValidation": {
+        "enabled": true,
+        "severity": "warning",
+        "checkExistence": true
+      },
+      "linkValidation": {
+        "enabled": true,
+        "severity": "warning"
+      },
+      "duplicateTagCheck": {
+        "enabled": true,
+        "severity": "warning"
+      },
+      "unknownFields": {
+        "enabled": true,
+        "severity": "warning"
+      },
+      "emptyContent": {
+        "enabled": true,
+        "severity": "warning"
+      }
+    },
+    "errorMessages": {
+      "missingRequiredField": "Required field '{field}' is missing. This field is mandatory for {contentType} entries.",
+      "invalidTag": "Tag '{tag}' is not valid. Only these tags are allowed: {validTags}",
+      "invalidWorkType": "Work type '{type}' is not valid. Use 'project' or 'publication'.",
+      "imageNotFound": "Image file '{path}' could not be found. Check the file path and ensure the image exists.",
+      "invalidFieldType": "Field '{field}' should be {expectedType}, but got {actualType}.",
+      "duplicateTags": "Duplicate tags found. Remove duplicate entries from the tags array.",
+      "unknownField": "Field '{field}' is not defined in the content schema. Consider removing it or adding it to the schema.",
+      "emptyContent": "Content body is empty. Add some content to describe this {contentType}."
+    },
+    "helpMessages": {
+      "general": [
+        "Content validation ensures your portfolio displays correctly.",
+        "Run 'npm run validate' to check all content files.",
+        "Check src/_data/content-schemas.json for field requirements."
+      ],
+      "tags": [
+        "Tags help visitors filter your work by area of expertise.",
+        "Use 'science' for research and scientific work.",
+        "Use 'policy' for policy analysis and governance work.", 
+        "Use 'tech' for technical projects and development work.",
+        "You can use multiple tags for interdisciplinary work."
+      ],
+      "workTypes": [
+        "Use type: 'project' for software, apps, and technical implementations.",
+        "Use type: 'publication' for papers, articles, and research publications.",
+        "Projects should include 'technologies' field, publications should include 'journal' field."
+      ],
+      "images": [
+        "Images should be placed in src/assets/images/ or src/static/",
+        "Use relative paths starting with /assets/images/ or /static/",
+        "Include alt text in media.alt for accessibility.",
+        "Optimize images before adding them to keep the site fast."
+      ]
+    }
+  }
+}
