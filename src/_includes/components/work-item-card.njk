@@ -126,10 +126,10 @@
         {# Status #}
         {% if work.status %}
           <div class="flex items-center">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
-                         {% if work.status == 'published' or work.status == 'completed' %}bg-success bg-opacity-10 text-success
-                         {% elif work.status == 'ongoing' %}bg-info bg-opacity-10 text-info
-                         {% else %}bg-neutral-100 text-textSecondary{% endif %}">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium text-text
+                         {% if work.status == 'published' or work.status == 'completed' %}bg-success bg-opacity-10
+                         {% elif work.status == 'ongoing' %}bg-info bg-opacity-10
+                         {% else %}bg-neutral-100{% endif %}">
               {{ work.status | capitalize }}
             </span>
           </div>
@@ -175,7 +175,7 @@
             </h4>
             <div class="flex flex-wrap gap-2">
               {% for tech in work.technologies %}
-                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-info bg-opacity-10 text-info border border-info border-opacity-20"
+                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-info bg-opacity-10 text-text border border-info border-opacity-20"
                       itemprop="keywords">
                   {{ tech }}
                 </span>
@@ -193,11 +193,11 @@
         {# Tags #}
         <div class="work-item-card__tags flex flex-wrap gap-2" role="list" aria-label="Work categories">
           {% for tag in work.tags %}
-            <span class="work-item-card__tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                         {% if tag == 'science' %}bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20
-                         {% elif tag == 'policy' %}bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-20
-                         {% elif tag == 'tech' %}bg-info bg-opacity-10 text-info border border-info border-opacity-20
-                         {% else %}bg-neutral-100 text-textSecondary{% endif %}"
+            <span class="work-item-card__tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-text
+                         {% if tag == 'science' %}bg-primary bg-opacity-10 border border-primary border-opacity-20
+                         {% elif tag == 'policy' %}bg-secondary bg-opacity-10 border border-secondary border-opacity-20
+                         {% elif tag == 'tech' %}bg-info bg-opacity-10 border border-info border-opacity-20
+                         {% else %}bg-neutral-100{% endif %}"
                   role="listitem"
                   itemprop="keywords">
               {{ tag | capitalize }}
