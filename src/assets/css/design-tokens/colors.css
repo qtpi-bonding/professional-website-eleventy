@@ -79,6 +79,13 @@
   --color-filter-hover: #006280;
   --color-filter-hover-text: #FFFFFF;
   
+  /* Override neutral colors for dark theme */
+  --color-neutral-50: #1f2937;
+  --color-neutral-100: #374151;
+  --color-neutral-200: #4b5563;
+  --color-neutral-700: #d1d5db;
+  --color-neutral-800: #1f2937;
+  
   /* State colors - dark theme */
   --color-success: #34d399;
   --color-warning: #fbbf24;
@@ -104,6 +111,12 @@
     --color-filter-active-text: #000000;
     --color-filter-hover: #006280;
     --color-filter-hover-text: #FFFFFF;
+    /* Override neutral colors for dark theme */
+    --color-neutral-50: #1f2937;
+    --color-neutral-100: #374151;
+    --color-neutral-200: #4b5563;
+    --color-neutral-700: #d1d5db;
+    --color-neutral-800: #1f2937;
     --color-success: #34d399;
     --color-warning: #fbbf24;
     --color-error: #f87171;

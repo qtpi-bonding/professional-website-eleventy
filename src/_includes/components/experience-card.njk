@@ -21,7 +21,7 @@
          itemtype="https://schema.org/WorkExperience">
   
   {# Card container with theme styling #}
-  <div class="experience-card__container bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
+  <div class="experience-card__container bg-surface border border-neutral-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
     
     {# Header section with title and organization #}
     <header class="experience-card__header p-6 pb-4">
@@ -88,7 +88,7 @@
     {% endif %}
     
     {# Footer with tags #}
-    <footer class="experience-card__footer px-6 py-4 bg-neutral-50 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700">
+    <footer class="experience-card__footer px-6 py-4 bg-neutral-50 border-t border-neutral-200">
       <div class="flex items-center justify-between">
         
         {# Tags #}
@@ -98,7 +98,7 @@
                          {% if tag == 'science' %}bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20
                          {% elif tag == 'policy' %}bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-20
                          {% elif tag == 'tech' %}bg-info bg-opacity-10 text-info border border-info border-opacity-20
-                         {% else %}bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300{% endif %}"
+                         {% else %}bg-neutral-100 text-neutral-700{% endif %}"
                   role="listitem"
                   itemprop="skills">
               {{ tag | capitalize }}

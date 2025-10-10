@@ -25,11 +25,11 @@
          itemtype="{% if work.type == 'publication' %}https://schema.org/ScholarlyArticle{% else %}https://schema.org/CreativeWork{% endif %}">
   
   {# Card container with theme styling #}
-  <div class="work-item-card__container bg-surface border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+  <div class="work-item-card__container bg-surface border border-neutral-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
     
     {# Media section (screenshot for projects, TOC image for publications) #}
     {% if showImg and work.media and (work.media.screenshot or work.media.tocImage) %}
-      <div class="work-item-card__media relative overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+      <div class="work-item-card__media relative overflow-hidden bg-neutral-100">
         {% set mediaUrl = work.media.screenshot or work.media.tocImage %}
         {% set mediaAlt = work.media.alt or (work.title + " " + work.type + " image") %}
         
@@ -129,7 +129,7 @@
             <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
                          {% if work.status == 'published' or work.status == 'completed' %}bg-success bg-opacity-10 text-success
                          {% elif work.status == 'ongoing' %}bg-info bg-opacity-10 text-info
-                         {% else %}bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300{% endif %}">
+                         {% else %}bg-neutral-100 text-neutral-700{% endif %}">
               {{ work.status | capitalize }}
             </span>
           </div>
@@ -158,7 +158,7 @@
             </h4>
             <div class="flex flex-wrap gap-2">
               {% for collaborator in work.collaborators %}
-                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300"
+                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-neutral-700"
                       itemprop="{% if work.type == 'publication' %}author{% else %}contributor{% endif %}">
                   {{ collaborator }}
                 </span>
@@ -187,7 +187,7 @@
     {% endif %}
     
     {# Footer with tags and links #}
-    <footer class="work-item-card__footer px-6 py-4 bg-neutral-50 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700">
+    <footer class="work-item-card__footer px-6 py-4 bg-neutral-50 border-t border-neutral-200">
       <div class="flex items-center justify-between gap-4">
         
         {# Tags #}
@@ -197,7 +197,7 @@
                          {% if tag == 'science' %}bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20
                          {% elif tag == 'policy' %}bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-20
                          {% elif tag == 'tech' %}bg-info bg-opacity-10 text-info border border-info border-opacity-20
-                         {% else %}bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300{% endif %}"
+                         {% else %}bg-neutral-100 text-neutral-700{% endif %}"
                   role="listitem"
                   itemprop="keywords">
               {{ tag | capitalize }}
@@ -228,7 +228,7 @@
               <a href="{{ work.links.github }}" 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 class="inline-flex items-center p-2 rounded-md text-textSecondary hover:text-text hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-150"
+                 class="inline-flex items-center p-2 rounded-md text-textSecondary hover:text-text hover:bg-neutral-100 transition-colors duration-150"
                  aria-label="View source code"
                  title="View source code">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
