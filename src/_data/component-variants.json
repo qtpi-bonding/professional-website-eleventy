@@ -15,7 +15,7 @@
         "colors": "bg-secondary text-surface hover:bg-primary",
         "sizes": {
           "sm": "h-8 px-3 text-sm",
-          "md": "h-10 px-4 text-base", 
+          "md": "h-10 px-4 text-base",
           "lg": "h-12 px-6 text-lg"
         }
       },
@@ -68,7 +68,7 @@
         "element": "h1"
       },
       "h2": {
-        "class": "heading-2", 
+        "class": "heading-2",
         "element": "h2"
       },
       "h3": {
@@ -139,7 +139,7 @@
       "success": {
         "base": "border border-success bg-success bg-opacity-10 text-success rounded-lg p-4",
         "icon": "text-success",
-        "title": "font-medium text-success", 
+        "title": "font-medium text-success",
         "description": "text-success text-opacity-80"
       },
       "warning": {

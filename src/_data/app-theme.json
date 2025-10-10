@@ -6,7 +6,7 @@
         "dark": "#006280"
       },
       "secondary": {
-        "light": "#006280", 
+        "light": "#006280",
         "dark": "#00C3FF"
       }
     },
@@ -44,16 +44,16 @@
     },
     "categories": {
       "science": {
-        "light": "#059669",
-        "dark": "#10b981"
+        "light": "#D2E4FF",
+        "dark": "#0D47A1"
       },
       "policy": {
-        "light": "#7c3aed",
-        "dark": "#a78bfa"
+        "light": "#DFF5E1",
+        "dark": "#1B5E20"
       },
       "tech": {
-        "light": "#dc2626",
-        "dark": "#f87171"
+        "light": "#E6D8FF",
+        "dark": "#5B2E90"
       }
     },
     "neutral": {
@@ -74,17 +74,35 @@
       "headline": {
         "family": "Geologica",
         "fallback": "system-ui, sans-serif",
-        "weights": [400, 500, 600, 700, 800, 900]
+        "weights": [
+          400,
+          500,
+          600,
+          700,
+          800,
+          900
+        ]
       },
       "body": {
         "family": "Source Sans 3",
-        "fallback": "system-ui, sans-serif", 
-        "weights": [300, 400, 500, 600, 700]
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          300,
+          400,
+          500,
+          600,
+          700
+        ]
       },
       "mono": {
         "family": "JetBrains Mono",
         "fallback": "monospace",
-        "weights": [400, 500, 600, 700]
+        "weights": [
+          400,
+          500,
+          600,
+          700
+        ]
       }
     },
     "sizes": {
@@ -109,7 +127,7 @@
     "scale": {
       "0": "0",
       "1": "0.25rem",
-      "2": "0.5rem", 
+      "2": "0.5rem",
       "3": "0.75rem",
       "4": "1rem",
       "5": "1.25rem",
@@ -137,26 +155,20 @@
       "text": "#000000",
       "textSecondary": "#666666",
       "success": "#10b981",
-      "warning": "#f59e0b", 
+      "warning": "#f59e0b",
       "error": "#ef4444",
-      "info": "#3b82f6",
-      "science": "#059669",
-      "policy": "#7c3aed",
-      "tech": "#dc2626"
+      "info": "#3b82f6"
     },
     "dark": {
       "primary": "#006280",
-      "secondary": "#00C3FF", 
+      "secondary": "#00C3FF",
       "surface": "#000000",
       "text": "#ffffff",
       "textSecondary": "#cccccc",
       "success": "#34d399",
       "warning": "#fbbf24",
-      "error": "#f87171", 
-      "info": "#60a5fa",
-      "science": "#10b981",
-      "policy": "#a78bfa",
-      "tech": "#f87171"
+      "error": "#f87171",
+      "info": "#60a5fa"
     }
   },
   "accessibility": {
