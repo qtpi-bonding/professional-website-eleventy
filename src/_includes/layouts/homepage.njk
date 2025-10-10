@@ -59,7 +59,7 @@ hideHeader: true
           {# Theme toggle button in sidebar #}
           <button id="sidebar-theme-toggle" 
                   data-theme-toggle
-                  class="p-2 rounded-md bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 transition-colors duration-200"
+                  class="p-2 rounded-md bg-neutral-100 hover:bg-neutral-200 transition-colors duration-200"
                   aria-label="Toggle theme">
             <svg class="w-5 h-5 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -143,7 +143,7 @@ hideHeader: true
           <p class="text-xl leading-relaxed mb-6">{{ site.description }}</p>
           <p class="leading-relaxed">{{ site.author.bio }}</p>
           
-          <div class="mt-8 p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
+          <div class="mt-8 p-6 bg-neutral-50 rounded-lg">
             <h3 class="text-lg font-semibold text-text mb-4">Current Focus</h3>
             <p class="text-textSecondary">
               Working at the intersection of science, policy, and technology to create meaningful impact 
@@ -212,7 +212,7 @@ hideHeader: true
         <div class="contact-content">
           <div class="grid gap-6 md:grid-cols-2">
             <a href="mailto:{{ site.author.email }}" 
-               class="contact-card flex items-center p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200">
+               class="contact-card flex items-center p-6 bg-neutral-50 rounded-lg hover:bg-neutral-100 transition-colors duration-200">
               <div class="contact-icon mr-4">
                 <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -227,7 +227,7 @@ hideHeader: true
             <a href="{{ site.social.linkedin }}" 
                target="_blank" 
                rel="noopener noreferrer"
-               class="contact-card flex items-center p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200">
+               class="contact-card flex items-center p-6 bg-neutral-50 rounded-lg hover:bg-neutral-100 transition-colors duration-200">
               <div class="contact-icon mr-4">
                 <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -245,165 +245,247 @@ hideHeader: true
   </main>
 </div>
 
-{# JavaScript for sidebar layout and section-based filtering #}
-<script src="/assets/js/navigation-system.js?v={{ cacheBuster }}"></script>
-<script src="/assets/js/content-filter.js?v={{ cacheBuster }}"></script>
+{# Standalone JavaScript - No external dependencies #}
 <script>
-  // Sidebar portfolio layout functionality
-  document.addEventListener('DOMContentLoaded', function() {
+(function() {
+  'use strict';
+  
+  console.log('🚀 Standalone homepage JavaScript loading...');
+  
+  // Simple theme toggle functionality
+  function setupThemeToggle() {
+    const themeToggle = document.getElementById('sidebar-theme-toggle');
+    console.log('🎨 Theme toggle button found:', !!themeToggle);
     
-    // Initialize theme toggle for sidebar (with retry mechanism)
-    function initializeThemeToggle() {
-      const sidebarThemeToggle = document.getElementById('sidebar-theme-toggle');
-      if (sidebarThemeToggle && window.themeSystem) {
-        sidebarThemeToggle.addEventListener('click', function() {
-          console.log('Theme toggle clicked'); // Debug log
+    if (!themeToggle) return;
+    
+    // Wait for theme system to be available
+    function waitForThemeSystem() {
+      if (window.themeSystem) {
+        console.log('🎨 Theme system available, setting up toggle');
+        
+        // Add click handler
+        themeToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('🎨 Theme toggle clicked!');
+          
+          const beforeTheme = window.themeSystem.getEffectiveTheme();
+          console.log('🎨 Current theme before toggle:', beforeTheme);
+          
           window.themeSystem.toggleTheme();
+          
+          // Log theme change
+          setTimeout(() => {
+            const afterTheme = window.themeSystem.getEffectiveTheme();
+            console.log('🎨 Theme after toggle:', afterTheme);
+            console.log('🎨 CSS variables after toggle:', {
+              surface: getComputedStyle(document.documentElement).getPropertyValue('--color-surface'),
+              text: getComputedStyle(document.documentElement).getPropertyValue('--color-text'),
+              primary: getComputedStyle(document.documentElement).getPropertyValue('--color-primary')
+            });
+          }, 100);
         });
-        console.log('Theme toggle initialized'); // Debug log
-      } else if (sidebarThemeToggle) {
-        // Retry after a short delay if themeSystem isn't ready
-        setTimeout(initializeThemeToggle, 100);
+        
+        console.log('✅ Theme toggle initialized with ThemeSystem');
+      } else {
+        console.log('🎨 Theme system not ready, retrying...');
+        setTimeout(waitForThemeSystem, 100);
       }
     }
     
-    // Initialize theme toggle
-    initializeThemeToggle();
+    waitForThemeSystem();
+  }
+  
+  // Simple navigation scrolling
+  function setupNavigation() {
+    const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
+    const mainContent = document.querySelector('.main-content');
     
-    // Initialize smooth scrolling navigation
-    function initializeSmoothScrolling() {
-      const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
-      const mainContent = document.querySelector('.main-content');
+    console.log('🧭 Navigation links found:', navLinks.length);
+    console.log('📄 Main content found:', !!mainContent);
+    
+    if (!mainContent || navLinks.length === 0) return;
+    
+    // Debug main content properties
+    console.log('📄 Main content scroll properties:', {
+      scrollTop: mainContent.scrollTop,
+      scrollHeight: mainContent.scrollHeight,
+      clientHeight: mainContent.clientHeight,
+      overflowY: getComputedStyle(mainContent).overflowY
+    });
+    
+    navLinks.forEach(function(link, index) {
+      const href = link.getAttribute('href');
+      console.log('🔗 Setting up link ' + (index + 1) + ':', href);
       
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('🧭 Navigation clicked:', href);
+        
+        const targetId = href.substring(1);
+        const targetSection = document.getElementById(targetId);
+        
+        console.log('🎯 Target section found:', !!targetSection);
+        
+        if (targetSection) {
+          // Get the position relative to the main content
+          const mainContentRect = mainContent.getBoundingClientRect();
+          const targetRect = targetSection.getBoundingClientRect();
+          const currentScrollTop = mainContent.scrollTop;
           
-          const targetId = this.getAttribute('href').substring(1);
-          const targetSection = document.getElementById(targetId);
+          // Calculate the target position
+          const targetTop = currentScrollTop + (targetRect.top - mainContentRect.top) - 80;
           
-          if (targetSection && mainContent) {
-            // Calculate offset for better positioning
-            const offset = 80; // Adjust this value as needed
-            const targetPosition = targetSection.offsetTop - offset;
-            
-            // Smooth scroll to target
-            mainContent.scrollTo({
-              top: targetPosition,
-              behavior: 'smooth'
-            });
-            
-            // Update active nav link
-            navLinks.forEach(navLink => navLink.classList.remove('active'));
-            this.classList.add('active');
-            
-            console.log('Scrolling to:', targetId); // Debug log
-          }
-        });
+          console.log('📜 Scroll calculation:', {
+            mainContentTop: mainContentRect.top,
+            targetTop: targetRect.top,
+            currentScrollTop: currentScrollTop,
+            calculatedTarget: targetTop
+          });
+          
+          // Try multiple scroll methods
+          console.log('📜 Attempting scroll to position:', targetTop);
+          
+          // Method 1: scrollTo with smooth behavior
+          mainContent.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+          });
+          
+          // Method 2: Fallback with scrollTop (in case scrollTo doesn't work)
+          setTimeout(function() {
+            if (Math.abs(mainContent.scrollTop - targetTop) > 10) {
+              console.log('📜 Fallback: Using scrollTop directly');
+              mainContent.scrollTop = targetTop;
+              
+              // Method 3: Try scrolling the window as last resort
+              setTimeout(function() {
+                if (Math.abs(mainContent.scrollTop - targetTop) > 10) {
+                  console.log('📜 Last resort: Scrolling window to element');
+                  targetSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start',
+                    inline: 'nearest'
+                  });
+                }
+              }, 100);
+            }
+          }, 100);
+          
+          // Update active state
+          navLinks.forEach(function(navLink) {
+            navLink.classList.remove('active');
+          });
+          link.classList.add('active');
+          
+          console.log('✅ Scroll initiated');
+          
+          // Verify scroll after a delay
+          setTimeout(function() {
+            console.log('📜 Final scroll position:', mainContent.scrollTop);
+          }, 1000);
+        } else {
+          console.log('❌ Target section not found');
+        }
       });
-      
-      console.log('Smooth scrolling initialized for', navLinks.length, 'links'); // Debug log
-    }
+    });
     
-    // Initialize smooth scrolling
-    initializeSmoothScrolling();
-    
-    // Section-based filtering system
+    console.log('✅ Navigation initialized');
+  }
+  
+  // Simple content filtering
+  function setupFiltering() {
+    const filterButtons = document.querySelectorAll('.filter-button');
     const sections = document.querySelectorAll('.content-section');
     
-    // Enhanced content filter for section-based filtering
-    if (window.contentFilter) {
-      // Override the default filtering to work with sections
-      const originalSetFilter = window.contentFilter.setFilter;
-      
-      window.contentFilter.setFilter = function(filter) {
-        // Call original filter logic
-        originalSetFilter.call(this, filter);
+    console.log('🔍 Filter buttons found:', filterButtons.length);
+    console.log('📄 Content sections found:', sections.length);
+    
+    if (filterButtons.length === 0) return;
+    
+    filterButtons.forEach(function(button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         
-        // Section-based filtering logic
-        sections.forEach(section => {
-          const sectionTags = section.dataset.sectionTags;
-          if (!sectionTags) {
-            // Always show sections without tags (like About, Contact)
-            section.style.display = '';
-            return;
+        const filter = this.getAttribute('data-filter') || this.textContent.toLowerCase().trim();
+        console.log('🔍 Filter clicked:', filter);
+        
+        // Update active button
+        filterButtons.forEach(function(btn) {
+          btn.classList.remove('filter-button--active');
+          btn.classList.add('filter-button--inactive');
+          btn.setAttribute('aria-pressed', 'false');
+        });
+        this.classList.add('filter-button--active');
+        this.classList.remove('filter-button--inactive');
+        this.setAttribute('aria-pressed', 'true');
+        
+        // Filter individual items within sections instead of entire sections
+        const allItems = document.querySelectorAll('.experience-item, .work-item, .project-item, .publication-item');
+        
+        console.log('🔍 Found', allItems.length, 'filterable items');
+        
+        allItems.forEach(function(item) {
+          const itemTags = item.getAttribute('data-tags') || '';
+          const tags = itemTags.split(',').map(function(tag) { return tag.trim(); }).filter(function(tag) { return tag; });
+          
+          console.log('🔍 Item:', item.className, 'has tags:', tags);
+          
+          if (filter === 'all' || tags.includes(filter) || (filter === 'tech' && tags.includes('technology'))) {
+            item.style.display = '';
+            item.setAttribute('aria-hidden', 'false');
+            console.log('🔍 Showing item with tags:', tags);
+          } else {
+            item.style.display = 'none';
+            item.setAttribute('aria-hidden', 'true');
+            console.log('🔍 Hiding item with tags:', tags);
           }
+        });
+        
+        // Show/hide sections based on whether they have visible items
+        sections.forEach(function(section) {
+          const visibleItems = section.querySelectorAll('.experience-item:not([aria-hidden="true"]), .work-item:not([aria-hidden="true"]), .project-item:not([aria-hidden="true"]), .publication-item:not([aria-hidden="true"])');
           
-          const tags = sectionTags.split(',').map(tag => tag.trim()).filter(tag => tag);
-          const shouldShow = filter === 'all' || tags.includes(filter);
-          
-          if (shouldShow) {
+          if (visibleItems.length > 0 || section.id === 'about-section' || section.id === 'contact-section') {
             section.style.display = '';
             section.setAttribute('aria-hidden', 'false');
+            console.log('🔍 Showing section:', section.id, 'with', visibleItems.length, 'visible items');
           } else {
             section.style.display = 'none';
             section.setAttribute('aria-hidden', 'true');
+            console.log('🔍 Hiding section:', section.id, 'no visible items');
           }
         });
-      };
-    }
-    
-    // Mobile menu functionality
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const sidebar = document.querySelector('.sidebar');
-    
-    if (mobileMenuButton && sidebar) {
-      // Show mobile menu button on homepage
-      mobileMenuButton.classList.remove('hidden');
-      
-      mobileMenuButton.addEventListener('click', function() {
-        sidebar.classList.toggle('sidebar--mobile-open');
         
-        // Update button icon
-        const icon = this.querySelector('svg');
-        if (sidebar.classList.contains('sidebar--mobile-open')) {
-          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-          this.setAttribute('aria-label', 'Close navigation menu');
-        } else {
-          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-          this.setAttribute('aria-label', 'Open navigation menu');
-        }
+        console.log('🔍 Filter applied:', filter);
       });
-      
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener('click', function(e) {
-        if (window.innerWidth < 1024 && 
-            !sidebar.contains(e.target) && 
-            !mobileMenuButton.contains(e.target) &&
-            sidebar.classList.contains('sidebar--mobile-open')) {
-          sidebar.classList.remove('sidebar--mobile-open');
-          mobileMenuButton.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-          mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
-        }
-      });
-    }
+    });
     
-    // Mobile responsiveness
-    function handleResize() {
-      const mainContent = document.querySelector('.main-content');
-      
-      if (window.innerWidth < 1024) {
-        // Mobile layout adjustments
-        if (sidebar) sidebar.classList.add('sidebar--mobile');
-        if (mainContent) mainContent.classList.add('main-content--mobile');
-      } else {
-        // Desktop layout
-        if (sidebar) {
-          sidebar.classList.remove('sidebar--mobile', 'sidebar--mobile-open');
-        }
-        if (mainContent) mainContent.classList.remove('main-content--mobile');
-        
-        // Reset mobile menu button
-        if (mobileMenuButton) {
-          mobileMenuButton.querySelector('svg').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-          mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
-        }
-      }
-    }
+    console.log('✅ Filtering initialized');
+  }
+  
+  // Initialize everything
+  function initialize() {
+    console.log('🔧 Initializing homepage functionality...');
     
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Initial call
-  });
+    setupThemeToggle();
+    setupNavigation();
+    setupFiltering();
+    
+    console.log('🎉 Homepage initialization complete!');
+  }
+  
+  // Run when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize);
+  } else {
+    initialize();
+  }
+  
+})();
 </script>
 
 <style>
@@ -455,8 +537,11 @@ hideHeader: true
   
   /* Main content area */
   .main-content {
-    @apply flex-1 min-h-screen overflow-y-auto;
+    @apply flex-1 min-h-screen;
     margin-left: 20rem; /* 320px sidebar width */
+    overflow-y: auto !important;
+    height: 100vh !important;
+    position: relative;
   }
   
   .content-wrapper {
@@ -496,7 +581,7 @@ hideHeader: true
   
   /* Contact cards */
   .contact-card {
-    @apply flex items-center p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-200;
+    @apply flex items-center p-6 bg-neutral-50 rounded-lg hover:bg-neutral-100 transition-colors duration-200;
   }
   
   .contact-icon {
