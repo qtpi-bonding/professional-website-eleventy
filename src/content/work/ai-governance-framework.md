@@ -11,9 +11,6 @@ featured: true
 links:
   doi: "10.1000/jtp.2023.456789"
   external: "https://journal-tech-policy.example.com/articles/ai-governance"
-media:
-  tocImage: "/assets/images/ai-governance-paper-toc.jpg"
-  alt: "Table of contents from AI governance framework paper"
 ---
 
 This paper presents a comprehensive framework for implementing algorithmic accountability measures within federal agencies. Through analysis of existing governance structures and stakeholder interviews, we propose practical guidelines for AI system oversight and transparency.

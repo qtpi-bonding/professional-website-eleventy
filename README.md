@@ -2,6 +2,8 @@
 
 A modern, responsive personal portfolio website built with Eleventy (11ty) and Tailwind CSS. Features a centralized theme system, content filtering, and automated deployment to GitHub Pages.
 
+🚀 **Ready for deployment** - Configure GitHub Pages and push to deploy!
+
 ## Features
 
 - **Unified Content Filtering**: Filter content by Science, Policy, and Technology domains

@@ -11,9 +11,6 @@ featured: false
 links:
   doi: "10.55540/ssq.2023.789012"
   external: "https://strategic-studies.example.edu/quantum-policy"
-media:
-  tocImage: "/assets/images/quantum-policy-brief-toc.jpg"
-  alt: "Table of contents from quantum computing policy brief"
 ---
 
 This policy brief examines the strategic implications of quantum computing advances for national security, economic competitiveness, and international relations. We analyze current quantum research investments globally and propose policy frameworks for maintaining technological leadership.

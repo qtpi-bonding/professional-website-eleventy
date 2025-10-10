@@ -12,9 +12,6 @@ links:
   demo: "https://climate-viz-demo.example.com"
   github: "https://github.com/username/climate-data-platform"
   live: "https://climate-platform.example.com"
-media:
-  screenshot: "/assets/images/climate-platform-screenshot.jpg"
-  alt: "Screenshot of climate data visualization showing temperature trends"
 ---
 
 Developed a comprehensive web platform that enables researchers and policymakers to visualize and analyze climate data from multiple sources. The platform integrates real-time data feeds with historical datasets to provide actionable insights for climate adaptation planning.

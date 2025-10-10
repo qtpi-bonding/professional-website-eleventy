@@ -11,9 +11,6 @@ featured: true
 links:
   doi: "10.1038/nbt.2023.12345"
   external: "https://nature.com/articles/nbt2023-genomics-privacy"
-media:
-  tocImage: "/assets/images/genomics-privacy-paper-toc.jpg"
-  alt: "Table of contents from genomics privacy paper showing technical and policy sections"
 ---
 
 This interdisciplinary study examines the intersection of genomic research, privacy-preserving technologies, and regulatory frameworks. We analyze current technical approaches to protecting genomic privacy and propose policy recommendations for balancing research benefits with individual privacy rights.
