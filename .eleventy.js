@@ -8,8 +8,11 @@ module.exports = function(eleventyConfig) {
   
   // Add base URL filter for proper asset paths
   eleventyConfig.addFilter("url", function(url) {
-    const environment = this.ctx.environment || {};
-    const baseUrl = environment.baseUrl || '/';
+    // Get base URL from site data, fallback to environment or root
+    const siteData = this.ctx.site || {};
+    const baseUrl = process.env.NODE_ENV === 'production' 
+      ? (siteData.baseUrl || '/professional-website-eleventy/')
+      : '/';
     
     if (!url) return baseUrl;
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
