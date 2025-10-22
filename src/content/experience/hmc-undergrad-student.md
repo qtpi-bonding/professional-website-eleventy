@@ -21,7 +21,7 @@ Notable Outcomes:
 against experimental data on Claisen rearrangements (2018)
 - Resarch project: Density functional theory investigation of hydroamination
 reaction (2015)
-- [CS70](https://www.cs.hmc.edu/cs70/)
+- [CS70: Data Structures and Program Development](https://www.cs.hmc.edu/cs70/)
 
 
 Software used: Gaussian, TURBOMOLE, Bash, MATHEMATICA
