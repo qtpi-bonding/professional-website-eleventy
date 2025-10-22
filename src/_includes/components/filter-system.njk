@@ -11,10 +11,10 @@
 #}
 
 {% set defaultFilters = [
-  { id: 'all', label: 'All', ariaLabel: 'Show all content' },
-  { id: 'science', label: 'Science', ariaLabel: 'Show science content only' },
-  { id: 'policy', label: 'Policy', ariaLabel: 'Show policy content only' },
-  { id: 'tech', label: 'Tech', ariaLabel: 'Show technology content only' }
+  { id: 'all', label: site.content.filters.labels.all, ariaLabel: 'Show all content' },
+  { id: 'science', label: site.content.filters.labels.science, ariaLabel: 'Show science content only' },
+  { id: 'policy', label: site.content.filters.labels.policy, ariaLabel: 'Show policy content only' },
+  { id: 'tech', label: site.content.filters.labels.tech, ariaLabel: 'Show technology content only' }
 ] %}
 
 {% set filterList = filters or defaultFilters %}

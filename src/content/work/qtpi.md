@@ -9,7 +9,7 @@ year: 2024
 status: "ongoing"
 featured: true
 links:
-  github: "https://github.com/username/climate-data-platform"
+  github: "https://github.com/qtpi-bonding/"
   live: "https://qtpi.app"
 ---
 
@@ -17,7 +17,7 @@ links:
 to fundamentally redefine how people connect, moving beyond the
 engagement-driven, often unethical models of traditional dating apps. As a
 solo-founded venture, Qtpi is built on a core philosophy that technology can
-be ethical art, embedding values of Privacy, Agency, and Thoughtfulness
+be ethical, embedding values of Privacy, Agency, and Thoughtfulness
 directly into its architecture.
 
 The platform addresses the ineffectiveness of online dating through a
@@ -28,8 +28,15 @@ extends beyond initial connections, with planned offerings such as an integrated
 couples throughout their entire relationship journey, transforming churn into
 long-term engagement.
 
-Underpinned by a robust, privacy-by-design tech stack featuring self-hosted
-end-to-end encrypted messaging and identity management, Qtpi is a testament
-to building a more humane and effective way for people to connect. It's a
-protest against systems that disrespect users' time, fostering genuine,
-lasting relationships through thoughtful design and aligned incentives.
+## Technical Foundation
+Built on a robust, modular architecture, the platform utilizes Django (DRF)
+for the backend, Flutter for cross-platform mobile development, and
+self-hosted Keycloak and Matrix for secure identity and end-to-end encrypted
+communication. This privacy-by-design stack ensures user control and data
+integrity.
+
+## AI-Augmented Development Strategy:
+As a solo founder, I leveraged advanced AI (Gemini, Kiro) across all
+development phases—from architectural design and code generation to
+strategic planning and internal tooling—significantly enhancing productivity
+and scope.

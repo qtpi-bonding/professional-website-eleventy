@@ -17,7 +17,74 @@
     "description": "",
     "email": "your.email@example.com",
     "orcid": "0000-0002-1242-2759",
-    "bio": "Interested in science, policy, and technology"
+    "bio": "Science, Technology, & Policy"
+  },
+  "content": {
+    "currentFocus": {
+      "title": "Current Focus",
+      "description": "Working at the intersection of science, policy, and technology to create meaningful impact through interdisciplinary collaboration and evidence-based solutions."
+    },
+    "sections": {
+      "about": {
+        "title": "About"
+      },
+      "experience": {
+        "title": "Experience",
+        "description": "Experiences across science, technology. and policy domains"
+      },
+      "projects": {
+        "title": "Projects",
+        "description": ""
+      },
+      "publications": {
+        "title": "Publications",
+        "description": "Research publications"
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Let's connect and explore collaboration opportunities"
+      }
+    },
+    "navigation": {
+      "quickLinks": "Quick Links",
+      "portfolioHome": "Portfolio Home",
+      "downloadResume": "Download Resume",
+      "professionalNetworks": "Professional Networks"
+    },
+    "filters": {
+      "title": "Filter by Area",
+      "labels": {
+        "all": "All",
+        "science": "Science",
+        "policy": "Policy",
+        "tech": "Technology"
+      }
+    },
+    "accessibility": {
+      "skipToContent": "Skip to main content",
+      "toggleTheme": "Toggle theme",
+      "toggleNavigation": "Toggle navigation menu",
+      "openNavigation": "Open navigation menu",
+      "closeNavigation": "Close navigation menu"
+    },
+    "labels": {
+      "email": "Email",
+      "socialPlatforms": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "orcid": "ORCID"
+      },
+      "workItems": {
+        "collaborators": "Collaborators",
+        "coAuthors": "Co-authors",
+        "technologies": "Technologies",
+        "viewDemo": "View demo",
+        "viewSourceCode": "View source code",
+        "viewLiveSite": "View live site",
+        "viewDOI": "View DOI"
+      }
+    }
   },
   "social": {
     "linkedin": "https://linkedin.com/in/gabriel-phun-11093731b",
@@ -30,7 +97,13 @@
     "path": "/static/resume.pdf"
   },
   "seo": {
-    "keywords": ["science", "policy", "technology", "research", "portfolio"],
+    "keywords": [
+      "science",
+      "policy",
+      "technology",
+      "research",
+      "portfolio"
+    ],
     "ogImage": "/assets/images/og-image.jpg",
     "twitterCard": "summary_large_image"
   },
