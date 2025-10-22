@@ -1,17 +1,17 @@
 ---
-title: "Climate Data Visualization Platform"
-description: "Interactive web platform for exploring climate change impacts across different geographic regions and time scales"
+title: "SciPiPol"
+description: "Scientist & Policymaker Bill Collaboration Platform"
 type: "project"
-tags: ["science", "tech"]
-collaborators: ["Dr. Sarah Chen", "Mike Rodriguez", "Climate Research Lab Team"]
-technologies: ["React", "D3.js", "Python", "PostgreSQL", "AWS"]
-year: 2023
+tags: ["tech"]
+collaborators: [""]
+technologies: ["Docker", "Django", "PostgreSQL", "LegiScan"]
+year: 2024
 status: "completed"
 featured: true
-links:
-  demo: "https://climate-viz-demo.example.com"
-  github: "https://github.com/username/climate-data-platform"
-  live: "https://climate-platform.example.com"
+# links:
+#   demo: "https://climate-viz-demo.example.com"
+#   github: "https://github.com/username/climate-data-platform"
+#   live: "https://climate-platform.example.com"
 ---
 
 Developed a comprehensive web platform that enables researchers and policymakers to visualize and analyze climate data from multiple sources. The platform integrates real-time data feeds with historical datasets to provide actionable insights for climate adaptation planning.

@@ -12,18 +12,17 @@
   },
   "language": "en",
   "author": {
-    "name": "Your Name",
-    "title": "Science, Policy & Technology Professional",
-    "description": "Professional working at the intersection of science, policy, and technology to create meaningful impact through interdisciplinary collaboration and evidence-based solutions.",
+    "name": "Gabriel Phun",
+    "title": "",
+    "description": "",
     "email": "your.email@example.com",
-    "orcid": "0000-0000-0000-0000",
-    "bio": "Professional working at the intersection of science, policy, and technology"
+    "orcid": "0000-0002-1242-2759",
+    "bio": "Interested in science, policy, and technology"
   },
   "social": {
-    "linkedin": "https://linkedin.com/in/username",
-    "twitter": "https://twitter.com/username",
-    "github": "https://github.com/username",
-    "orcid": "https://orcid.org/0000-0000-0000-0000"
+    "linkedin": "https://linkedin.com/in/gabriel-phun-11093731b",
+    "github": "https://github.com/qtpi-bonding",
+    "orcid": "https://orcid.org/0000-0002-1242-2759"
   },
   "resume": {
     "filename": "resume.pdf",
