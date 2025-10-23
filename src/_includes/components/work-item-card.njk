@@ -125,10 +125,7 @@
         {# Status #}
         {% if work.status %}
           <div class="flex items-center">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium text-text
-                         {% if work.status == 'published' or work.status == 'completed' %}bg-success bg-opacity-10
-                         {% elif work.status == 'ongoing' %}bg-info bg-opacity-10
-                         {% else %}bg-neutral-100{% endif %}">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-neutral-100 text-textSecondary">
               {{ work.status | capitalize }}
             </span>
           </div>
@@ -174,7 +171,7 @@
             </h4>
             <div class="flex flex-wrap gap-2">
               {% for tech in work.technologies %}
-                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-info bg-opacity-10 text-text border border-info border-opacity-20"
+                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-textSecondary"
                       itemprop="keywords">
                   {{ tech }}
                 </span>

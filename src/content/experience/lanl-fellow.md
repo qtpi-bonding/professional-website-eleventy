@@ -9,7 +9,6 @@ type: "experience"
 status: "completed"
 ---
 
-Description: 
 Awarded [DOE Office of Science Graduate Student Research (SCGSR) Fellowship](https://science.osti.gov/wdts/scgsr/SCGSR-Awards-and-Publications/Awards-from-Past-SCGSR-Solicitations) (2021 Solicitation 2). Conducted computational, mechanistic study of dinoflagellate luciferin bioluminescence under the guidance of [Dr. Sergei Tretiak](https://cnls.lanl.gov/~serg/homepage.html) and [Dr. Tammy Gibson](https://scholar.google.com/citations?user=qCbR1WIAAAAJ&hl=en).
 
 Notable Outcomes:

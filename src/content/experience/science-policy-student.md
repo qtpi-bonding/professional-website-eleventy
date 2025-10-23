@@ -9,7 +9,6 @@ type: "experience"
 status: "completed"
 ---
 
-Description:
 [NSPN Science Policy Skills Training Course](https://www.scipolnetwork.org/scipolskillstraining) 8‑week online intensive covering policy analysis, stakeholder engagement, and public‑policy deliverables. Completed individual and group assignments including a policy presentation and policy brief.
 
 

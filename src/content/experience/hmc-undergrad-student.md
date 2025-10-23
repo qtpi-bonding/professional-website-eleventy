@@ -9,7 +9,6 @@ type: "experience"
 status: "completed"
 ---
 
-Description:
 Completed a B.S. double major in Chemistry and Physics, focusing on computational electronic structure research. Conducted research under guidance of [Professor Robert Cave](https://www.hmc.edu/chemistry/faculty-staff/cave/), [Professor G. William Daub](https://www.hmc.edu/chemistry/faculty-staff/daub/), and [Professor Adam R. Johnson](https://www.hmc.edu/chemistry/faculty-staff/johnson/).
 
 Notable Outcomes:
