@@ -9,7 +9,6 @@ type: "experience"
 status: "completed"
 ---
 
-Description:
 Completed a PhD in Chemistry, focusing on computational quantum chemistry, chemical kinetics, and photochemistry. Conducted research under guidance of [Professor Filipp Furche](https://ffgroup.chem.uci.edu/) and [Professor Shane Ardo](https://www.chem.uci.edu/~ardo/).
 
 Notable Outcomes:

@@ -9,7 +9,6 @@ type: "experience"
 status: "current"
 ---
 
-Description:
 Designed, developed, and launched the beta of [Qtpi](https://qtpi.app)
 (Cutie Pie), an ethical dating and relationship platform disrupting the
 online dating industry. Drove all aspects of Qtpi's development
