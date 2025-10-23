@@ -16,7 +16,7 @@ hideHeader: true
           {{ site.author.name }}
         </h1>
         <p class="text-lg text-nav-text mb-4 font-medium">
-          {{ site.author.title or "Professional Title" }}
+          {{ site.author.title }}
         </p>
         <p class="text-sm text-textSecondary leading-relaxed mb-6">
           {{ site.author.description or site.author.bio }}
@@ -68,7 +68,7 @@ hideHeader: true
           <button id="sidebar-theme-toggle" 
                   data-theme-toggle
                   class="p-2 rounded-md bg-surface border border-neutral-200 hover:bg-neutral-100 transition-colors duration-200"
-                  aria-label="Toggle theme">
+                  aria-label="{{ site.content.accessibility.toggleTheme }}">
             <svg class="w-5 h-5 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
             </svg>
@@ -109,13 +109,13 @@ hideHeader: true
       {# Filter System in Sidebar #}
       <div class="sidebar-filters">
         <h3 class="text-sm font-semibold text-textSecondary uppercase tracking-wide mb-4">
-          Filter by Area
+          {{ site.content.filters.title }}
         </h3>
         {% set sidebarFilters = [
-          { id: 'all', label: 'All', ariaLabel: 'Show all content' },
-          { id: 'science', label: 'Science', ariaLabel: 'Show science content only' },
-          { id: 'policy', label: 'Policy', ariaLabel: 'Show policy content only' },
-          { id: 'tech', label: 'Technology', ariaLabel: 'Show technology content only' }
+          { id: 'all', label: site.content.filters.labels.all, ariaLabel: 'Show all content' },
+          { id: 'science', label: site.content.filters.labels.science, ariaLabel: 'Show science content only' },
+          { id: 'policy', label: site.content.filters.labels.policy, ariaLabel: 'Show policy content only' },
+          { id: 'tech', label: site.content.filters.labels.tech, ariaLabel: 'Show technology content only' }
         ] %}
         {% set filters = sidebarFilters %}
         {% set activeFilter = 'all' %}
@@ -127,11 +127,11 @@ hideHeader: true
       <div class="sidebar-resume mt-8 pt-8 border-t border-secondary border-opacity-20">
         <a href="{{ site.resume.path }}" 
            class="inline-flex items-center justify-center w-full px-4 py-3 bg-primary text-surface rounded-md font-medium hover:bg-secondary transition-colors duration-200"
-           aria-label="Download resume PDF">
+           aria-label="{{ site.content.navigation.downloadResume }}">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
-          Download Resume
+          {{ site.content.navigation.downloadResume }}
         </a>
       </div>
     </div>
@@ -144,7 +144,7 @@ hideHeader: true
       {# About Section #}
       <section id="about-section" class="content-section mb-16">
         <header class="section-header mb-8">
-          <h2 class="text-3xl font-headline font-bold text-text mb-4">About</h2>
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">{{ site.content.sections.about.title }}</h2>
         </header>
         
         <div class="prose prose-lg max-w-none text-textSecondary">
@@ -152,10 +152,9 @@ hideHeader: true
           <p class="leading-relaxed">{{ site.author.bio }}</p>
           
           <div class="mt-8 p-6 bg-neutral-100 rounded-lg">
-            <h3 class="text-lg font-semibold text-text mb-4">Current Focus</h3>
+            <h3 class="text-lg font-semibold text-text mb-4">{{ site.content.currentFocus.title }}</h3>
             <p class="text-textSecondary">
-              Working at the intersection of science, policy, and technology to create meaningful impact 
-              through interdisciplinary collaboration and evidence-based solutions.
+              {{ site.content.currentFocus.description }}
             </p>
           </div>
         </div>
@@ -164,8 +163,8 @@ hideHeader: true
       {# Experience Section #}
       <section id="experience-section" class="content-section mb-16" data-section-tags="{{ collections.experience | getAllTags | join(',') }}">
         <header class="section-header mb-8">
-          <h2 class="text-3xl font-headline font-bold text-text mb-4">Experience</h2>
-          <p class="text-textSecondary">Professional journey across science, policy, and technology domains</p>
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">{{ site.content.sections.experience.title }}</h2>
+          <p class="text-textSecondary">{{ site.content.sections.experience.description }}</p>
         </header>
         
         <div class="experience-grid space-y-6">
@@ -179,11 +178,11 @@ hideHeader: true
       {# Projects Section #}
       <section id="projects-section" class="content-section mb-16" data-section-tags="{{ collections.work | filterByType('project') | getAllTags | join(',') }}">
         <header class="section-header mb-8">
-          <h2 class="text-3xl font-headline font-bold text-text mb-4">Projects</h2>
-          <p class="text-textSecondary">Technical projects and implementations</p>
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">{{ site.content.sections.projects.title }}</h2>
+          <p class="text-textSecondary">{{ site.content.sections.projects.description }}</p>
         </header>
         
-        <div class="projects-grid grid gap-6 md:grid-cols-2">
+        <div class="projects-grid space-y-6">
           {% for workItem in collections.work %}
             {% if workItem.data.type == 'project' %}
               {% set class = "work-item project-item" %}
@@ -196,8 +195,8 @@ hideHeader: true
       {# Publications Section #}
       <section id="publications-section" class="content-section mb-16" data-section-tags="{{ collections.work | filterByType('publication') | getAllTags | join(',') }}">
         <header class="section-header mb-8">
-          <h2 class="text-3xl font-headline font-bold text-text mb-4">Publications</h2>
-          <p class="text-textSecondary">Research publications and academic work</p>
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">{{ site.content.sections.publications.title }}</h2>
+          <p class="text-textSecondary">{{ site.content.sections.publications.description }}</p>
         </header>
         
         <div class="publications-grid space-y-6">
@@ -213,8 +212,8 @@ hideHeader: true
       {# Contact Section #}
       <section id="contact-section" class="content-section">
         <header class="section-header mb-8">
-          <h2 class="text-3xl font-headline font-bold text-text mb-4">Contact</h2>
-          <p class="text-textSecondary">Let's connect and explore collaboration opportunities</p>
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">{{ site.content.sections.contact.title }}</h2>
+          <p class="text-textSecondary">{{ site.content.sections.contact.description }}</p>
         </header>
         
         <div class="contact-content">
@@ -227,7 +226,7 @@ hideHeader: true
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold text-text mb-1">Email</h3>
+                <h3 class="font-semibold text-text mb-1">{{ site.content.labels.email }}</h3>
                 <p class="text-textSecondary">{{ site.author.email }}</p>
               </div>
             </a>
@@ -573,8 +572,7 @@ hideHeader: true
   }
   
   .projects-grid {
-    @apply grid gap-6;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    @apply space-y-6;
   }
   
   .publications-grid {
@@ -624,7 +622,7 @@ hideHeader: true
     }
     
     .projects-grid {
-      @apply grid-cols-1;
+      @apply space-y-4;
     }
     
     .contact-content .grid {
@@ -668,7 +666,7 @@ hideHeader: true
     
     .projects-grid,
     .publications-grid {
-      @apply grid-cols-1 space-y-4;
+      @apply space-y-4;
     }
   }
   

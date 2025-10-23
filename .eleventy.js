@@ -217,10 +217,32 @@ module.exports = function(eleventyConfig) {
     const items = collectionApi.getFilteredByGlob("src/content/experience/*.md");
     items.forEach(item => validateContent(item, "experience"));
     return items.sort((a, b) => {
-      // Sort by featured first, then by date
+      // Sort by featured first, then by most recent date
       if (a.data.featured && !b.data.featured) return -1;
       if (!a.data.featured && b.data.featured) return 1;
-      return new Date(b.date) - new Date(a.date);
+      
+      // Extract end year from dateRange for sorting (most recent first)
+      const getEndYear = (dateRange) => {
+        if (!dateRange) return 0;
+        
+        // Handle "Present" or "Current" cases
+        if (dateRange.toLowerCase().includes('present') || dateRange.toLowerCase().includes('current')) {
+          return new Date().getFullYear();
+        }
+        
+        // Extract the last year from the range (e.g., "2024 - 2025" -> 2025, "2022 - 2023" -> 2023)
+        const yearMatch = dateRange.match(/(\d{4})/g);
+        if (yearMatch && yearMatch.length > 0) {
+          return parseInt(yearMatch[yearMatch.length - 1]);
+        }
+        
+        return 0;
+      };
+      
+      const aEndYear = getEndYear(a.data.dateRange);
+      const bEndYear = getEndYear(b.data.dateRange);
+      
+      return bEndYear - aEndYear; // Most recent first
     });
   });
   
