@@ -182,7 +182,7 @@ hideHeader: true
           <p class="text-textSecondary">{{ site.content.sections.projects.description }}</p>
         </header>
         
-        <div class="projects-grid grid gap-6 md:grid-cols-2">
+        <div class="projects-grid space-y-6">
           {% for workItem in collections.work %}
             {% if workItem.data.type == 'project' %}
               {% set class = "work-item project-item" %}
@@ -572,8 +572,7 @@ hideHeader: true
   }
   
   .projects-grid {
-    @apply grid gap-6;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    @apply space-y-6;
   }
   
   .publications-grid {
@@ -623,7 +622,7 @@ hideHeader: true
     }
     
     .projects-grid {
-      @apply grid-cols-1;
+      @apply space-y-4;
     }
     
     .contact-content .grid {
@@ -667,7 +666,7 @@ hideHeader: true
     
     .projects-grid,
     .publications-grid {
-      @apply grid-cols-1 space-y-4;
+      @apply space-y-4;
     }
   }
   
