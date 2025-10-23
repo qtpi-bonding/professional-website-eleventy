@@ -3,11 +3,10 @@ title: "Qtπ"
 description: "Dating and Relationship Platform"
 type: "project"
 tags: ["tech"]
-# collaborators: [""]
 technologies: ["Docker", "Django", "PostgreSQL", "DGraph", "Redis", "SeaweedFS", "Keycloak", "KrakenD", "Flutter", "Posthog", "Glitchtip"]
 year: 2024
 status: "ongoing"
-featured: true
+featured: false
 links:
   github: "https://github.com/qtpi-bonding/"
   live: "https://qtpi.app"
@@ -36,7 +35,7 @@ communication. This privacy-by-design stack ensures user control and data
 integrity.
 
 ## AI-Augmented Development Strategy:
-As a solo founder, I leveraged advanced AI (Gemini, Kiro) across all
+Leveraged AI (Gemini, Kiro) across all
 development phases—from architectural design and code generation to
 strategic planning and internal tooling—significantly enhancing productivity
 and scope.
