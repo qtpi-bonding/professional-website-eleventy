@@ -9,7 +9,6 @@ type: "experience"
 status: "completed"
 ---
 
-Description:
 
 Notable Outcomes:
 - [Phun, G. S. et al., *Chem. Mater.* **2025**, *37*, 10, 3769–3775](https://doi.org/10.1021/acs.chemmater.5c00311)
