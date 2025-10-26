@@ -383,11 +383,11 @@ hideHeader: true
         console.log('📱 Device type:', manager.currentDeviceType);
         console.log('👁️ Is visible:', manager.isVisible);
         
-        // Check if we're on desktop and sidebar should be visible
-        if (window.innerWidth >= 1024 && !manager.isVisible) {
-          console.log('🚨 Desktop detected but sidebar is hidden - fixing...');
+        // FORCE SIDEBAR TO SHOW ON DESKTOP - DEPLOYMENT FIX
+        if (window.innerWidth >= 1024) {
+          console.log('🚨 Desktop detected - ensuring sidebar is visible...');
           
-          // Clear any problematic preferences
+          // Clear any problematic preferences that might be hiding the sidebar
           try {
             const preferences = localStorage.getItem('sidebar-preferences');
             if (preferences) {
@@ -399,16 +399,31 @@ hideHeader: true
             console.warn('Failed to clear preferences:', e);
           }
           
-          // Force refresh the sidebar state
-          manager.refresh();
+          // Force show the sidebar on desktop regardless of current state
+          if (!manager.isVisible) {
+            console.log('🔧 Force showing sidebar...');
+            manager.forceShow();
+          }
           
-          // If still not visible, force show
+          // Double-check after a short delay
           setTimeout(() => {
             if (!manager.isVisible && window.innerWidth >= 1024) {
-              console.log('🔧 Force showing sidebar...');
+              console.log('🔧 Second attempt to force show sidebar...');
               manager.forceShow();
+              
+              // If still not working, manually update the DOM
+              const sidebar = document.querySelector('[data-sidebar]');
+              const mainContent = document.querySelector('.main-content');
+              
+              if (sidebar && mainContent) {
+                console.log('🔧 Manually updating DOM classes...');
+                sidebar.classList.add('sidebar--visible');
+                sidebar.setAttribute('aria-hidden', 'false');
+                sidebar.setAttribute('data-sidebar-state', 'visible');
+                mainContent.classList.remove('main-content--sidebar-hidden');
+              }
             }
-          }, 100);
+          }, 200);
         } else if (manager.isVisible) {
           console.log('✅ Sidebar is correctly visible');
         }

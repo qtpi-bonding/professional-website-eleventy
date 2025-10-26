@@ -267,7 +267,17 @@ class ResponsiveSidebarManager {
       // Mobile always starts hidden
       this.hide();
     } else {
-      // Tablet/Desktop: check saved preference or use default
+      // DEPLOYMENT FIX: Always show sidebar on tablet/desktop by default
+      // Ignore stored preferences that might be causing issues
+      console.log('📋 DEPLOYMENT FIX: Forcing sidebar visible on', deviceType);
+      
+      // For production deployment, always show on tablet/desktop
+      // This ensures the sidebar is visible regardless of any stored preferences
+      this.show();
+      
+      // Optional: Still check preferences but don't let them override the default visible state
+      // This can be uncommented later if we want to restore preference functionality
+      /*
       const preference = this.preferences[deviceType];
       
       if (preference !== undefined) {
@@ -285,6 +295,7 @@ class ResponsiveSidebarManager {
           this.hide();
         }
       }
+      */
     }
   }
   
