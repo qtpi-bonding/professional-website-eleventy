@@ -21,6 +21,7 @@ class ContentFilter {
     this.contentItems = [];
     this.announcementArea = null;
     this.isAnimating = false;
+    this.deviceType = this.getDeviceType();
     
     this.init();
   }
@@ -49,13 +50,29 @@ class ContentFilter {
   }
   
   bindEvents() {
-    // Add click handlers to filter buttons
+    // Add click handlers to filter buttons with mobile optimization
     this.filterButtons.forEach(button => {
+      // Use touchend for better mobile responsiveness
+      if (this.deviceType === 'mobile') {
+        button.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          const filter = button.dataset.filter;
+          if (filter && !this.isAnimating) {
+            this.setFilterWithMobileOptimization(filter);
+          }
+        }, { passive: false });
+      }
+      
+      // Standard click handler for all devices
       button.addEventListener('click', (e) => {
         e.preventDefault();
         const filter = button.dataset.filter;
         if (filter && !this.isAnimating) {
-          this.setFilter(filter);
+          if (this.deviceType === 'mobile') {
+            this.setFilterWithMobileOptimization(filter);
+          } else {
+            this.setFilter(filter);
+          }
         }
       });
       
@@ -69,6 +86,23 @@ class ContentFilter {
           }
         }
       });
+      
+      // Add mobile-specific touch feedback
+      if (this.deviceType === 'mobile') {
+        button.addEventListener('touchstart', (e) => {
+          button.classList.add('filter-button--touch-active');
+        }, { passive: true });
+        
+        button.addEventListener('touchend', (e) => {
+          setTimeout(() => {
+            button.classList.remove('filter-button--touch-active');
+          }, 150);
+        }, { passive: true });
+        
+        button.addEventListener('touchcancel', (e) => {
+          button.classList.remove('filter-button--touch-active');
+        }, { passive: true });
+      }
     });
     
     // Handle URL hash changes for deep linking
@@ -80,6 +114,15 @@ class ContentFilter {
     window.addEventListener('popstate', () => {
       this.handleHashChange();
     });
+    
+    // Handle device type changes on resize
+    window.addEventListener('resize', this.debounce(() => {
+      const newDeviceType = this.getDeviceType();
+      if (newDeviceType !== this.deviceType) {
+        this.deviceType = newDeviceType;
+        this.handleDeviceTypeChange();
+      }
+    }, 250));
   }
   
   initializeState() {
@@ -122,9 +165,105 @@ class ContentFilter {
       detail: { 
         filter, 
         previousFilter,
-        visibleCount: this.getVisibleCount(filter)
+        visibleCount: this.getVisibleCount(filter),
+        deviceType: this.deviceType
       }
     }));
+  }
+  
+  // Mobile-optimized filter setting with enhanced UX
+  setFilterWithMobileOptimization(filter) {
+    if (filter === this.currentFilter || this.isAnimating) {
+      return;
+    }
+    
+    // Add haptic feedback if available
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+    
+    // Provide immediate visual feedback
+    const button = this.filterButtons.find(btn => btn.dataset.filter === filter);
+    if (button) {
+      button.classList.add('filter-button--mobile-processing');
+    }
+    
+    // Ensure navigation system is aware of filtering
+    this.maintainNavigationDuringFiltering();
+    
+    // Apply filter with mobile-specific timing
+    setTimeout(() => {
+      this.setFilter(filter);
+      
+      // Clean up mobile processing state
+      if (button) {
+        setTimeout(() => {
+          button.classList.remove('filter-button--mobile-processing');
+        }, this.options.animationDuration);
+      }
+    }, 50);
+  }
+  
+  // Maintain proper section visibility and navigation after filtering
+  maintainNavigationDuringFiltering() {
+    // Store current scroll position
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+      this.scrollPositionBeforeFilter = mainContent.scrollTop;
+    }
+    
+    // Get current active section from navigation system
+    if (window.navigationSystem) {
+      this.activeSectionBeforeFilter = window.navigationSystem.getCurrentSection();
+    }
+  }
+  
+  // Device type detection
+  getDeviceType() {
+    const width = window.innerWidth;
+    
+    if (width >= 1024) return 'desktop';
+    if (width >= 768) return 'tablet';
+    return 'mobile';
+  }
+  
+  // Handle device type changes
+  handleDeviceTypeChange() {
+    console.log('ContentFilter: Device type changed to', this.deviceType);
+    
+    // Re-apply current filter with device-appropriate behavior
+    this.applyFilter(this.currentFilter, false);
+    
+    // Update filter button interactions
+    this.updateFilterButtonInteractions();
+  }
+  
+  // Update filter button interactions based on device type
+  updateFilterButtonInteractions() {
+    this.filterButtons.forEach(button => {
+      // Remove existing mobile-specific classes
+      button.classList.remove('filter-button--touch-active', 'filter-button--mobile-processing');
+      
+      // Update touch action based on device type
+      if (this.deviceType === 'mobile') {
+        button.style.touchAction = 'manipulation';
+      } else {
+        button.style.touchAction = 'auto';
+      }
+    });
+  }
+  
+  // Debounce utility for resize events
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
   }
   
   applyFilter(filter, animate = true) {
@@ -177,16 +316,51 @@ class ContentFilter {
     });
     
     if (animate) {
+      // Use device-appropriate animation timing
+      const animationDelay = this.deviceType === 'mobile' ? 100 : 50;
+      
       // Animate out hidden items first
       this.animateItems(itemsToHide, false, () => {
         // Then animate in visible items
-        this.animateItems(itemsToShow, true);
-      });
+        this.animateItems(itemsToShow, true, () => {
+          // After filtering is complete, maintain navigation state
+          this.restoreNavigationAfterFiltering();
+        });
+      }, animationDelay);
     } else {
       // Immediate show/hide without animation
       itemsToHide.forEach(item => this.hideItem(item));
       itemsToShow.forEach(item => this.showItem(item));
+      this.restoreNavigationAfterFiltering();
     }
+  }
+  
+  // Restore navigation state after filtering
+  restoreNavigationAfterFiltering() {
+    if (this.deviceType !== 'mobile') return;
+    
+    // Ensure navigation system updates section visibility
+    if (window.navigationSystem) {
+      setTimeout(() => {
+        window.navigationSystem.refresh();
+        
+        // If we had an active section before filtering, try to maintain it
+        if (this.activeSectionBeforeFilter) {
+          const activeSection = document.getElementById(this.activeSectionBeforeFilter);
+          if (activeSection && !activeSection.classList.contains(this.options.hiddenClass)) {
+            // Section is still visible after filtering, maintain scroll position
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent && this.scrollPositionBeforeFilter !== undefined) {
+              mainContent.scrollTop = this.scrollPositionBeforeFilter;
+            }
+          }
+        }
+      }, this.options.animationDuration + 100);
+    }
+    
+    // Clean up stored state
+    this.scrollPositionBeforeFilter = undefined;
+    this.activeSectionBeforeFilter = undefined;
   }
   
   shouldShowItem(item, filter) {
@@ -211,7 +385,7 @@ class ContentFilter {
       .filter(tag => tag.length > 0);
   }
   
-  animateItems(items, show, callback) {
+  animateItems(items, show, callback, staggerDelay = 50) {
     if (items.length === 0) {
       if (callback) callback();
       return;
@@ -220,19 +394,26 @@ class ContentFilter {
     // Use requestAnimationFrame for smooth animations
     requestAnimationFrame(() => {
       items.forEach((item, index) => {
-        // Stagger animations slightly for better visual effect
+        // Use device-appropriate stagger timing
+        const delay = this.deviceType === 'mobile' ? 
+          Math.min(index * staggerDelay, 200) : // Cap mobile stagger for performance
+          index * staggerDelay;
+        
         setTimeout(() => {
           if (show) {
             this.showItem(item);
           } else {
             this.hideItem(item);
           }
-        }, index * 50);
+        }, delay);
       });
       
       // Call callback after all animations start
       if (callback) {
-        setTimeout(callback, items.length * 50 + 100);
+        const totalDelay = this.deviceType === 'mobile' ? 
+          Math.min(items.length * staggerDelay, 200) + 150 :
+          items.length * staggerDelay + 100;
+        setTimeout(callback, totalDelay);
       }
     });
   }
@@ -325,7 +506,7 @@ class ContentFilter {
   }
   
   addFilterStyles() {
-    // Add CSS for smooth content transitions
+    // Add CSS for smooth content transitions with mobile optimizations
     const style = document.createElement('style');
     style.textContent = `
       /* Content filter transition styles */
@@ -338,10 +519,79 @@ class ContentFilter {
         pointer-events: none;
       }
       
+      /* Mobile-specific filter button states */
+      .filter-button--touch-active {
+        transform: scale(0.98);
+        opacity: 0.8;
+        transition: transform 150ms ease-out, opacity 150ms ease-out;
+      }
+      
+      .filter-button--mobile-processing {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .filter-button--mobile-processing::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        animation: mobile-filter-processing 600ms ease-in-out;
+      }
+      
+      @keyframes mobile-filter-processing {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+      
+      /* Mobile-specific content transitions */
+      @media (max-width: 767px) {
+        ${this.options.contentSelector} {
+          transition: opacity 250ms ease-in-out,
+                      transform 250ms ease-in-out;
+        }
+        
+        /* Optimize for mobile performance */
+        ${this.options.contentSelector}.${this.options.hiddenClass} {
+          will-change: opacity, transform;
+        }
+        
+        /* Enhanced mobile filter button feedback */
+        .filter-button {
+          transition: all 200ms ease-in-out;
+        }
+        
+        .filter-button:active {
+          transform: scale(0.96);
+        }
+      }
+      
+      /* Tablet optimizations */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        ${this.options.contentSelector} {
+          transition: opacity 200ms ease-in-out,
+                      transform 200ms ease-in-out;
+        }
+      }
+      
       /* Reduced motion support */
       @media (prefers-reduced-motion: reduce) {
         ${this.options.contentSelector} {
           transition: none !important;
+        }
+        
+        .filter-button--touch-active,
+        .filter-button--mobile-processing,
+        .filter-button {
+          transition: none !important;
+          animation: none !important;
+        }
+        
+        .filter-button--mobile-processing::after {
+          display: none;
         }
       }
       
@@ -349,6 +599,17 @@ class ContentFilter {
       .filter-button:focus-visible {
         outline: 2px solid var(--color-secondary);
         outline-offset: 2px;
+      }
+      
+      /* High contrast mode support for mobile states */
+      @media (prefers-contrast: high) {
+        .filter-button--touch-active {
+          border-width: 3px;
+        }
+        
+        .filter-button--mobile-processing::after {
+          background: linear-gradient(90deg, transparent, rgba(0,0,0,0.5), transparent);
+        }
       }
     `;
     

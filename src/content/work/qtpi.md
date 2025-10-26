@@ -35,7 +35,4 @@ communication. This privacy-by-design stack ensures user control and data
 integrity.
 
 ## AI-Augmented Development Strategy:
-Leveraged AI (Gemini, Kiro) across all
-development phases—from architectural design and code generation to
-strategic planning and internal tooling—significantly enhancing productivity
-and scope.
+Leveraged AI (Gemini, Kiro) to learn app development while building and increase development spped.

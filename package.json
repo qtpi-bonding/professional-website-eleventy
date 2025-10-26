@@ -21,6 +21,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:workflow": "node scripts/test-content-workflow.js",
+    "test:responsive": "node scripts/test-responsive-behavior.js",
     "verify:deployment": "node scripts/verify-deployment.js",
     "deploy:check": "npm run build && npm run verify:deployment"
   },

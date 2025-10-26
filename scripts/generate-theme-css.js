@@ -32,7 +32,7 @@ function loadThemeData() {
  * Generate CSS custom properties for themes
  */
 function generateThemeVariables(themeData) {
-  const { themes, colors } = themeData;
+  const { themes, colors, responsive } = themeData;
   const categories = colors.categories;
   
   // Auto-generate category colors in themes from categories section
@@ -65,6 +65,35 @@ function generateThemeVariables(themeData) {
   css += `\n  /* Neutral colors - consistent across themes */\n`;
   for (const [shade, value] of Object.entries(colors.neutral)) {
     css += `  --color-neutral-${shade}: ${value};\n`;
+  }
+
+  // Add responsive variables if they exist
+  if (responsive) {
+    css += `\n  /* Responsive breakpoints */\n`;
+    if (responsive.breakpoints) {
+      for (const [device, value] of Object.entries(responsive.breakpoints)) {
+        css += `  --breakpoint-${device}: ${value};\n`;
+      }
+    }
+
+    css += `\n  /* Sidebar dimensions and animations */\n`;
+    if (responsive.sidebar) {
+      if (responsive.sidebar.width) {
+        for (const [device, value] of Object.entries(responsive.sidebar.width)) {
+          css += `  --sidebar-width-${device}: ${value};\n`;
+        }
+      }
+      if (responsive.sidebar.animations) {
+        css += `  --sidebar-duration: ${responsive.sidebar.animations.duration};\n`;
+        css += `  --sidebar-easing: ${responsive.sidebar.animations.easing};\n`;
+      }
+    }
+
+    css += `\n  /* Touch target sizing */\n`;
+    if (responsive.touchTargets) {
+      css += `  --touch-target-min-size: ${responsive.touchTargets.minSize};\n`;
+      css += `  --touch-target-spacing: ${responsive.touchTargets.spacing};\n`;
+    }
   }
 
   css += `}\n\n`;
