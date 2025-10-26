@@ -107,26 +107,98 @@ class NavigationSystem {
     const section = document.getElementById(sectionId);
     if (!section || !this.mainContent) return;
     
-    // Calculate scroll position with offset for better positioning
-    const headerOffset = 20; // Small offset from top
+    // Get device type for mobile-specific behavior
+    const deviceType = this.getDeviceType();
+    
+    // Calculate mobile-specific header offset
+    let headerOffset = 20; // Default offset
+    
+    if (deviceType === 'mobile') {
+      // Account for mobile hamburger button and additional spacing
+      headerOffset = 100; // Larger offset for mobile to account for hamburger button
+    } else if (deviceType === 'tablet') {
+      headerOffset = 40; // Medium offset for tablet
+    }
+    
     const sectionTop = section.offsetTop - this.mainContent.offsetTop;
     const scrollPosition = Math.max(0, sectionTop - headerOffset);
     
-    // Smooth scroll to section
-    this.mainContent.scrollTo({
+    // Enhanced smooth scroll with mobile optimization
+    const scrollOptions = {
       top: scrollPosition,
       behavior: 'smooth'
-    });
+    };
+    
+    // Add mobile-specific scroll behavior
+    if (deviceType === 'mobile') {
+      // Ensure smooth scrolling works correctly on mobile
+      this.mainContent.style.scrollBehavior = 'smooth';
+      
+      // Use requestAnimationFrame for better mobile performance
+      this.smoothScrollToPosition(scrollPosition);
+    } else {
+      this.mainContent.scrollTo(scrollOptions);
+    }
     
     // Update URL hash without triggering scroll
     if (history.replaceState) {
       history.replaceState(null, null, `#${sectionId}`);
     }
     
-    // Manually trigger highlighting (in case intersection observer doesn't fire)
+    // Manually trigger highlighting with device-specific timing
+    const highlightDelay = deviceType === 'mobile' ? 200 : 100;
     setTimeout(() => {
       this.highlightNavItem(sectionId);
-    }, 100);
+    }, highlightDelay);
+    
+    // Dispatch mobile navigation event
+    if (deviceType === 'mobile') {
+      window.dispatchEvent(new CustomEvent('mobilenavigation', {
+        detail: { 
+          targetSection: sectionId,
+          scrollPosition: scrollPosition,
+          headerOffset: headerOffset
+        }
+      }));
+    }
+  }
+  
+  // Enhanced smooth scroll for mobile devices
+  smoothScrollToPosition(targetPosition) {
+    const startPosition = this.mainContent.scrollTop;
+    const distance = targetPosition - startPosition;
+    const duration = 600; // Slightly longer duration for mobile
+    let startTime = null;
+    
+    const easeInOutCubic = (t) => {
+      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    };
+    
+    const animateScroll = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      const easedProgress = easeInOutCubic(progress);
+      const currentPosition = startPosition + (distance * easedProgress);
+      
+      this.mainContent.scrollTop = currentPosition;
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+    
+    requestAnimationFrame(animateScroll);
+  }
+  
+  // Device type detection for navigation system
+  getDeviceType() {
+    const width = window.innerWidth;
+    
+    if (width >= 1024) return 'desktop';
+    if (width >= 768) return 'tablet';
+    return 'mobile';
   }
   
   handleInitialHash() {
