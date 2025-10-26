@@ -41,24 +41,12 @@ jobs:
       - name: Build site
         run: |
           echo "Starting build process..."
-          npm run build:validate
-          npm run clean
-          npm run generate:theme
-          echo "Generated theme CSS:"
-          head -20 src/assets/css/design-tokens/colors.css
-          npm run build:css
-          echo "Built CSS file size:"
-          wc -c _site/assets/css/main.css
-          echo "CSS file contains theme variables:"
-          grep -c "var(--color" _site/assets/css/main.css || echo "No theme variables found!"
-          npm run build:html
-          npm run optimize:images
-          npm run optimize:js
+          npm run build
           echo "Build completed. Checking output..."
           ls -la _site/
           ls -la _site/assets/css/
-        env:
-          NODE_ENV: production
+          echo "JavaScript files:"
+          ls -la _site/assets/js/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
