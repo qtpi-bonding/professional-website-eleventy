@@ -63,10 +63,10 @@ class SimpleSidebarManager {
   // Simple device detection
   updateDeviceType() {
     const wasMobile = this.isMobile;
-    this.isMobile = window.innerWidth < 768;
+    this.isMobile = window.innerWidth <= 1024; // Use 1024px as the breakpoint to match CSS
     
     if (wasMobile !== this.isMobile) {
-      console.log('📱 Device type changed to:', this.isMobile ? 'mobile' : 'desktop');
+      console.log('📱 Device type changed to:', this.isMobile ? 'mobile/tablet' : 'desktop');
       return true;
     }
     
