@@ -46,12 +46,12 @@ hideHeader: true
   
   {# Left Sidebar - Fixed Navigation #}
   <aside id="main-sidebar"
-         class="sidebar fixed left-0 top-0 h-screen w-80 bg-nav-background text-nav-text overflow-y-auto z-10 border-r border-secondary border-opacity-20"
+         class="sidebar sidebar--visible fixed left-0 top-0 h-screen w-80 bg-nav-background text-nav-text overflow-y-auto z-10 border-r border-secondary border-opacity-20"
          data-sidebar
          role="navigation"
          aria-label="Main navigation"
-         aria-hidden="true"
-         data-sidebar-state="hidden">
+         aria-hidden="false"
+         data-sidebar-state="visible">
     <div class="sidebar-content p-8">
       
       {# Personal Information Header #}
@@ -623,21 +623,33 @@ hideHeader: true
     @apply mr-4;
   }
   
-  /* Mobile responsiveness */
+  /* Desktop: sidebar visible by default */
+  @media (min-width: 1025px) {
+    .sidebar {
+      @apply fixed left-0 top-0 h-screen w-80 transform translate-x-0;
+    }
+    
+    .sidebar.sidebar--visible {
+      @apply translate-x-0;
+    }
+    
+    .main-content {
+      @apply ml-80; /* 320px sidebar width */
+    }
+  }
+
+  /* Mobile/Tablet: sidebar hidden by default */
   @media (max-width: 1024px) {
     .sidebar {
       @apply fixed inset-y-0 left-0 z-50 w-80 transform -translate-x-full transition-transform duration-300;
     }
     
-    .sidebar--mobile-open {
+    /* Show sidebar when opened on mobile */
+    .sidebar.sidebar--visible {
       @apply translate-x-0;
     }
     
     .main-content {
-      @apply ml-0;
-    }
-    
-    .main-content--mobile {
       @apply ml-0;
     }
     
