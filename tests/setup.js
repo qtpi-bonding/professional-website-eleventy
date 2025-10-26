@@ -3,6 +3,11 @@
  * Configures global test environment and utilities
  */
 
+// Polyfills for Node.js environment
+const { TextEncoder, TextDecoder } = require('util');
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
+
 // Global test utilities
 global.createMockElement = (tag, attributes = {}) => {
   const element = document.createElement(tag);

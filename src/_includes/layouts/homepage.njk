@@ -6,10 +6,14 @@ hideHeader: true
 {# Sidebar Portfolio Layout #}
 <div class="portfolio-layout flex min-h-screen bg-surface">
   
+  {# Screen reader announcements #}
+  <div id="sidebar-announcements" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  
   {# Mobile Sidebar Overlay #}
   <div class="sidebar-overlay" 
        data-sidebar-overlay
        aria-hidden="true"
+       role="presentation"
        style="display: none;">
   </div>
   
@@ -58,7 +62,7 @@ hideHeader: true
       <header class="sidebar-header mb-12">
         {# Close button for mobile #}
         <button class="sidebar-close-button md:hidden absolute top-4 right-4 p-2 text-textSecondary hover:text-text transition-colors duration-200"
-                data-sidebar-close
+                data-sidebar-toggle
                 aria-label="Close navigation"
                 role="button"
                 tabindex="0">
@@ -366,70 +370,15 @@ hideHeader: true
     waitForThemeSystem();
   }
   
-  // Debug and fix sidebar state on desktop
-  function debugAndFixSidebar() {
-    console.log('🔍 Debugging sidebar state...');
-    
-    // Wait for sidebar manager to be available
-    function waitForSidebarManager() {
-      if (window.sidebarManager) {
-        console.log('🔧 Sidebar manager available, checking state...');
-        
-        const manager = window.sidebarManager;
-        const currentState = manager.getCurrentState();
-        
-        console.log('📊 Current sidebar state:', currentState);
-        console.log('📐 Window size:', window.innerWidth + 'x' + window.innerHeight);
-        console.log('📱 Device type:', manager.currentDeviceType);
-        console.log('👁️ Is visible:', manager.isVisible);
-        
-        // Check if we're on desktop and sidebar should be visible
-        if (window.innerWidth >= 1024 && !manager.isVisible) {
-          console.log('🚨 Desktop detected but sidebar is hidden - fixing...');
-          
-          // Clear any problematic preferences
-          try {
-            const preferences = localStorage.getItem('sidebar-preferences');
-            if (preferences) {
-              console.log('🧹 Found stored preferences:', preferences);
-              console.log('🧹 Clearing preferences to reset to defaults...');
-              localStorage.removeItem('sidebar-preferences');
-            }
-          } catch (e) {
-            console.warn('Failed to clear preferences:', e);
-          }
-          
-          // Force refresh the sidebar state
-          manager.refresh();
-          
-          // If still not visible, force show
-          setTimeout(() => {
-            if (!manager.isVisible && window.innerWidth >= 1024) {
-              console.log('🔧 Force showing sidebar...');
-              manager.forceShow();
-            }
-          }, 100);
-        } else if (manager.isVisible) {
-          console.log('✅ Sidebar is correctly visible');
-        }
-      } else {
-        console.log('🔧 Sidebar manager not ready, retrying...');
-        setTimeout(waitForSidebarManager, 100);
-      }
-    }
-    
-    waitForSidebarManager();
-  }
+  // Sidebar manager will handle its own initialization and default state
   
   // Initialize theme toggle when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       setupThemeToggle();
-      debugAndFixSidebar();
     });
   } else {
     setupThemeToggle();
-    debugAndFixSidebar();
   }
   
 })();
