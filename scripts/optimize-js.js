@@ -55,9 +55,10 @@ async function optimizeJS() {
         
         const result = await minify(code, {
           compress: {
-            drop_console: process.env.NODE_ENV === 'production',
+            // Be more conservative with compression to avoid breaking logic
+            drop_console: false, // Keep console statements to avoid breaking control flow
             drop_debugger: true,
-            pure_funcs: ['console.log', 'console.info', 'console.debug']
+            pure_funcs: [] // Don't treat any functions as pure to avoid unexpected optimizations
           },
           mangle: {
             toplevel: true
