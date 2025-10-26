@@ -1,7 +1,7 @@
 ---
 title: "Resume"
 description: "Download my comprehensive CV showcasing experience across science, policy, and technology"
-layout: "layouts/page.njk"
+layout: "layouts/homepage.njk"
 permalink: "/resume/"
 eleventyNavigation:
   key: "Resume"
