@@ -13,6 +13,14 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
+  --color-sidebarOverlay: rgba(0, 0, 0, 0.5);
+  --color-sidebarBackground: #ffffff;
+  --color-hamburgerLine: #000000;
+  --color-toggleButton: #f3f4f6;
+  --color-toggleButtonHover: #e5e7eb;
+  --color-toggleButtonActive: #d1d5db;
+  --color-focusRing: #00C3FF;
+  --color-touchFeedback: rgba(0, 195, 255, 0.1);
   --color-science: #D2E4FF;
   --color-policy: #DFF5E1;
   --color-tech: #E6D8FF;
@@ -28,6 +36,22 @@
   --color-neutral-700: #374151;
   --color-neutral-800: #1f2937;
   --color-neutral-900: #111827;
+
+  /* Responsive breakpoints */
+  --breakpoint-mobile: 0px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+
+  /* Sidebar dimensions and animations */
+  --sidebar-width-mobile: 100vw;
+  --sidebar-width-tablet: 320px;
+  --sidebar-width-desktop: 320px;
+  --sidebar-duration: 300ms;
+  --sidebar-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Touch target sizing */
+  --touch-target-min-size: 44px;
+  --touch-target-spacing: 8px;
 }
 
 /* Light theme (explicit) */
@@ -41,6 +65,14 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
+  --color-sidebarOverlay: rgba(0, 0, 0, 0.5);
+  --color-sidebarBackground: #ffffff;
+  --color-hamburgerLine: #000000;
+  --color-toggleButton: #f3f4f6;
+  --color-toggleButtonHover: #e5e7eb;
+  --color-toggleButtonActive: #d1d5db;
+  --color-focusRing: #00C3FF;
+  --color-touchFeedback: rgba(0, 195, 255, 0.1);
   --color-science: #D2E4FF;
   --color-policy: #DFF5E1;
   --color-tech: #E6D8FF;
@@ -71,6 +103,14 @@
   --color-warning: #fbbf24;
   --color-error: #f87171;
   --color-info: #60a5fa;
+  --color-sidebarOverlay: rgba(0, 0, 0, 0.7);
+  --color-sidebarBackground: #000000;
+  --color-hamburgerLine: #ffffff;
+  --color-toggleButton: #374151;
+  --color-toggleButtonHover: #4b5563;
+  --color-toggleButtonActive: #6b7280;
+  --color-focusRing: #00C3FF;
+  --color-touchFeedback: rgba(0, 195, 255, 0.2);
   --color-science: #0D47A1;
   --color-policy: #1B5E20;
   --color-tech: #5B2E90;
@@ -109,6 +149,14 @@
     --color-warning: #fbbf24;
     --color-error: #f87171;
     --color-info: #60a5fa;
+    --color-sidebarOverlay: rgba(0, 0, 0, 0.7);
+    --color-sidebarBackground: #000000;
+    --color-hamburgerLine: #ffffff;
+    --color-toggleButton: #374151;
+    --color-toggleButtonHover: #4b5563;
+    --color-toggleButtonActive: #6b7280;
+    --color-focusRing: #00C3FF;
+    --color-touchFeedback: rgba(0, 195, 255, 0.2);
     --color-science: #0D47A1;
     --color-policy: #1B5E20;
     --color-tech: #5B2E90;
@@ -147,6 +195,14 @@
 .text-warning { color: var(--color-warning); }
 .text-error { color: var(--color-error); }
 .text-info { color: var(--color-info); }
+.text-sidebarOverlay { color: var(--color-sidebarOverlay); }
+.text-sidebarBackground { color: var(--color-sidebarBackground); }
+.text-hamburgerLine { color: var(--color-hamburgerLine); }
+.text-toggleButton { color: var(--color-toggleButton); }
+.text-toggleButtonHover { color: var(--color-toggleButtonHover); }
+.text-toggleButtonActive { color: var(--color-toggleButtonActive); }
+.text-focusRing { color: var(--color-focusRing); }
+.text-touchFeedback { color: var(--color-touchFeedback); }
 .text-science { color: var(--color-science); }
 .text-policy { color: var(--color-policy); }
 .text-tech { color: var(--color-tech); }
@@ -161,6 +217,14 @@
 .bg-warning { background-color: var(--color-warning); }
 .bg-error { background-color: var(--color-error); }
 .bg-info { background-color: var(--color-info); }
+.bg-sidebarOverlay { background-color: var(--color-sidebarOverlay); }
+.bg-sidebarBackground { background-color: var(--color-sidebarBackground); }
+.bg-hamburgerLine { background-color: var(--color-hamburgerLine); }
+.bg-toggleButton { background-color: var(--color-toggleButton); }
+.bg-toggleButtonHover { background-color: var(--color-toggleButtonHover); }
+.bg-toggleButtonActive { background-color: var(--color-toggleButtonActive); }
+.bg-focusRing { background-color: var(--color-focusRing); }
+.bg-touchFeedback { background-color: var(--color-touchFeedback); }
 .bg-science { background-color: var(--color-science); }
 .bg-policy { background-color: var(--color-policy); }
 .bg-tech { background-color: var(--color-tech); }
@@ -175,6 +239,14 @@
 .border-warning { border-color: var(--color-warning); }
 .border-error { border-color: var(--color-error); }
 .border-info { border-color: var(--color-info); }
+.border-sidebarOverlay { border-color: var(--color-sidebarOverlay); }
+.border-sidebarBackground { border-color: var(--color-sidebarBackground); }
+.border-hamburgerLine { border-color: var(--color-hamburgerLine); }
+.border-toggleButton { border-color: var(--color-toggleButton); }
+.border-toggleButtonHover { border-color: var(--color-toggleButtonHover); }
+.border-toggleButtonActive { border-color: var(--color-toggleButtonActive); }
+.border-focusRing { border-color: var(--color-focusRing); }
+.border-touchFeedback { border-color: var(--color-touchFeedback); }
 .border-science { border-color: var(--color-science); }
 .border-policy { border-color: var(--color-policy); }
 .border-tech { border-color: var(--color-tech); }
