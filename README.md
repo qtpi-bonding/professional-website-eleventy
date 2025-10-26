@@ -29,7 +29,7 @@ cd repository-name
 
 2. Start the development environment:
 ```bash
-docker-compose up eleventy-dev
+docker-compose up eleventy-dev -d
 ```
 
 3. Open your browser to `http://localhost:8080`
@@ -46,6 +46,28 @@ npm install
 2. Start the development server:
 ```bash
 npm run serve
+```
+
+## Project Structure
+
+See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for a detailed overview of the project organization.
+
+## Testing & Validation
+
+The project includes comprehensive testing and validation:
+
+```bash
+# Run unit tests
+docker exec -it eleventy-landing-dev npm test
+
+# Validate content
+docker exec -it eleventy-landing-dev npm run validate
+
+# Test responsive behavior
+docker exec -it eleventy-landing-dev npm run test:responsive
+
+# Test content workflow
+docker exec -it eleventy-landing-dev npm run test:workflow
 ```
 
 3. Open your browser to `http://localhost:8080`

@@ -1,0 +1,919 @@
+/* Responsive Design Tokens */
+/* AUTO-GENERATED from app-theme.json - DO NOT EDIT MANUALLY */
+/* Run 'npm run generate:theme' to regenerate this file */
+
+/* Mobile-first responsive base styles */
+@layer base {
+  /* Enhanced sidebar animation system CSS custom properties */
+  :root {
+    /* Base animation timing (300ms as specified in requirements) */
+    --sidebar-duration: 300ms;
+    
+    /* Natural motion easing functions for different animation phases */
+    --sidebar-easing: cubic-bezier(0.4, 0, 0.2, 1); /* Standard easing */
+    --sidebar-easing-in: cubic-bezier(0.4, 0, 1, 1); /* Ease-in for opening */
+    --sidebar-easing-out: cubic-bezier(0, 0, 0.2, 1); /* Ease-out for closing */
+    --sidebar-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Subtle bounce */
+    
+    /* Device-specific animation durations for optimal UX */
+    --sidebar-duration-mobile: 300ms; /* Slower for touch interactions */
+    --sidebar-duration-tablet: 250ms; /* Medium speed for hybrid usage */
+    --sidebar-duration-desktop: 200ms; /* Faster for mouse interactions */
+    
+    /* Overlay animation properties with natural fade timing */
+    --overlay-duration: 300ms;
+    --overlay-duration-in: 200ms; /* Faster fade-in */
+    --overlay-duration-out: 300ms; /* Slower fade-out for better UX */
+    --overlay-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --overlay-easing-in: cubic-bezier(0.4, 0, 1, 1);
+    --overlay-easing-out: cubic-bezier(0, 0, 0.2, 1);
+    
+    /* Main content transition properties with device-aware timing */
+    --content-transition-duration: 300ms;
+    --content-transition-duration-mobile: 0ms; /* No content transition on mobile */
+    --content-transition-duration-tablet: 250ms;
+    --content-transition-duration-desktop: 200ms;
+    --content-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Floating toggle animation properties with spring-like motion */
+    --floating-toggle-duration: 200ms;
+    --floating-toggle-duration-in: 150ms; /* Faster appearance */
+    --floating-toggle-duration-out: 200ms; /* Slower disappearance */
+    --floating-toggle-easing: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Spring effect */
+    --floating-toggle-easing-in: cubic-bezier(0.4, 0, 1, 1);
+    --floating-toggle-easing-out: cubic-bezier(0, 0, 0.2, 1);
+    
+    /* Hamburger menu animation timing */
+    --hamburger-duration: 300ms;
+    --hamburger-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Staggered animation delays for complex transitions */
+    --animation-stagger-delay: 50ms;
+    --animation-stagger-delay-mobile: 75ms;
+    --animation-stagger-delay-desktop: 25ms;
+  }
+
+  /* Responsive content CSS custom properties */
+  :root {
+    /* Mobile-first content spacing */
+    --content-wrapper-padding-mobile: 16px;
+    --content-wrapper-padding-tablet: 32px;
+    --content-wrapper-padding-desktop: 32px;
+    
+    --content-wrapper-max-width-mobile: 100%;
+    --content-wrapper-max-width-tablet: 768px;
+    --content-wrapper-max-width-desktop: 1024px;
+    
+    --content-sections-spacing-mobile: 32px;
+    --content-sections-spacing-tablet: 48px;
+    --content-sections-spacing-desktop: 64px;
+    
+    --content-cards-spacing-mobile: 16px;
+    --content-cards-spacing-tablet: 24px;
+    --content-cards-spacing-desktop: 24px;
+    
+    --content-text-line-length-mobile: 100%;
+    --content-text-line-length-tablet: 65ch;
+    --content-text-line-length-desktop: 75ch;
+    
+    --content-images-max-width-mobile: 100%;
+    --content-images-max-width-tablet: 100%;
+    --content-images-max-width-desktop: 100%;
+  }
+
+  /* Sidebar base styles - mobile first */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw; /* Full viewport width on mobile */
+    z-index: 50;
+    
+    /* Hidden by default on mobile */
+    transform: translateX(-100%);
+    
+    /* Enhanced sidebar animations with hardware acceleration and natural motion */
+    transition: transform var(--sidebar-duration, 300ms) var(--sidebar-easing, cubic-bezier(0.4, 0, 0.2, 1));
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    /* Ensure proper backdrop using theme-aware colors */
+    background-color: var(--color-sidebarBackground);
+    border-right: 1px solid var(--color-neutral-200);
+    
+    /* Enable smooth scrolling within sidebar */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .sidebar--visible {
+    transform: translateX(0);
+    
+    /* Use ease-in timing when opening */
+    transition-timing-function: var(--sidebar-easing-in, cubic-bezier(0.4, 0, 1, 1));
+  }
+  
+  .sidebar:not(.sidebar--visible) {
+    /* Use ease-out timing when closing */
+    transition-timing-function: var(--sidebar-easing-out, cubic-bezier(0, 0, 0.2, 1));
+  }
+  
+  /* Ensure sidebar content is properly positioned */
+  .sidebar-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Main content base styles */
+  .main-content {
+    min-height: 100vh;
+    
+    /* Enhanced main content transitions for tablet/desktop */
+    transition: margin-left var(--sidebar-duration, 300ms) var(--sidebar-easing, cubic-bezier(0.4, 0, 0.2, 1));
+    will-change: margin-left;
+  }
+  
+  /* Overlay for mobile sidebar */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-sidebarOverlay);
+    z-index: 40;
+    opacity: 0;
+    visibility: hidden;
+    
+    /* Enhanced overlay fade-in/fade-out transitions with natural timing */
+    transition: opacity var(--overlay-duration, 300ms) var(--overlay-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+                visibility var(--overlay-duration, 300ms) var(--overlay-easing, cubic-bezier(0.4, 0, 0.2, 1));
+    will-change: opacity;
+    
+    /* Enable click-to-close */
+    cursor: pointer;
+  }
+  
+  .sidebar-overlay--visible {
+    opacity: 1;
+    visibility: visible;
+    
+    /* Faster fade-in for better perceived performance */
+    transition-duration: var(--overlay-duration-in, 200ms);
+    transition-timing-function: var(--overlay-easing-in, cubic-bezier(0.4, 0, 1, 1));
+  }
+  
+  .sidebar-overlay:not(.sidebar-overlay--visible) {
+    /* Slower fade-out for smoother UX */
+    transition-duration: var(--overlay-duration-out, 300ms);
+    transition-timing-function: var(--overlay-easing-out, cubic-bezier(0, 0, 0.2, 1));
+  }
+  
+  /* Sidebar close button styling */
+  .sidebar-close-button {
+    @apply touch-target;
+    border-radius: 8px;
+    
+    /* Ensure it's above other sidebar content */
+    z-index: 10;
+    position: relative;
+  }
+}
+
+/* Touch target optimization */
+@layer components {
+  /* Base touch target styles */
+  .touch-target {
+    min-height: var(--touch-target-min-size, 44px);
+    min-width: var(--touch-target-min-size, 44px);
+    
+    /* Improve touch responsiveness */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Touch-friendly spacing */
+  .touch-spacing {
+    margin: var(--touch-target-spacing, 8px) 0;
+  }
+  
+  /* Filter buttons touch optimization */
+  .filter-button {
+    @apply touch-target touch-spacing;
+    padding: 12px 16px;
+    
+    /* Prevent text selection on touch */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Navigation links touch optimization */
+  .nav-link {
+    @apply touch-target;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    
+    /* Prevent text selection on touch */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Social links and interactive elements */
+  .social-link,
+  .theme-toggle,
+  .sidebar-toggle {
+    @apply touch-target;
+    padding: 12px;
+    
+    /* Center content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Tablet styles (768px and up) */
+@media (min-width: 768px) {
+  /* Device-specific animation timing for tablet - balanced for hybrid usage */
+  :root {
+    --sidebar-duration: var(--sidebar-duration-tablet, 250ms);
+    --content-transition-duration: var(--content-transition-duration-tablet, 250ms);
+    --overlay-duration: var(--sidebar-duration-tablet, 250ms);
+    --hamburger-duration: var(--sidebar-duration-tablet, 250ms);
+    --animation-stagger-delay: var(--animation-stagger-delay, 50ms);
+  }
+
+  .sidebar {
+    width: var(--sidebar-width-tablet, 320px);
+    transform: translateX(0); /* Visible by default */
+    
+    /* Tablet-specific animation behavior */
+    transition: transform var(--sidebar-duration-tablet, 250ms) var(--sidebar-easing, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  
+  .sidebar--hidden {
+    transform: translateX(-100%);
+  }
+  
+  .main-content {
+    margin-left: var(--sidebar-width-tablet, 320px);
+    
+    /* Enhanced tablet main content transitions */
+    transition: margin-left var(--content-transition-duration, 250ms) var(--content-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  
+  .main-content--sidebar-hidden {
+    margin-left: 0;
+  }
+  
+  /* Hide overlay on tablet and desktop */
+  .sidebar-overlay {
+    display: none;
+  }
+  
+  /* Tablet content wrapper spacing */
+  .content-wrapper {
+    padding: var(--content-wrapper-padding-tablet, 32px);
+    max-width: var(--content-wrapper-max-width-tablet, 768px);
+  }
+  
+  /* Tablet section spacing */
+  .content-section {
+    margin-bottom: var(--content-sections-spacing-tablet, 48px);
+  }
+  
+  /* Tablet card spacing */
+  .experience-grid,
+  .projects-grid,
+  .publications-grid {
+    gap: var(--content-cards-spacing-tablet, 24px);
+  }
+  
+  /* Tablet text line length */
+  .prose {
+    max-width: var(--content-text-line-length-tablet, 65ch);
+  }
+  
+  /* Tablet image scaling */
+  .prose img,
+  img {
+    max-width: var(--content-images-max-width-tablet, 100%);
+  }
+}
+
+/* Desktop styles (1024px and up) */
+@media (min-width: 1024px) {
+  /* Device-specific animation timing for desktop - optimized for mouse interactions */
+  :root {
+    --sidebar-duration: var(--sidebar-duration-desktop, 200ms);
+    --content-transition-duration: var(--content-transition-duration-desktop, 200ms);
+    --overlay-duration: var(--sidebar-duration-desktop, 200ms);
+    --hamburger-duration: var(--sidebar-duration-desktop, 200ms);
+    --floating-toggle-duration: var(--floating-toggle-duration, 200ms);
+    --animation-stagger-delay: var(--animation-stagger-delay-desktop, 25ms);
+  }
+
+  .sidebar {
+    width: var(--sidebar-width-desktop, 320px);
+    
+    /* Desktop-specific animation behavior - faster transitions */
+    transition: transform var(--sidebar-duration-desktop, 200ms) var(--sidebar-easing, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  
+  .main-content {
+    margin-left: var(--sidebar-width-desktop, 320px);
+    
+    /* Enhanced desktop main content transitions - faster for better responsiveness */
+    transition: margin-left var(--content-transition-duration, 200ms) var(--content-transition-easing, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  
+  /* Floating toggle button when sidebar is hidden */
+  .floating-sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 30;
+    background-color: var(--color-toggleButton);
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8) translateY(-10px);
+    
+    /* Enhanced floating toggle animations with spring-like motion */
+    transition: opacity var(--floating-toggle-duration, 200ms) var(--floating-toggle-easing, cubic-bezier(0.68, -0.55, 0.265, 1.55)),
+                visibility var(--floating-toggle-duration, 200ms) var(--floating-toggle-easing, cubic-bezier(0.68, -0.55, 0.265, 1.55)),
+                transform var(--floating-toggle-duration, 200ms) var(--floating-toggle-easing, cubic-bezier(0.68, -0.55, 0.265, 1.55)),
+                box-shadow var(--floating-toggle-duration, 200ms) var(--floating-toggle-easing, cubic-bezier(0.68, -0.55, 0.265, 1.55));
+    will-change: opacity, transform, box-shadow;
+    
+    /* Touch optimization */
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+    
+    /* Hover effects */
+    cursor: pointer;
+  }
+  
+  .floating-sidebar-toggle--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+    
+    /* Faster spring-in animation */
+    transition-duration: var(--floating-toggle-duration-in, 150ms);
+    transition-timing-function: var(--floating-toggle-easing-in, cubic-bezier(0.4, 0, 1, 1));
+  }
+  
+  .floating-sidebar-toggle:not(.floating-sidebar-toggle--visible) {
+    /* Slower spring-out animation */
+    transition-duration: var(--floating-toggle-duration-out, 200ms);
+    transition-timing-function: var(--floating-toggle-easing-out, cubic-bezier(0, 0, 0.2, 1));
+  }
+  
+  /* Sidebar toggle button in header (tablet/desktop) */
+  .sidebar-toggle-button {
+    @apply touch-target;
+    border-radius: 8px;
+    
+    /* Ensure it's above other sidebar content */
+    z-index: 10;
+    position: relative;
+  }
+  
+  /* Desktop content wrapper spacing */
+  .content-wrapper {
+    padding: var(--content-wrapper-padding-desktop, 32px);
+    max-width: var(--content-wrapper-max-width-desktop, 1024px);
+  }
+  
+  /* Desktop section spacing */
+  .content-section {
+    margin-bottom: var(--content-sections-spacing-desktop, 64px);
+  }
+  
+  /* Desktop card spacing */
+  .experience-grid,
+  .projects-grid,
+  .publications-grid {
+    gap: var(--content-cards-spacing-desktop, 24px);
+  }
+  
+  /* Desktop text line length */
+  .prose {
+    max-width: var(--content-text-line-length-desktop, 75ch);
+  }
+  
+  /* Desktop image scaling */
+  .prose img,
+  img {
+    max-width: var(--content-images-max-width-desktop, 100%);
+  }
+}
+
+/* Mobile-specific styles (below 768px) */
+@media (max-width: 767px) {
+  /* Device-specific animation timing for mobile - optimized for touch */
+  :root {
+    --sidebar-duration: var(--sidebar-duration-mobile, 300ms);
+    --overlay-duration: var(--sidebar-duration-mobile, 300ms);
+    --content-transition-duration: var(--content-transition-duration-mobile, 0ms);
+    --hamburger-duration: var(--sidebar-duration-mobile, 300ms);
+    --animation-stagger-delay: var(--animation-stagger-delay-mobile, 75ms);
+  }
+
+  /* Hamburger menu button */
+  .mobile-menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 60;
+    background-color: var(--color-toggleButton);
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    
+    /* Touch optimization */
+    @apply touch-target;
+    padding: 12px;
+  }
+  
+  /* Enhanced hamburger icon animation */
+  .hamburger-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-hamburgerLine);
+    margin: 3px 0;
+    border-radius: 1px;
+    
+    /* Enhanced hamburger line animations with natural motion timing */
+    transition: all var(--hamburger-duration, 300ms) var(--hamburger-easing, cubic-bezier(0.4, 0, 0.2, 1));
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+  
+  /* Animated hamburger when sidebar is open */
+  .mobile-menu-toggle--active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .mobile-menu-toggle--active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-menu-toggle--active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  /* Mobile content wrapper spacing */
+  .content-wrapper {
+    padding: var(--content-wrapper-padding-mobile, 16px);
+    padding-top: 80px; /* Account for hamburger button */
+    max-width: var(--content-wrapper-max-width-mobile, 100%);
+  }
+  
+  /* Mobile section spacing */
+  .content-section {
+    margin-bottom: var(--content-sections-spacing-mobile, 32px);
+  }
+  
+  /* Stack content cards vertically with mobile spacing */
+  .experience-grid,
+  .projects-grid,
+  .publications-grid {
+    gap: var(--content-cards-spacing-mobile, 16px);
+  }
+  
+  /* Mobile-friendly text line length and readability */
+  .prose {
+    max-width: var(--content-text-line-length-mobile, 100%);
+    line-height: 1.6; /* Improved readability on small screens */
+  }
+  
+  .prose p {
+    margin-bottom: 1rem;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  
+  .prose h1:first-child,
+  .prose h2:first-child,
+  .prose h3:first-child {
+    margin-top: 0;
+  }
+  
+  /* Mobile-friendly image scaling and responsive behavior */
+  .prose img,
+  img {
+    max-width: var(--content-images-max-width-mobile, 100%);
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ensure images don't overflow on mobile */
+  .experience-card img,
+  .work-item-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Mobile-specific card adjustments */
+  .experience-card__container,
+  .work-item-card__container {
+    margin-bottom: var(--content-cards-spacing-mobile, 16px);
+  }
+  
+  /* Improve touch targets for mobile cards */
+  .experience-card,
+  .work-item-card {
+    min-height: var(--touch-target-min-size, 44px);
+  }
+  
+  /* Mobile typography adjustments */
+  .section-header h2 {
+    font-size: 1.75rem; /* Smaller on mobile */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .section-header p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Mobile contact section adjustments */
+  .contact-content {
+    padding: 0;
+  }
+  
+  .contact-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Enhanced mobile navigation behavior with staggered animations */
+@layer components {
+  /* Smooth transition for sidebar closing during navigation with staggered timing */
+  .sidebar--transitioning {
+    transition: transform var(--sidebar-duration, 300ms) var(--sidebar-easing-out, cubic-bezier(0, 0, 0.2, 1)),
+                opacity calc(var(--sidebar-duration, 300ms) + var(--animation-stagger-delay, 50ms)) var(--sidebar-easing-out, cubic-bezier(0, 0, 0.2, 1));
+  }
+  
+  /* Staggered animation for sidebar content elements */
+  .sidebar--visible .sidebar-content > * {
+    animation: slideInStagger 300ms var(--sidebar-easing-in, cubic-bezier(0.4, 0, 1, 1)) forwards;
+  }
+  
+  .sidebar--visible .sidebar-content > *:nth-child(1) { animation-delay: 0ms; }
+  .sidebar--visible .sidebar-content > *:nth-child(2) { animation-delay: var(--animation-stagger-delay, 50ms); }
+  .sidebar--visible .sidebar-content > *:nth-child(3) { animation-delay: calc(var(--animation-stagger-delay, 50ms) * 2); }
+  .sidebar--visible .sidebar-content > *:nth-child(4) { animation-delay: calc(var(--animation-stagger-delay, 50ms) * 3); }
+  .sidebar--visible .sidebar-content > *:nth-child(5) { animation-delay: calc(var(--animation-stagger-delay, 50ms) * 4); }
+  
+  /* Keyframe for staggered slide-in animation */
+  @keyframes slideInStagger {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Enhanced mobile navigation link highlighting */
+  .nav-link--mobile-active {
+    background-color: var(--color-nav-active) !important;
+    color: var(--color-surface) !important;
+    font-weight: 600 !important;
+    transform: translateX(4px);
+    transition: all 200ms ease-in-out;
+  }
+  
+  /* Mobile-specific scroll behavior */
+  @media (max-width: 767px) {
+    .main-content {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      /* Improve scroll performance on mobile */
+      will-change: scroll-position;
+    }
+    
+    /* Enhanced section highlighting during mobile navigation */
+    .content-section {
+      scroll-margin-top: 100px; /* Account for mobile header offset */
+    }
+    
+    /* Smooth transitions for mobile navigation */
+    .nav-link {
+      transition: all 200ms ease-in-out;
+    }
+    
+    /* Mobile navigation feedback */
+    .nav-link:active {
+      background-color: var(--color-nav-active);
+      color: var(--color-surface);
+      transform: translateX(2px);
+    }
+  }
+  
+  /* Tablet-specific navigation adjustments */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .content-section {
+      scroll-margin-top: 40px; /* Account for tablet header offset */
+    }
+  }
+  
+  /* Desktop navigation behavior */
+  @media (min-width: 1024px) {
+    .content-section {
+      scroll-margin-top: 20px; /* Minimal offset for desktop */
+    }
+  }
+}
+
+/* Touch vs mouse interaction detection */
+@media (hover: hover) {
+  /* Mouse hover states using theme-aware colors */
+  .filter-button:hover,
+  .nav-link:hover,
+  .social-link:hover,
+  .theme-toggle:hover,
+  .sidebar-toggle:hover {
+    background-color: var(--color-toggleButtonHover);
+  }
+  
+  .mobile-menu-toggle:hover,
+  .floating-sidebar-toggle:hover {
+    background-color: var(--color-toggleButtonHover);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
+}
+
+@media (hover: none) {
+  /* Touch active states using theme-aware colors */
+  .filter-button:active,
+  .nav-link:active,
+  .social-link:active,
+  .theme-toggle:active,
+  .sidebar-toggle:active {
+    background-color: var(--color-toggleButtonActive);
+    transform: scale(0.98);
+  }
+  
+  .mobile-menu-toggle:active,
+  .floating-sidebar-toggle:active {
+    background-color: var(--color-toggleButtonActive);
+    transform: scale(0.95);
+  }
+  
+  /* Touch feedback with theme-aware colors */
+  .filter-button:active::after,
+  .nav-link:active::after,
+  .social-link:active::after,
+  .theme-toggle:active::after,
+  .sidebar-toggle:active::after,
+  .mobile-menu-toggle:active::after,
+  .floating-sidebar-toggle:active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-touchFeedback);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+/* Enhanced accessibility and reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations for users who prefer reduced motion */
+  :root {
+    --sidebar-duration: 0ms !important;
+    --sidebar-duration-mobile: 0ms !important;
+    --sidebar-duration-tablet: 0ms !important;
+    --sidebar-duration-desktop: 0ms !important;
+    --overlay-duration: 0ms !important;
+    --content-transition-duration: 0ms !important;
+    --floating-toggle-duration: 0ms !important;
+  }
+
+  .sidebar,
+  .sidebar-overlay,
+  .main-content,
+  .floating-sidebar-toggle,
+  .hamburger-line,
+  .sidebar--transitioning {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+  
+  /* Ensure immediate state changes without animation */
+  .sidebar--visible {
+    transform: translateX(0) !important;
+  }
+  
+  .sidebar:not(.sidebar--visible) {
+    transform: translateX(-100%) !important;
+  }
+  
+  .sidebar-overlay--visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  .floating-sidebar-toggle--visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) translateY(0) !important;
+  }
+}
+
+/* Enhanced focus management for keyboard navigation */
+.sidebar-toggle:focus-visible,
+.mobile-menu-toggle:focus-visible,
+.floating-sidebar-toggle:focus-visible,
+.sidebar-close-button:focus-visible {
+  outline: 2px solid var(--color-focusRing);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-touchFeedback);
+}
+
+/* Enhanced focus indicators for interactive elements */
+.nav-link:focus-visible,
+.social-link:focus-visible,
+.theme-toggle:focus-visible,
+.filter-button:focus-visible {
+  outline: 2px solid var(--color-focusRing);
+  outline-offset: 2px;
+  background-color: var(--color-toggleButtonHover);
+}
+
+/* Focus-visible class for JavaScript-managed focus */
+.focus-visible {
+  outline: 2px solid var(--color-focusRing) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px var(--color-touchFeedback) !important;
+}
+
+/* Focus indicators automatically adapt to theme via CSS variables */
+/* No need for theme-specific overrides since we use theme-aware variables */
+
+/* Remove default focus outline to use our custom ones */
+.sidebar-toggle:focus,
+.mobile-menu-toggle:focus,
+.floating-sidebar-toggle:focus,
+.sidebar-close-button:focus,
+.nav-link:focus,
+.social-link:focus,
+.theme-toggle:focus,
+.filter-button:focus {
+  outline: none;
+}
+
+/* Ensure focus indicators work with touch devices */
+@media (hover: none) {
+  .sidebar-toggle:focus,
+  .mobile-menu-toggle:focus,
+  .floating-sidebar-toggle:focus,
+  .sidebar-close-button:focus {
+    outline: 2px solid var(--color-focusRing);
+    outline-offset: 2px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .sidebar {
+    border-right-width: 2px;
+  }
+  
+  .mobile-menu-toggle,
+  .floating-sidebar-toggle {
+    border-width: 2px;
+  }
+}
+
+/* Enhanced CSS fallbacks for browsers without animation support */
+@supports not (transition: transform 300ms) {
+  /* Fallback for browsers without CSS transitions */
+  .sidebar,
+  .sidebar-overlay,
+  .main-content,
+  .floating-sidebar-toggle,
+  .hamburger-line,
+  .sidebar--transitioning {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  /* Ensure immediate state changes */
+  .sidebar--visible {
+    transform: translateX(0) !important;
+  }
+  
+  .sidebar-overlay--visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  .floating-sidebar-toggle--visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) translateY(0) !important;
+  }
+}
+
+@supports not (will-change: transform) {
+  /* Fallback for browsers without will-change support */
+  .sidebar,
+  .sidebar-overlay,
+  .main-content,
+  .floating-sidebar-toggle,
+  .hamburger-line {
+    will-change: auto !important;
+  }
+}
+
+@supports not (backface-visibility: hidden) {
+  /* Fallback for browsers without backface-visibility support */
+  .sidebar {
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+  }
+}
+
+@supports not (animation: slideInStagger 300ms) {
+  /* Fallback for browsers without CSS animations */
+  .sidebar--visible .sidebar-content > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+  
+  @keyframes slideInStagger {
+    from, to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@supports not (cubic-bezier(0.4, 0, 0.2, 1)) {
+  /* Fallback for browsers without cubic-bezier support */
+  :root {
+    --sidebar-easing: ease !important;
+    --sidebar-easing-in: ease-in !important;
+    --sidebar-easing-out: ease-out !important;
+    --overlay-easing: ease !important;
+    --floating-toggle-easing: ease !important;
+    --hamburger-easing: ease !important;
+  }
+}
+
+/* Print styles - ensure sidebar is visible */
+@media print {
+  .sidebar {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    transition: none;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    transition: none;
+  }
+  
+  .sidebar-overlay,
+  .mobile-menu-toggle,
+  .floating-sidebar-toggle {
+    display: none;
+  }
+}

@@ -157,7 +157,15 @@
       "success": "#10b981",
       "warning": "#f59e0b",
       "error": "#ef4444",
-      "info": "#3b82f6"
+      "info": "#3b82f6",
+      "sidebarOverlay": "rgba(0, 0, 0, 0.5)",
+      "sidebarBackground": "#ffffff",
+      "hamburgerLine": "#000000",
+      "toggleButton": "#f3f4f6",
+      "toggleButtonHover": "#e5e7eb",
+      "toggleButtonActive": "#d1d5db",
+      "focusRing": "#00C3FF",
+      "touchFeedback": "rgba(0, 195, 255, 0.1)"
     },
     "dark": {
       "primary": "#006280",
@@ -168,7 +176,84 @@
       "success": "#34d399",
       "warning": "#fbbf24",
       "error": "#f87171",
-      "info": "#60a5fa"
+      "info": "#60a5fa",
+      "sidebarOverlay": "rgba(0, 0, 0, 0.7)",
+      "sidebarBackground": "#000000",
+      "hamburgerLine": "#ffffff",
+      "toggleButton": "#374151",
+      "toggleButtonHover": "#4b5563",
+      "toggleButtonActive": "#6b7280",
+      "focusRing": "#00C3FF",
+      "touchFeedback": "rgba(0, 195, 255, 0.2)"
+    }
+  },
+  "responsive": {
+    "breakpoints": {
+      "mobile": "0px",
+      "tablet": "768px",
+      "desktop": "1024px"
+    },
+    "sidebar": {
+      "width": {
+        "mobile": "100vw",
+        "tablet": "320px",
+        "desktop": "320px"
+      },
+      "defaults": {
+        "mobile": "hidden",
+        "tablet": "visible",
+        "desktop": "visible"
+      },
+      "animations": {
+        "duration": "300ms",
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      }
+    },
+    "touchTargets": {
+      "minSize": "44px",
+      "spacing": "8px"
+    },
+    "content": {
+      "wrapper": {
+        "padding": {
+          "mobile": "16px",
+          "tablet": "32px",
+          "desktop": "32px"
+        },
+        "maxWidth": {
+          "mobile": "100%",
+          "tablet": "768px",
+          "desktop": "1024px"
+        }
+      },
+      "sections": {
+        "spacing": {
+          "mobile": "32px",
+          "tablet": "48px",
+          "desktop": "64px"
+        }
+      },
+      "cards": {
+        "spacing": {
+          "mobile": "16px",
+          "tablet": "24px",
+          "desktop": "24px"
+        }
+      },
+      "text": {
+        "lineLength": {
+          "mobile": "100%",
+          "tablet": "65ch",
+          "desktop": "75ch"
+        }
+      },
+      "images": {
+        "maxWidth": {
+          "mobile": "100%",
+          "tablet": "100%",
+          "desktop": "100%"
+        }
+      }
     }
   },
   "accessibility": {
@@ -179,8 +264,16 @@
     "focusRing": {
       "width": "2px",
       "style": "solid",
-      "color": "var(--color-secondary)",
+      "color": "var(--color-focusRing)",
       "offset": "2px"
+    },
+    "touchTargets": {
+      "minSize": "44px",
+      "spacing": "8px",
+      "feedback": {
+        "duration": "150ms",
+        "easing": "ease-out"
+      }
     }
   }
 }

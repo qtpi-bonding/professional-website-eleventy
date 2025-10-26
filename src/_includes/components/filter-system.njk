@@ -25,8 +25,9 @@
      aria-label="Content filter options"
      {% if class %}class="{{ class }}"{% endif %}>
   
-  {# Filter buttons container with responsive layout #}
-  <div class="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
+  {# Filter buttons container with responsive layout and touch-friendly spacing #}
+  <div class="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start"
+       style="gap: var(--touch-target-spacing, 8px);">
     {% for filter in filterList %}
       <button type="button"
               class="filter-button {% if filter.id == active %}filter-button--active{% else %}filter-button--inactive{% endif %}"
@@ -61,7 +62,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.375rem;
-    padding: 0.5rem 1rem;
+    padding: 12px 16px;
     border-radius: 0.375rem;
     font-family: var(--font-body);
     font-weight: 500;
@@ -69,9 +70,17 @@
     transition: all 200ms ease-in-out;
     outline: none;
     
-    /* Touch targets for mobile */
-    min-height: 44px;
-    min-width: 44px;
+    /* Touch targets for mobile - ensure 44px minimum */
+    min-height: var(--touch-target-min-size, 44px);
+    min-width: var(--touch-target-min-size, 44px);
+    
+    /* Improve touch responsiveness */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    
+    /* Prevent text selection on touch */
+    -webkit-user-select: none;
+    user-select: none;
   }
   
   .filter-button:focus-visible {
@@ -96,12 +105,18 @@
   .sidebar-filter-system .filter-button {
     width: 100%;
     justify-content: flex-start;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--touch-target-spacing, 8px);
     font-size: 0.875rem;
     border-width: 2px;
-    min-height: auto;
-    padding: 0.5rem 1rem;
+    min-height: var(--touch-target-min-size, 44px);
+    padding: 12px 16px;
     transition: all 0.2s ease-in-out;
+    
+    /* Touch optimization for sidebar filters */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
+    user-select: none;
   }
   
   /* Category-specific colors - inactive state (transparent) */
@@ -158,29 +173,63 @@
     font-weight: 600;
   }
   
-  /* Hover states - light background for inactive buttons */
-  .sidebar-filter-system .filter-button[data-filter="science"].filter-button--inactive:hover {
-    background-color: var(--color-science);
-    color: var(--color-surface);
-    opacity: 0.3;
+  /* Touch vs mouse interaction detection */
+  @media (hover: hover) {
+    /* Mouse hover states - light background for inactive buttons */
+    .sidebar-filter-system .filter-button[data-filter="science"].filter-button--inactive:hover {
+      background-color: var(--color-science);
+      color: var(--color-surface);
+      opacity: 0.3;
+    }
+    
+    .sidebar-filter-system .filter-button[data-filter="policy"].filter-button--inactive:hover {
+      background-color: var(--color-policy);
+      color: var(--color-surface);
+      opacity: 0.3;
+    }
+    
+    .sidebar-filter-system .filter-button[data-filter="tech"].filter-button--inactive:hover {
+      background-color: var(--color-tech);
+      color: var(--color-surface);
+      opacity: 0.3;
+    }
+    
+    .sidebar-filter-system .filter-button[data-filter="all"].filter-button--inactive:hover {
+      background-color: var(--color-primary);
+      color: var(--color-surface);
+      opacity: 0.3;
+    }
   }
   
-  .sidebar-filter-system .filter-button[data-filter="policy"].filter-button--inactive:hover {
-    background-color: var(--color-policy);
-    color: var(--color-surface);
-    opacity: 0.3;
-  }
-  
-  .sidebar-filter-system .filter-button[data-filter="tech"].filter-button--inactive:hover {
-    background-color: var(--color-tech);
-    color: var(--color-surface);
-    opacity: 0.3;
-  }
-  
-  .sidebar-filter-system .filter-button[data-filter="all"].filter-button--inactive:hover {
-    background-color: var(--color-primary);
-    color: var(--color-surface);
-    opacity: 0.3;
+  @media (hover: none) {
+    /* Touch active states - more pronounced feedback */
+    .sidebar-filter-system .filter-button[data-filter="science"].filter-button--inactive:active {
+      background-color: var(--color-science);
+      color: var(--color-surface);
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+    
+    .sidebar-filter-system .filter-button[data-filter="policy"].filter-button--inactive:active {
+      background-color: var(--color-policy);
+      color: var(--color-surface);
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+    
+    .sidebar-filter-system .filter-button[data-filter="tech"].filter-button--inactive:active {
+      background-color: var(--color-tech);
+      color: var(--color-surface);
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+    
+    .sidebar-filter-system .filter-button[data-filter="all"].filter-button--inactive:active {
+      background-color: var(--color-primary);
+      color: var(--color-surface);
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
   }
   
   /* Inactive filter button state - only for non-sidebar filters */
@@ -232,13 +281,19 @@
       flex: 1;
       min-width: 0;
       font-size: 0.75rem;
-      padding: 0.5rem 0.75rem;
+      padding: 12px 16px; /* Maintain touch-friendly padding */
+      min-height: var(--touch-target-min-size, 44px); /* Ensure touch target size */
     }
     
     .filter-button__label {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    
+    /* Ensure adequate spacing between buttons on mobile */
+    .filter-system .flex {
+      gap: var(--touch-target-spacing, 8px);
     }
   }
   
