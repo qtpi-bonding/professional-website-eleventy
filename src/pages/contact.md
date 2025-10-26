@@ -1,7 +1,7 @@
 ---
 title: "Contact"
 description: "Get in touch for collaboration opportunities, research partnerships, or professional inquiries"
-layout: "layouts/page.njk"
+layout: "layouts/homepage.njk"
 permalink: "/contact/"
 eleventyNavigation:
   key: "Contact"
