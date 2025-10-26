@@ -319,9 +319,9 @@ hideHeader: true
 </div>
 
 {# Load JavaScript modules #}
-<script src="/assets/js/sidebar-manager.js"></script>
-<script src="/assets/js/navigation-system.js"></script>
-<script src="/assets/js/content-filter.js"></script>
+<script src="{{ '/assets/js/sidebar-manager.js' | url }}?v={{ cacheBuster }}"></script>
+<script src="{{ '/assets/js/navigation-system.js' | url }}?v={{ cacheBuster }}"></script>
+<script src="{{ '/assets/js/content-filter.js' | url }}?v={{ cacheBuster }}"></script>
 
 {# Simple theme toggle integration #}
 <script>
