@@ -53,10 +53,12 @@ jobs:
           grep -c "var(--color" _site/assets/css/main.css || echo "No theme variables found!"
           npm run build:html
           npm run optimize:images
-          npm run optimize:js
+          echo "Skipping JavaScript optimization to prevent syntax errors"
           echo "Build completed. Checking output..."
           ls -la _site/
           ls -la _site/assets/css/
+          echo "JavaScript files (unminified):"
+          ls -la _site/assets/js/
         env:
           NODE_ENV: production
 
