@@ -1,6 +1,26 @@
 module.exports = {
-  // Test environment
+  // Test environment - use jsdom for sidebar tests, node for others
   testEnvironment: 'node',
+  testEnvironmentOptions: {
+    url: 'http://localhost'
+  },
+  
+  // Use jsdom for sidebar tests specifically
+  projects: [
+    {
+      displayName: 'sidebar-tests',
+      testMatch: ['**/tests/sidebar-manager.test.js'],
+      testEnvironment: 'jsdom',
+      testEnvironmentOptions: {
+        url: 'http://localhost'
+      }
+    },
+    {
+      displayName: 'other-tests',
+      testMatch: ['**/tests/**/*.test.js', '!**/tests/sidebar-manager.test.js'],
+      testEnvironment: 'node'
+    }
+  ],
   
   // Test file patterns
   testMatch: [

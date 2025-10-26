@@ -37,4 +37,397 @@
   .prose a {
     @apply text-secondary hover:text-primary;
   }
+
+  /* Responsive Sidebar System */
+  
+  /* Mobile Hamburger Button - Hidden by default on desktop */
+  .mobile-menu-toggle {
+    @apply fixed top-4 left-4 z-50 p-3 bg-surface text-text rounded-md shadow-lg border border-neutral-200;
+    @apply flex flex-col items-center justify-center w-12 h-12;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:bg-neutral-100 hover:shadow-xl;
+    
+    /* Touch optimization */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
+    user-select: none;
+    
+    /* Hidden on desktop by default */
+    display: none;
+  }
+  
+  /* Show hamburger button on mobile when sidebar is hidden */
+  @media (max-width: 1024px) {
+    .mobile-menu-toggle {
+      display: flex;
+    }
+    
+    /* Hide hamburger when sidebar is visible on mobile */
+    .sidebar--visible ~ .mobile-menu-toggle {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.8);
+    }
+  }
+  
+  /* Hamburger icon lines */
+  .hamburger-line {
+    @apply block w-6 h-0.5 bg-current rounded-full transition-all duration-300;
+    margin: 2px 0;
+  }
+  
+  .hamburger-line:nth-child(1) {
+    transform-origin: center;
+  }
+  
+  .hamburger-line:nth-child(2) {
+    transform-origin: center;
+  }
+  
+  .hamburger-line:nth-child(3) {
+    transform-origin: center;
+  }
+  
+  /* Hamburger animation states */
+  .mobile-menu-toggle--active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .mobile-menu-toggle--active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+  }
+  
+  .mobile-menu-toggle--active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  /* Floating Toggle Button for Desktop */
+  .floating-sidebar-toggle {
+    @apply fixed top-4 left-4 z-40 p-3 bg-surface text-text rounded-md shadow-lg border border-neutral-200;
+    @apply flex items-center justify-center w-12 h-12;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:bg-neutral-100 hover:shadow-xl;
+    
+    /* Touch optimization */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
+    user-select: none;
+    
+    /* Hidden by default */
+    display: none;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  
+  /* Show floating toggle on desktop when sidebar is hidden */
+  @media (min-width: 1025px) {
+    .floating-sidebar-toggle--visible {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    /* Hide floating toggle on mobile */
+    @media (max-width: 1024px) {
+      .floating-sidebar-toggle {
+        display: none !important;
+      }
+    }
+  }
+  
+  /* Sidebar Overlay for Mobile */
+  .sidebar-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-30;
+    @apply transition-opacity duration-300 ease-in-out;
+    display: none;
+    opacity: 0;
+    
+    /* Touch optimization */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Show overlay on mobile when sidebar is visible */
+  @media (max-width: 1024px) {
+    .sidebar-overlay--visible {
+      display: block;
+      opacity: 1;
+    }
+  }
+  
+  /* Hide overlay on desktop */
+  @media (min-width: 1025px) {
+    .sidebar-overlay {
+      display: none !important;
+    }
+  }
+  
+  /* Sidebar Base Styles */
+  .sidebar {
+    @apply fixed left-0 top-0 h-screen w-80 bg-surface text-text overflow-y-auto z-40;
+    @apply border-r border-neutral-200 shadow-xl;
+    @apply transition-transform duration-300 ease-in-out;
+    
+    /* Ensure proper scrolling */
+    overscroll-behavior: contain;
+  }
+  
+  /* Desktop Sidebar Behavior */
+  @media (min-width: 1025px) {
+    .sidebar {
+      /* Visible by default on desktop */
+      transform: translateX(0);
+    }
+    
+    .sidebar:not(.sidebar--visible) {
+      /* Hidden state on desktop */
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Mobile Sidebar Behavior */
+  @media (max-width: 1024px) {
+    .sidebar {
+      /* Hidden by default on mobile */
+      transform: translateX(-100%);
+      width: 100%;
+      max-width: 320px;
+    }
+    
+    .sidebar--visible {
+      /* Visible state on mobile */
+      transform: translateX(0);
+    }
+  }
+  
+  /* Main Content Area Adjustments */
+  .main-content {
+    @apply flex-1 min-h-screen transition-all duration-300 ease-in-out;
+    
+    /* Ensure proper scrolling */
+    overflow-y: auto;
+    height: 100vh;
+    position: relative;
+  }
+  
+  /* Desktop Main Content Margins */
+  @media (min-width: 1025px) {
+    .main-content {
+      /* Default margin when sidebar is visible */
+      margin-left: 20rem; /* 320px sidebar width */
+    }
+    
+    .main-content--sidebar-hidden {
+      /* No margin when sidebar is hidden */
+      margin-left: 0;
+    }
+  }
+  
+  /* Mobile Main Content - No margins */
+  @media (max-width: 1024px) {
+    .main-content {
+      margin-left: 0;
+    }
+  }
+  
+  /* Sidebar Toggle Buttons Inside Sidebar */
+  .sidebar-close-button,
+  .sidebar-toggle-button {
+    @apply p-2 text-textSecondary hover:text-text transition-colors duration-200;
+    @apply rounded-md hover:bg-neutral-100;
+    
+    /* Touch optimization */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
+    user-select: none;
+    
+    /* Ensure proper sizing */
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Show close button on mobile, toggle button on desktop */
+  @media (max-width: 1024px) {
+    .sidebar-close-button {
+      display: flex;
+    }
+    
+    .sidebar-toggle-button {
+      display: none;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .sidebar-close-button {
+      display: none;
+    }
+    
+    .sidebar-toggle-button {
+      display: flex;
+    }
+  }
+  
+  /* Animation States and Transitions */
+  
+  /* Prevent rapid toggle clicks during animations */
+  .sidebar[data-animating="true"] ~ .mobile-menu-toggle,
+  .sidebar[data-animating="true"] ~ .floating-sidebar-toggle {
+    pointer-events: none;
+  }
+  
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* Enhanced focus styles for accessibility */
+  .mobile-menu-toggle:focus-visible,
+  .floating-sidebar-toggle:focus-visible,
+  .sidebar-close-button:focus-visible,
+  .sidebar-toggle-button:focus-visible {
+    @apply outline-none ring-2 ring-secondary ring-offset-2 ring-offset-surface;
+  }
+  
+  /* Additional focus styles for programmatic focus */
+  .mobile-menu-toggle.focus-visible,
+  .floating-sidebar-toggle.focus-visible,
+  .sidebar-close-button.focus-visible,
+  .sidebar-toggle-button.focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-surface;
+    animation: focusPulse 0.3s ease-in-out;
+  }
+  
+  /* Focus pulse animation */
+  @keyframes focusPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Focus styles for overlay when it's focusable */
+  .sidebar-overlay:focus-visible {
+    @apply outline-none ring-2 ring-secondary ring-inset;
+  }
+  
+  /* Ensure focus indicators are visible in high contrast mode */
+  @media (prefers-contrast: high) {
+    .mobile-menu-toggle:focus-visible,
+    .floating-sidebar-toggle:focus-visible,
+    .sidebar-close-button:focus-visible,
+    .sidebar-toggle-button:focus-visible {
+      @apply ring-4 ring-text;
+    }
+  }
+  
+  /* Smooth transitions for all interactive elements */
+  .mobile-menu-toggle,
+  .floating-sidebar-toggle,
+  .sidebar-overlay,
+  .sidebar,
+  .main-content {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Focus states for accessibility */
+  .mobile-menu-toggle:focus,
+  .floating-sidebar-toggle:focus,
+  .sidebar-close-button:focus,
+  .sidebar-toggle-button:focus {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+  
+  /* Focus styles for sidebar content elements */
+  .sidebar a:focus-visible,
+  .sidebar button:focus-visible,
+  .sidebar [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-secondary ring-offset-1 ring-offset-surface rounded-sm;
+  }
+  
+  /* Ensure focus indicators work in sidebar */
+  .sidebar [data-sidebar-toggle]:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2;
+  }
+  
+  /* High contrast mode support for sidebar focus */
+  @media (prefers-contrast: high) {
+    .sidebar a:focus-visible,
+    .sidebar button:focus-visible,
+    .sidebar [tabindex]:focus-visible {
+      @apply ring-4 ring-text;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .mobile-menu-toggle,
+    .floating-sidebar-toggle {
+      @apply border-2 border-text;
+    }
+    
+    .sidebar {
+      @apply border-r-2 border-text;
+    }
+    
+    .sidebar-overlay {
+      @apply bg-black bg-opacity-80;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu-toggle,
+    .floating-sidebar-toggle,
+    .sidebar-overlay,
+    .sidebar,
+    .main-content,
+    .hamburger-line {
+      transition-duration: 0.01ms !important;
+    }
+    
+    .hamburger-line {
+      transition: none !important;
+    }
+    
+    .mobile-menu-toggle--active .hamburger-line {
+      transition: none !important;
+    }
+  }
+  
+  /* Print styles - hide all toggle buttons */
+  @media print {
+    .mobile-menu-toggle,
+    .floating-sidebar-toggle,
+    .sidebar-overlay {
+      display: none !important;
+    }
+    
+    .sidebar {
+      position: static !important;
+      transform: none !important;
+      width: auto !important;
+      height: auto !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    
+    .main-content {
+      margin-left: 0 !important;
+      height: auto !important;
+    }
+  }
 }
