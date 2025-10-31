@@ -2,7 +2,7 @@
 title: "Founder"
 organization: "Qtpi Bonding LLC"
 dateRange: "2025 - Present"
-location: "Riverside, CA"
+location: "Remote"
 tags: ["tech"]
 featured: true
 type: "experience"
@@ -15,8 +15,7 @@ online dating industry. Drove all aspects of Qtpi's development
 and operations, strategically augmented by AI-powered productivity. This
 encompassed product vision, game-theory strategy, full-stack technical
 architecture (backend, frontend, self-hosted microservices), internal tooling, and business
-operations. Following successful core product development and beta testing,
-the MVP launch is slated for February 2026.
+operations.
 
 Notable Outcomes:
 - Backend (Django Rest Framework, PostgreSQL, DGraph, Redis, SeaweddFS, KrakenD)
