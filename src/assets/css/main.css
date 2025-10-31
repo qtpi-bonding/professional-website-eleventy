@@ -213,6 +213,13 @@
     position: relative;
   }
   
+  /* Override Tailwind margin when sidebar is hidden on desktop */
+  @media (min-width: 1025px) {
+    .main-content--sidebar-hidden {
+      margin-left: 0 !important;
+    }
+  }
+  
   /* Desktop Main Content Margins */
   @media (min-width: 1025px) {
     .main-content {
