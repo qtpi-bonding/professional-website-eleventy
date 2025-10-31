@@ -210,7 +210,7 @@ hideHeader: true
   </aside>
   
   {# Main Content Area - Scrollable #}
-  <main class="main-content flex-1 ml-80 min-h-screen" role="main">
+  <main class="main-content flex-1 ml-0 lg:ml-80 min-h-screen" role="main">
     <div class="content-wrapper max-w-4xl mx-auto px-8 py-12">
       
       {# About Section #}
@@ -523,7 +523,6 @@ hideHeader: true
   /* Main content area */
   .main-content {
     @apply flex-1 min-h-screen;
-    margin-left: 20rem; /* 320px sidebar width */
     overflow-y: auto !important;
     height: 100vh !important;
     position: relative;
@@ -582,9 +581,7 @@ hideHeader: true
       @apply translate-x-0;
     }
     
-    .main-content {
-      @apply ml-80; /* 320px sidebar width */
-    }
+    /* Margin handled by Tailwind classes in HTML */
   }
 
   /* Mobile/Tablet: sidebar hidden by default */
@@ -598,9 +595,7 @@ hideHeader: true
       @apply translate-x-0;
     }
     
-    .main-content {
-      @apply ml-0;
-    }
+    /* Margin handled by Tailwind classes in HTML */
     
     /* Add mobile menu button */
     .mobile-menu-button {

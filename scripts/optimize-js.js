@@ -62,7 +62,10 @@ async function optimizeJS() {
             pure_funcs: []
           },
           mangle: {
-            toplevel: true
+            // Don't mangle top-level names to avoid conflicts
+            toplevel: false,
+            // Reserve important class names to prevent conflicts
+            reserved: ['SimpleSidebarManager', 'ThemeSystem', 'ContentFilter', 'NavigationSystem']
           },
           format: {
             comments: false
