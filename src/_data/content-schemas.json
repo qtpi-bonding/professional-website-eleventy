@@ -84,7 +84,7 @@
       "status": {
         "type": "string",
         "description": "Current status",
-        "validValues": ["completed", "ongoing", "archived", "published"]
+        "validValues": ["completed", "ongoing", "archived", "paused", "published"]
       },
       "featured": {
         "type": "boolean",
