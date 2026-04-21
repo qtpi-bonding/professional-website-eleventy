@@ -3,7 +3,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "src/assets/images": "assets/images",
     "src/assets/js": "assets/js",
-    "src/static": "static"
+    "src/static": "static",
+    "src/robots.txt": "robots.txt"
   });
   
   // Add base URL filter for proper asset paths
