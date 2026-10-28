@@ -35,14 +35,17 @@ layout: layouts/base.njk
     <div class="flex flex-wrap items-center gap-3 mt-4 text-sm text-textSecondary">
       {% if year %}<span>{{ year }}</span>{% endif %}
       {% if status %}
-        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-neutral-100 text-textSecondary">{{ status | capitalize }}</span>
+        <span class="status-pill inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-neutral-100 text-textSecondary" data-status="{{ status }}">{{ status | capitalize }}</span>
       {% endif %}
     </div>
 
     {% if technologies and technologies.length > 0 %}
       <div class="flex flex-wrap gap-2 mt-4">
         {% for tech in technologies %}
-          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-textSecondary" itemprop="keywords">{{ tech }}</span>
+          {% set techColor = techColors[tech] if techColors else "" %}
+          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium {% if techColor %}tech-chip{% else %}bg-neutral-100 text-textSecondary{% endif %}"
+                {% if techColor %}style="--chip: #{{ techColor }};"{% endif %}
+                itemprop="keywords">{{ tech }}</span>
         {% endfor %}
       </div>
     {% endif %}
@@ -78,18 +81,7 @@ layout: layouts/base.njk
     </div>
   {% endif %}
 
-  {# Demo video if there is one, otherwise the hero image if there is one #}
-  {% if youtube %}
-    <div id="demo" class="work-page__video mb-10 rounded-lg overflow-hidden bg-neutral-100" style="aspect-ratio: 16 / 9;">
-      <iframe class="w-full h-full"
-              src="https://www.youtube-nocookie.com/embed/{{ youtube | urlencode }}"
-              title="{{ title }} demo video"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-    </div>
-  {% elif media and media.screenshot %}
+  {% if media and media.screenshot %}
     {% set heroW = media.width or 1200 %}
     {% set heroH = media.height or 750 %}
     <img src="{{ media.screenshot | url }}"
@@ -118,6 +110,22 @@ layout: layouts/base.njk
         </details>
       {% endif %}
     </section>
+  {% endif %}
+
+  {# Demo video, below the highlights #}
+  {% if youtube %}
+    {# Vertical videos (YouTube Shorts) get a portrait frame, like the portrait hero image #}
+    {% set videoVertical = youtubeAspect == "9 / 16" %}
+    <div id="demo" class="work-page__video mt-10 rounded-lg overflow-hidden bg-neutral-100{% if videoVertical %} mx-auto{% endif %}"
+         style="aspect-ratio: {{ youtubeAspect or '16 / 9' }};{% if videoVertical %} width: min(100%, 20.25rem);{% endif %}">
+      <iframe class="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/{{ youtube | urlencode }}"
+              title="{{ title }} demo video"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
   {% endif %}
 
 </article>

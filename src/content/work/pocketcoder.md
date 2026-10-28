@@ -7,6 +7,7 @@ technologies: ["Docker", "Docker MCP Gateway", "Flutter", "PocketBase", "OpenCod
 year: 2026
 status: "ongoing"
 featured: true
+youtube: "TiwKDhdW2x4"
 links:
   github: "https://github.com/qtpi-bonding-org/pocketcoder"
   live: "https://pocketcoder.org"

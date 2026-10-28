@@ -158,15 +158,15 @@ hideHeader: true
             </a>
           </li>
           <li>
-            <a href="#experience-section" 
-               class="nav-link block px-4 py-2 text-nav-text hover:text-nav-hover border-2 border-transparent hover:border-nav-hover rounded-md transition-all duration-200 scroll-smooth">
-              Experience
-            </a>
-          </li>
-          <li>
             <a href="#projects-section" 
                class="nav-link block px-4 py-2 text-nav-text hover:text-nav-hover border-2 border-transparent hover:border-nav-hover rounded-md transition-all duration-200 scroll-smooth">
               Projects
+            </a>
+          </li>
+          <li>
+            <a href="#experience-section" 
+               class="nav-link block px-4 py-2 text-nav-text hover:text-nav-hover border-2 border-transparent hover:border-nav-hover rounded-md transition-all duration-200 scroll-smooth">
+              Experience
             </a>
           </li>
           <li>
@@ -197,7 +197,7 @@ hideHeader: true
       
       {# Resume Download #}
       <div class="sidebar-resume mt-8 pt-8 border-t border-secondary border-opacity-20">
-        <a href="{{ site.resume.path }}" 
+        <a href="{{ site.resume.path | url }}" 
            class="inline-flex items-center justify-center w-full px-4 py-3 bg-primary text-surface rounded-md font-medium hover:bg-secondary transition-colors duration-200"
            aria-label="{{ site.content.navigation.downloadResume }}">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -220,16 +220,33 @@ hideHeader: true
         </header>
         
         <div class="prose prose-lg max-w-none text-textSecondary">
-          <p class="text-xl leading-relaxed mb-6">{{ site.description }}</p>
-          <p class="leading-relaxed">{{ site.author.bio }}</p>
-          
-          <div class="mt-8 p-6 bg-neutral-100 rounded-lg">
-            <h3 class="text-lg font-semibold text-text mb-4">{{ site.content.currentFocus.title }}</h3>
-            <p class="text-textSecondary">
-              {{ site.content.currentFocus.description }}
-            </p>
-          </div>
+          <p class="text-xl leading-relaxed mb-6">{{ site.author.bio }}</p>
         </div>
+      </section>
+
+      {# Projects Section #}
+      <section id="projects-section" class="content-section mb-16" data-section-tags="{{ collections.work | filterByType('project') | getAllTags | join(',') }}">
+        <header class="section-header mb-8">
+          <h2 class="text-3xl font-headline font-bold text-text mb-4">{{ site.content.sections.projects.title }}</h2>
+          <p class="text-textSecondary">{{ site.content.sections.projects.description }}</p>
+        </header>
+        
+        {% set groups = [
+          { title: "Released", released: true },
+          { title: "More projects", released: false }
+        ] %}
+        {% for group in groups %}
+          <h3 class="text-xl font-headline font-semibold text-text mb-4{% if not loop.first %} mt-10{% endif %}">{{ group.title }}</h3>
+          <div class="projects-grid space-y-6">
+            {% for workItem in collections.work %}
+              {% set isReleased = workItem.data.stage == 'released' and workItem.data.status == 'ongoing' %}
+              {% if workItem.data.type == 'project' and isReleased == group.released %}
+                {% set class = "work-item project-item" %}
+                {% include "components/work-item-card.njk" %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endfor %}
       </section>
 
       {# Experience Section #}
@@ -243,23 +260,6 @@ hideHeader: true
           {% for experience in collections.experience %}
             {% set class = "experience-item" %}
             {% include "components/experience-card.njk" %}
-          {% endfor %}
-        </div>
-      </section>
-
-      {# Projects Section #}
-      <section id="projects-section" class="content-section mb-16" data-section-tags="{{ collections.work | filterByType('project') | getAllTags | join(',') }}">
-        <header class="section-header mb-8">
-          <h2 class="text-3xl font-headline font-bold text-text mb-4">{{ site.content.sections.projects.title }}</h2>
-          <p class="text-textSecondary">{{ site.content.sections.projects.description }}</p>
-        </header>
-        
-        <div class="projects-grid space-y-6">
-          {% for workItem in collections.work %}
-            {% if workItem.data.type == 'project' %}
-              {% set class = "work-item project-item" %}
-              {% include "components/work-item-card.njk" %}
-            {% endif %}
           {% endfor %}
         </div>
       </section>

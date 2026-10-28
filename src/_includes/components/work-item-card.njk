@@ -173,7 +173,7 @@
         {# Status #}
         {% if work.status %}
           <div class="flex items-center">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-neutral-100 text-textSecondary">
+            <span class="status-pill inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-neutral-100 text-textSecondary" data-status="{{ work.status }}">
               {{ work.status | capitalize }}
             </span>
           </div>
@@ -219,7 +219,9 @@
             </h4>
             <div class="flex flex-wrap gap-2">
               {% for tech in work.technologies %}
-                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-textSecondary"
+                {% set techColor = work.techColors[tech] if work.techColors else "" %}
+                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium {% if techColor %}tech-chip{% else %}bg-neutral-100 text-textSecondary{% endif %}"
+                      {% if techColor %}style="--chip: #{{ techColor }};"{% endif %}
                       itemprop="keywords">
                   {{ tech }}
                 </span>

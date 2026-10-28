@@ -45,7 +45,7 @@
   "work": {
     "description": "Schema for work items (projects and publications)",
     "required": ["title", "description", "type", "tags"],
-    "optional": ["collaborators", "technologies", "journal", "year", "status", "featured", "links", "media", "youtube", "bullets", "overview", "highlights"],
+    "optional": ["collaborators", "technologies", "journal", "year", "started", "stage", "techColors", "status", "featured", "links", "media", "youtube", "youtubeAspect", "bullets", "overview", "highlights"],
     "fields": {
       "title": {
         "type": "string",
@@ -81,6 +81,18 @@
         "type": "number",
         "description": "Year of completion or publication"
       },
+      "techColors": {
+        "type": "object",
+        "description": "Technology name to hex color (no #), generated from worksbase; tints the technology chips"
+      },
+      "stage": {
+        "type": "string",
+        "description": "Maturity (prototype, beta, released), generated from worksbase"
+      },
+      "started": {
+        "type": "string",
+        "description": "Start month (YYYY-MM), generated from worksbase; used to order projects"
+      },
       "status": {
         "type": "string",
         "description": "Current status",
@@ -113,6 +125,10 @@
           "width": "Image width in pixels (generated)",
           "height": "Image height in pixels (generated)"
         }
+      },
+      "youtubeAspect": {
+        "type": "string",
+        "description": "Video frame ratio; \"9 / 16\" for a YouTube Short, otherwise 16 / 9"
       },
       "youtube": {
         "type": "string",

@@ -23,8 +23,7 @@ const REQUIRED_FILES = [
 ];
 
 const REQUIRED_PAGES = [
-  'contact/index.html',
-  'resume/index.html'
+  'contact/index.html'
 ];
 
 function checkFileExists(filePath) {

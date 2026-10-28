@@ -14,9 +14,10 @@
     },
     {
       "title": "Resume",
-      "url": "/resume/",
+      "url": "/static/resume.pdf",
       "active": true,
-      "description": "Download comprehensive CV and resume"
+      "external": true,
+      "description": "Download resume (PDF)"
     }
   ],
   "filters": [

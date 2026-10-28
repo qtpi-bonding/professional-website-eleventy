@@ -1,5 +1,130 @@
 [
   {
+    "id": "structmux",
+    "title": "Structmux",
+    "type": "project",
+    "description": "A tmux-style workspace; agent, terminal and markdown panes share a typed protobuf API over WebSocket and Zenoh.",
+    "technologies": [
+      "Rust",
+      "GPUI",
+      "Alacritty",
+      "Protocol Buffers",
+      "ACP"
+    ],
+    "techColors": {
+      "Rust": "DEA584",
+      "GPUI": "DEA584",
+      "Alacritty": "DEA584"
+    },
+    "year": 2026,
+    "started": "2026-09",
+    "status": "ongoing",
+    "stage": "prototype",
+    "links": {},
+    "bullets": [
+      "Comments on a selected passage go to a coding agent, which edits the document in place."
+    ],
+    "overview": "structmux is a keyboard-driven workspace that tiles terminals, AI agents, markdown notes, nushell and git views in one window. A background daemon keeps the state, so the desktop window can close and reopen without losing the session. Several daemons can also be linked into a fleet.",
+    "highlights": [
+      "Move around and arrange panes from the keyboard. Layouts are nested splits, and directional focus jumps to the nearest pane. The mouse is optional.",
+      "Select passages or rows in a markdown note or agent pane, comment on them, and send them to an agent as one prompt. For a note, the agent gets the file path, section and quoted text and edits it in place. This is early, and drafts last only while the client is open.",
+      "Agent panes host agents over the Agent Client Protocol, with agents defined in global or per-project config. Permission requests appear in the pane, and proposed edits show as red and green lines. This is partly finished, and other tool requests still show raw input.",
+      "Markdown panes follow the file on disk, so edits made elsewhere show up in the pane, and code blocks are syntax highlighted. Terminal panes run a real shell with command grouping, and are keyboard-only for now.",
+      "Content lives in a graph of typed nodes, and the pane layout is only a view onto it. One piece of content can show in several panes or none, and each kind of content is a provider that changes the graph through typed writes.",
+      "Fleet settings are signed with an owner key made at setup, and setup does not finish until the key backup is confirmed. A policy decides whether each caller may read, write or execute, answering allow, ask or deny."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/structmux.webp",
+      "alt": "Markdown note on the left, agent pane on the right listing two sent comments, its plan and its reply",
+      "width": 1200,
+      "height": 750
+    }
+  },
+  {
+    "id": "gait",
+    "title": "Gait",
+    "type": "project",
+    "description": "Coding agent harness where each turn is a fresh sandboxed process and state is folded from an append-only log.",
+    "technologies": [
+      "Rust",
+      "Protobuf",
+      "libgit2",
+      "Wasmtime"
+    ],
+    "techColors": {
+      "Rust": "DEA584"
+    },
+    "year": 2026,
+    "started": "2026-06",
+    "status": "ongoing",
+    "stage": "released",
+    "links": {
+      "github": "https://github.com/qtpi-bonding/gait"
+    },
+    "bullets": [
+      "Used as the subagent Claude Code delegates coding work to when building these projects."
+    ],
+    "overview": "gait is a coding agent that works on a project from the command line, in an editor, or from a REPL. Each turn runs in a fresh process, and the conversation is rebuilt from a log saved on disk, so every session can be inspected and rewound. It works with many model providers, including local ones.",
+    "highlights": [
+      "Every session is recorded as an append-only log, with one event per line, kept in its own git branch of a separate workspace repository. The log defines the conversation, the model choice and permission grants, so you can see what happened.",
+      "Undo can restore your code to the state after any earlier run, and can also rewind the session transcript. Snapshots are kept apart from your own repository, which they never write to.",
+      "Tool calls pass through a permission gate where deny rules always win and anything not allowed asks you. On macOS the kernel sandbox also seals the model and tool processes; Linux support is not finished. A sandbox failure pauses the turn so you can unlock access.",
+      "One model string selects among 17 providers, including Ollama and LM Studio for local models. Adding another OpenAI-compatible provider takes one registry entry.",
+      "Larger jobs can be split up. The agent can start sub-agents as separate sandboxed processes, and YAML workflows chain shell commands, model prompts, branches and human approval gates. Skills, modes, hooks and MCP servers let you customize behavior.",
+      "The same turn engine serves the command line, two REPLs and an editor adapter for the Agent Client Protocol. A smaller gait-min build drops workflows, MCP and the rich terminal display. The editor adapter is still early."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/gait.webp",
+      "alt": "Gait REPL listing two turns, undoing to turn 1, and the git diff shrinking from 7 changed lines to 4",
+      "width": 1200,
+      "height": 750
+    }
+  },
+  {
+    "id": "archeglyph",
+    "title": "Archeglyph",
+    "type": "project",
+    "description": "Renders deterministic SVG diagrams from node-and-edge text files, with a visual editor and PR-reviewable diffs.",
+    "technologies": [
+      "TypeScript",
+      "Bun",
+      "SolidJS",
+      "Protobuf",
+      "elkjs"
+    ],
+    "techColors": {
+      "TypeScript": "3178C6",
+      "SolidJS": "3178C6"
+    },
+    "year": 2026,
+    "started": "2026-05",
+    "status": "ongoing",
+    "stage": "released",
+    "links": {
+      "live": "https://qtpi-bonding.github.io/archeglyph/?gh=qtpi-bonding/archeglyph&path=examples/stack-managed.diag.json",
+      "github": "https://github.com/qtpi-bonding/archeglyph"
+    },
+    "bullets": [
+      "CI gives fork pull requests a read-only token and posts comments only on the repo's own pull requests.",
+      "Computes graph layout with elkjs, the JavaScript port of the Eclipse Layout Kernel."
+    ],
+    "overview": "archeglyph turns a plain-text list of nodes and edges into an SVG diagram. The same input always produces the same picture, so a diagram can be committed next to the code and reviewed like any other file. A browser editor lets you arrange the diagram visually.",
+    "highlights": [
+      "Rendering is repeatable: the same diagram, style and theme give byte-identical SVG. Tests compare renders byte for byte, and a pull-request check fails if a committed SVG no longer matches its source.",
+      "A diff command compares two versions of a diagram and draws the changes in place. Added, deleted and modified parts get distinct colors plus a plus, minus or delta marker, and deleted elements are restored into the picture.",
+      "On pull requests that touch a diagram, a GitHub workflow posts one updated comment summarizing the changes. Before and after pictures sit side by side when the base revision has an SVG. Comments appear only on same-repository pull requests.",
+      "The text file holds the graph and the editor never changes it. The editor saves only a separate style file, which holds node positions and sizes, so layout tweaks stay apart from the diagram's content.",
+      "The browser editor opens and saves files on your own machine, has no telemetry, and makes network requests only when asked, such as loading a diagram from a URL. GitHub comment mode is still early.",
+      "Large diagrams can be narrowed to a view. The open command picks elements, how deep to expand them, and optionally how many edges away or which edge kinds to include, and records the choice in the stylesheet, leaving the diagram untouched."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/archeglyph.webp",
+      "alt": "Blueprint-themed stack diagram rendered by archeglyph - Heroku and Django feeding four managed services",
+      "width": 1200,
+      "height": 750
+    }
+  },
+  {
     "id": "episutra",
     "title": "Episutra",
     "type": "project",
@@ -10,7 +135,13 @@
       "PowerSync",
       "Serverpod"
     ],
+    "techColors": {
+      "Rust": "DEA584",
+      "Flutter": "00B4AB",
+      "Serverpod": "00B4AB"
+    },
     "year": 2026,
+    "started": "2026-02",
     "status": "ongoing",
     "stage": "beta",
     "links": {},
@@ -43,7 +174,13 @@
       "Docker",
       "ACP"
     ],
+    "techColors": {
+      "Flutter": "00B4AB",
+      "PocketBase": "00ADD8",
+      "NixOS": "7E7EFF"
+    },
     "year": 2026,
+    "started": "2026-02",
     "status": "ongoing",
     "stage": "released",
     "links": {
@@ -71,52 +208,6 @@
     }
   },
   {
-    "id": "qtpi",
-    "title": "Qtpi",
-    "type": "project",
-    "description": "Pay-per-match dating app designed to encourage intentional matching.",
-    "technologies": [
-      "DRF",
-      "Keycloak",
-      "Flutter",
-      "Matrix"
-    ],
-    "year": 2024,
-    "status": "paused",
-    "stage": "beta",
-    "links": {},
-    "bullets": [
-      "Production runs as one Docker Compose stack of Django, PostGIS, Dgraph, SeaweedFS, Redis, Keycloak and nginx.",
-      "Django verifies Keycloak sign-in tokens on every request; the API gateway only routes.",
-      "Trust, connect and verify relations live in a graph database that sets matchmaking distance.",
-      "Profile photos and message files are stored in S3-compatible buckets on SeaweedFS.",
-      "Matched and pledged users get push notifications through Firebase Cloud Messaging.",
-      "Creates and logs in Matrix chat users through the Synapse admin API during onboarding.",
-      "Production reports errors to Sentry, sampling 10 percent of traces.",
-      "Adds dating and befriending pledges with ledgers, served through the matchmaking API.",
-      "Adds matching and unmatching as its own Django app, with queries, API endpoints and tests.",
-      "Web of trust is its own Django app, backed by a Dgraph client and graph operations.",
-      "Serves a dating profile preview as a web view for the public website.",
-      "Beta-tested v1 with 25 people, with the app working for them end to end.",
-      "Sends App Store and Google Play purchase data to the backend receipts endpoint for verification."
-    ],
-    "overview": "Qtpi is a dating app with a mobile client and a Django backend. People match through a web of trust and a pledging system, then chat and get notified once they are matched. Its first version was tried by 25 beta testers.",
-    "highlights": [
-      "Matching uses a web of trust. Connections and verifications between people are stored in a graph database and used to work out how close two people are for matchmaking.",
-      "Users can pledge toward dating or befriending, and the app keeps ledgers of those pledges. Matching and unmatching are handled by the backend.",
-      "Matched users can message each other in the app, which sets up chat accounts for them during onboarding. Matched and pledged users also receive push notifications.",
-      "Purchases made through the Apple App Store or Google Play are sent to the backend for verification, and the backend checks Apple transactions against Apple's certificates.",
-      "Sign-in goes through a single identity service, and the backend checks the user's token on every request. Profile photos and message files are kept in self-hosted object storage.",
-      "The app is built with Flutter, with project folders for several platforms. Push setup is currently in place for Android and iOS. Community forum features are early groundwork and depend on a separate forum server."
-    ],
-    "media": {
-      "screenshot": "/assets/images/work/qtpi.webp",
-      "alt": "Launch screen rendered from the real UI in a test with mocked state, showing two pie characters and Log In options.",
-      "width": 644,
-      "height": 1400
-    }
-  },
-  {
     "id": "quanitya",
     "title": "Quanitya",
     "type": "project",
@@ -126,7 +217,12 @@
       "PowerSync",
       "Serverpod"
     ],
+    "techColors": {
+      "Flutter": "00B4AB",
+      "Serverpod": "00B4AB"
+    },
     "year": 2025,
+    "started": "2025-12",
     "status": "ongoing",
     "stage": "prototype",
     "links": {
@@ -165,7 +261,14 @@
       "Apache AGE",
       "Git"
     ],
+    "techColors": {
+      "Flutter": "00B4AB",
+      "Serverpod": "00B4AB",
+      "PostgreSQL": "E38C00",
+      "Apache AGE": "E38C00"
+    },
     "year": 2026,
+    "started": "2026-03",
     "status": "paused",
     "stage": "prototype",
     "links": {
@@ -194,78 +297,55 @@
     }
   },
   {
-    "id": "archeglyph",
-    "title": "Archeglyph",
+    "id": "qtpi",
+    "title": "Qtpi",
     "type": "project",
-    "description": "Renders deterministic SVG diagrams from node-and-edge text files, with a visual editor and PR-reviewable diffs.",
+    "description": "Pay-per-match dating app designed to encourage intentional matching.",
     "technologies": [
-      "TypeScript",
-      "Bun",
-      "SolidJS",
-      "Protobuf",
-      "elkjs"
+      "DRF",
+      "Keycloak",
+      "Flutter",
+      "Matrix"
     ],
-    "year": 2026,
-    "status": "ongoing",
-    "stage": "released",
-    "links": {
-      "live": "https://qtpi-bonding.github.io/archeglyph/?gh=qtpi-bonding/archeglyph&path=examples/stack-managed.diag.json",
-      "github": "https://github.com/qtpi-bonding/archeglyph"
+    "techColors": {
+      "DRF": "3572A5",
+      "Keycloak": "B07219",
+      "Flutter": "00B4AB"
     },
+    "year": 2024,
+    "started": "2024-06",
+    "status": "paused",
+    "stage": "beta",
+    "links": {},
     "bullets": [
-      "CI gives fork pull requests a read-only token and posts comments only on the repo's own pull requests.",
-      "Computes graph layout with elkjs, the JavaScript port of the Eclipse Layout Kernel."
+      "Production runs as one Docker Compose stack of Django, PostGIS, Dgraph, SeaweedFS, Redis, Keycloak and nginx.",
+      "Django verifies Keycloak sign-in tokens on every request; the API gateway only routes.",
+      "Trust, connect and verify relations live in a graph database that sets matchmaking distance.",
+      "Profile photos and message files are stored in S3-compatible buckets on SeaweedFS.",
+      "Matched and pledged users get push notifications through Firebase Cloud Messaging.",
+      "Creates and logs in Matrix chat users through the Synapse admin API during onboarding.",
+      "Production reports errors to Sentry, sampling 10 percent of traces.",
+      "Adds dating and befriending pledges with ledgers, served through the matchmaking API.",
+      "Adds matching and unmatching as its own Django app, with queries, API endpoints and tests.",
+      "Web of trust is its own Django app, backed by a Dgraph client and graph operations.",
+      "Serves a dating profile preview as a web view for the public website.",
+      "Beta-tested v1 with 25 people, with the app working for them end to end.",
+      "Sends App Store and Google Play purchase data to the backend receipts endpoint for verification."
     ],
-    "overview": "archeglyph turns a plain-text list of nodes and edges into an SVG diagram. The same input always produces the same picture, so a diagram can be committed next to the code and reviewed like any other file. A browser editor lets you arrange the diagram visually.",
+    "overview": "Qtpi is a dating app with a mobile client and a Django backend. People match through a web of trust and a pledging system, then chat and get notified once they are matched. Its first version was tried by 25 beta testers.",
     "highlights": [
-      "Rendering is repeatable: the same diagram, style and theme give byte-identical SVG. Tests compare renders byte for byte, and a pull-request check fails if a committed SVG no longer matches its source.",
-      "A diff command compares two versions of a diagram and draws the changes in place. Added, deleted and modified parts get distinct colors plus a plus, minus or delta marker, and deleted elements are restored into the picture.",
-      "On pull requests that touch a diagram, a GitHub workflow posts one updated comment summarizing the changes. Before and after pictures sit side by side when the base revision has an SVG. Comments appear only on same-repository pull requests.",
-      "The text file holds the graph and the editor never changes it. The editor saves only a separate style file, which holds node positions and sizes, so layout tweaks stay apart from the diagram's content.",
-      "The browser editor opens and saves files on your own machine, has no telemetry, and makes network requests only when asked, such as loading a diagram from a URL. GitHub comment mode is still early.",
-      "Large diagrams can be narrowed to a view. The open command picks elements, how deep to expand them, and optionally how many edges away or which edge kinds to include, and records the choice in the stylesheet, leaving the diagram untouched."
+      "Matching uses a web of trust. Connections and verifications between people are stored in a graph database and used to work out how close two people are for matchmaking.",
+      "Users can pledge toward dating or befriending, and the app keeps ledgers of those pledges. Matching and unmatching are handled by the backend.",
+      "Matched users can message each other in the app, which sets up chat accounts for them during onboarding. Matched and pledged users also receive push notifications.",
+      "Purchases made through the Apple App Store or Google Play are sent to the backend for verification, and the backend checks Apple transactions against Apple's certificates.",
+      "Sign-in goes through a single identity service, and the backend checks the user's token on every request. Profile photos and message files are kept in self-hosted object storage.",
+      "The app is built with Flutter, with project folders for several platforms. Push setup is currently in place for Android and iOS. Community forum features are early groundwork and depend on a separate forum server."
     ],
     "media": {
-      "screenshot": "/assets/images/work/archeglyph.webp",
-      "alt": "Blueprint-themed stack diagram rendered by archeglyph - Heroku and Django feeding four managed services",
-      "width": 1200,
-      "height": 750
-    }
-  },
-  {
-    "id": "gait",
-    "title": "Gait",
-    "type": "project",
-    "description": "Coding agent harness where each turn is a fresh sandboxed process and state is folded from an append-only log.",
-    "technologies": [
-      "Rust",
-      "Protobuf",
-      "libgit2",
-      "Wasmtime"
-    ],
-    "year": 2026,
-    "status": "ongoing",
-    "stage": "released",
-    "links": {
-      "github": "https://github.com/qtpi-bonding/gait"
-    },
-    "bullets": [
-      "Used as the subagent Claude Code delegates coding work to when building these projects."
-    ],
-    "overview": "gait is a coding agent that works on a project from the command line, in an editor, or from a REPL. Each turn runs in a fresh process, and the conversation is rebuilt from a log saved on disk, so every session can be inspected and rewound. It works with many model providers, including local ones.",
-    "highlights": [
-      "Every session is recorded as an append-only log, with one event per line, kept in its own git branch of a separate workspace repository. The log defines the conversation, the model choice and permission grants, so you can see what happened.",
-      "Undo can restore your code to the state after any earlier run, and can also rewind the session transcript. Snapshots are kept apart from your own repository, which they never write to.",
-      "Tool calls pass through a permission gate where deny rules always win and anything not allowed asks you. On macOS the kernel sandbox also seals the model and tool processes; Linux support is not finished. A sandbox failure pauses the turn so you can unlock access.",
-      "One model string selects among 17 providers, including Ollama and LM Studio for local models. Adding another OpenAI-compatible provider takes one registry entry.",
-      "Larger jobs can be split up. The agent can start sub-agents as separate sandboxed processes, and YAML workflows chain shell commands, model prompts, branches and human approval gates. Skills, modes, hooks and MCP servers let you customize behavior.",
-      "The same turn engine serves the command line, two REPLs and an editor adapter for the Agent Client Protocol. A smaller gait-min build drops workflows, MCP and the rich terminal display. The editor adapter is still early."
-    ],
-    "media": {
-      "screenshot": "/assets/images/work/gait.webp",
-      "alt": "Gait REPL listing two turns, undoing to turn 1, and the git diff shrinking from 7 changed lines to 4",
-      "width": 1200,
-      "height": 750
+      "screenshot": "/assets/images/work/qtpi.webp",
+      "alt": "Launch screen rendered from the real UI in a test with mocked state, showing two pie characters and Log In options.",
+      "width": 644,
+      "height": 1400
     }
   },
   {
@@ -279,7 +359,12 @@
       "HTMX",
       "Docker"
     ],
+    "techColors": {
+      "Django": "3572A5",
+      "PostgreSQL": "E38C00"
+    },
     "year": 2024,
+    "started": "2024-11",
     "status": "archived",
     "stage": "prototype",
     "links": {},
@@ -294,41 +379,6 @@
     "media": {
       "screenshot": "/assets/images/work/scipipol.webp",
       "alt": "SciPiPol logo, a pi symbol between the words Science and Policy",
-      "width": 1200,
-      "height": 750
-    }
-  },
-  {
-    "id": "structmux",
-    "title": "Structmux",
-    "type": "project",
-    "description": "A tmux-style workspace; agent, terminal and markdown panes share a typed protobuf API over WebSocket and Zenoh.",
-    "technologies": [
-      "Rust",
-      "GPUI",
-      "Alacritty",
-      "Protocol Buffers",
-      "ACP"
-    ],
-    "year": 2026,
-    "status": "ongoing",
-    "stage": "prototype",
-    "links": {},
-    "bullets": [
-      "Comments on a selected passage go to a coding agent, which edits the document in place."
-    ],
-    "overview": "structmux is a keyboard-driven workspace that tiles terminals, AI agents, markdown notes, nushell and git views in one window. A background daemon keeps the state, so the desktop window can close and reopen without losing the session. Several daemons can also be linked into a fleet.",
-    "highlights": [
-      "Move around and arrange panes from the keyboard. Layouts are nested splits, and directional focus jumps to the nearest pane. The mouse is optional.",
-      "Select passages or rows in a markdown note or agent pane, comment on them, and send them to an agent as one prompt. For a note, the agent gets the file path, section and quoted text and edits it in place. This is early, and drafts last only while the client is open.",
-      "Agent panes host agents over the Agent Client Protocol, with agents defined in global or per-project config. Permission requests appear in the pane, and proposed edits show as red and green lines. This is partly finished, and other tool requests still show raw input.",
-      "Markdown panes follow the file on disk, so edits made elsewhere show up in the pane, and code blocks are syntax highlighted. Terminal panes run a real shell with command grouping, and are keyboard-only for now.",
-      "Content lives in a graph of typed nodes, and the pane layout is only a view onto it. One piece of content can show in several panes or none, and each kind of content is a provider that changes the graph through typed writes.",
-      "Fleet settings are signed with an owner key made at setup, and setup does not finish until the key backup is confirmed. A policy decides whether each caller may read, write or execute, answering allow, ask or deny."
-    ],
-    "media": {
-      "screenshot": "/assets/images/work/structmux.webp",
-      "alt": "Markdown note on the left, agent pane on the right listing two sent comments, its plan and its reply",
       "width": 1200,
       "height": 750
     }

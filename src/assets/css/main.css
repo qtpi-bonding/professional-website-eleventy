@@ -438,3 +438,23 @@
     }
   }
 }
+
+/* Technology chips tinted with their language color (--chip set inline from generated techColors) */
+.tech-chip {
+  background: color-mix(in srgb, var(--chip) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--chip) 55%, transparent);
+  color: inherit;
+}
+
+
+/* Project status pill: a dot colored by status (theme success/warning, neutral for archived) */
+.status-pill::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.375rem;
+  border-radius: 9999px;
+  background: #9ca3af;
+}
+.status-pill[data-status="ongoing"]::before { background: #10b981; }
+.status-pill[data-status="paused"]::before { background: #f59e0b; }

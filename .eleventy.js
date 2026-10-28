@@ -262,11 +262,19 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("work", function(collectionApi) {
     const items = collectionApi.getFilteredByGlob("src/content/work/*.md");
     items.forEach(item => validateContent(item, "work"));
+    const statusRank = { ongoing: 0, paused: 1, archived: 2 };
+    const newest = item => item.data.started || `${item.data.year || 0}-00`;
     return items.sort((a, b) => {
-      // Sort by featured first, then by year (descending)
+      // Projects: starred first, then ongoing, paused, archived; newest start first within a group
+      if (a.data.type === 'project' && b.data.type === 'project') {
+        const rank = item => statusRank[item.data.status] ?? 3;
+        return (Boolean(b.data.featured) - Boolean(a.data.featured))
+          || (rank(a) - rank(b)) || newest(b).localeCompare(newest(a)) || String(a.data.title).localeCompare(String(b.data.title));
+      }
+      // Everything else: featured first, then newest first
       if (a.data.featured && !b.data.featured) return -1;
       if (!a.data.featured && b.data.featured) return 1;
-      return (b.data.year || 0) - (a.data.year || 0);
+      return newest(b).localeCompare(newest(a));
     });
   });
   

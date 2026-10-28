@@ -1,6 +1,6 @@
 {
-  "title": "Personal Portfolio",
-  "description": "A professional portfolio showcasing expertise across science, policy, and technology domains",
+  "title": "Gabriel Phun",
+  "description": "PhD in computational chemistry, now a solo dev building tools for AI agents, and with them.",
   "url": "https://qtpi-bonding.github.io",
   "baseUrl": "/professional-website-eleventy/",
   "github": {
@@ -15,22 +15,18 @@
     "name": "Gabriel Phun",
     "title": "",
     "description": "",
-    "email": "your.email@example.com",
+    "email": "gphun+jobs@uci.edu",
     "orcid": "0000-0002-1242-2759",
-    "bio": "Science, Technology, & Policy"
+    "bio": "PhD in computational chemistry, now a solo dev building tools for AI agents, and with them."
   },
   "content": {
-    "currentFocus": {
-      "title": "Current Focus",
-      "description": "Working at the intersection of science, policy, and technology to create meaningful impact through interdisciplinary collaboration and evidence-based solutions."
-    },
     "sections": {
       "about": {
         "title": "About"
       },
       "experience": {
         "title": "Experience",
-        "description": "Experiences across science, technology. and policy domains"
+        "description": "Research and technology roles"
       },
       "projects": {
         "title": "Projects",
@@ -94,15 +90,14 @@
   },
   "resume": {
     "filename": "resume.pdf",
-    "lastUpdated": "2024-01-15",
+    "lastUpdated": "2026-10-27",
     "path": "/static/resume.pdf"
   },
   "seo": {
     "keywords": [
-      "science",
-      "policy",
-      "technology",
-      "research",
+      "AI agents",
+      "software",
+      "computational chemistry",
       "portfolio"
     ],
     "ogImage": "/assets/images/og-image.jpg",

@@ -9,21 +9,15 @@ type: "experience"
 status: "current"
 ---
 
-Designed, developed, and launched the beta of [Qtpi](https://qtpi.app)
-(Cutie Pie), an ethical dating and relationship platform disrupting the
-online dating industry. Drove all aspects of Qtpi's development
-and operations, strategically augmented by AI-powered productivity. This
-encompassed product vision, game-theory strategy, full-stack technical
-architecture (backend, frontend, self-hosted microservices), internal tooling, and business
-operations.
+Founded Qtpi Bonding LLC, where I work solo on a set of apps and developer tools. I direct the design and architecture and use AI tools to implement them.
 
 Notable Outcomes:
-- Backend (Django Rest Framework, PostgreSQL, DGraph, Redis, SeaweddFS, KrakenD)
-- Frontend (Flutter)
-- Social Media Crossposter Automation (N8N, Postiz)
-- Self-hosted Infrastructure (Keycloak, Synapse, Posthog, Glitchtip)
-- Financial Automation Pipeline (Python)
-- Automated Backward-Planning Project Scheduler (Python)
-- AI Augmented Git-Based Knowledge Management & Workflow System (Bash, Python)
-
-Software used: Docker, Django, PostgreSQL, DGraph, Redis, SeaweedFS, Keycloak, KrakenD, Flutter, N8N, Postiz, Posthog, Glitchtip
+- [PocketCoder]({{ '/work/pocketcoder/' | url }}): mobile app that provisions and runs your own self-hosted AI coding agent server, with no terminal needed; on the Play Store
+- [Gait]({{ '/work/gait/' | url }}): coding agent harness where each turn is a fresh sandboxed process and state is folded from an append-only log
+- [Structmux]({{ '/work/structmux/' | url }}): tmux-style workspace where agent, terminal and markdown panes share a typed protobuf API
+- [Archeglyph]({{ '/work/archeglyph/' | url }}): renders deterministic SVG diagrams from node-and-edge text files, with a visual editor and PR-reviewable diffs
+- [Quanitya]({{ '/work/quanitya/' | url }}): end-to-end encrypted tracker for anything structured, with private JS scripts to analyze your data
+- [Episutra]({{ '/work/episutra/' | url }}): local-first knowledge-graph notes app with hybrid RAG search, CRDT collaboration and E2EE sync
+- [Qtpi]({{ '/work/qtpi/' | url }}): dating app with web-of-trust matching and a pledging system; first beta had 25 testers (paused)
+- Deployment tool that provisions a VPS on DigitalOcean, Vultr or Hetzner with Terraform, sets up the server with Ansible (rootless Docker, firewall, optional encrypted storage, TLS certificates), and deploys an app onto it
+- Social media crossposting automation (N8N, Postiz)

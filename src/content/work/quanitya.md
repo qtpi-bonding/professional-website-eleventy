@@ -7,6 +7,7 @@ technologies: ["Flutter", "Serverpod", "Dart", "PostgreSQL", "PowerSync", "Redis
 year: 2026
 status: "ongoing"
 featured: false
+youtube: "sydZho0sp_k"
 links:
   github: "https://github.com/qtpi-bonding-org/quanitya-cloud"
   live: "https://quanitya.com"
