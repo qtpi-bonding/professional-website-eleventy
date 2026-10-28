@@ -7,8 +7,11 @@ module.exports = function(eleventyConfig) {
     "src/robots.txt": "robots.txt"
   });
   
+  // Documentation inside asset folders is not a page
+  eleventyConfig.ignores.add("src/assets/**/README.md");
+  
   // Add base URL filter for proper asset paths
-  eleventyConfig.addFilter("url", function(url) {
+  function baseUrlFilter(url) {
     // Get base URL from site data, fallback to environment or root
     const siteData = this.ctx.site || {};
     const baseUrl = process.env.NODE_ENV === 'production' 
@@ -23,6 +26,15 @@ module.exports = function(eleventyConfig) {
     const cleanUrl = url.startsWith('/') ? url : `/${url}`;
     
     return `${cleanBase}${cleanUrl}`;
+  }
+  eleventyConfig.addFilter("url", baseUrlFilter);
+  
+  // Absolute URL (site origin + base path), for canonical and social-sharing tags
+  eleventyConfig.addFilter("absoluteUrl", function(url) {
+    const resolved = baseUrlFilter.call(this, url);
+    if (resolved.startsWith('http://') || resolved.startsWith('https://')) return resolved;
+    const origin = ((this.ctx.site || {}).url || '').replace(/\/$/, '');
+    return `${origin}${resolved}`;
   });
   
   // Add cache busting for CSS and JS files in production
@@ -49,7 +61,7 @@ module.exports = function(eleventyConfig) {
     const filePath = item.inputPath;
     
     // Extract only frontmatter fields (exclude Eleventy system fields)
-    const systemFields = ['page', 'collections', 'eleventy', 'pkg', 'cacheBuster', 'environment'];
+    const systemFields = ['page', 'collections', 'eleventy', 'pkg', 'cacheBuster', 'environment', 'hasPage', 'layout', 'permalink', 'projects', 'eleventyComputed'];
     const dataFields = Object.keys(contentSchemas).reduce((acc, key) => {
       if (contentSchemas[key].fields) {
         acc.push(...Object.keys(contentSchemas[key].fields));
@@ -59,7 +71,7 @@ module.exports = function(eleventyConfig) {
     
     // Copy only known content fields to avoid validating system data
     Object.keys(data).forEach(key => {
-      if (!systemFields.includes(key) && !key.startsWith('app-') && !key.startsWith('component-') && !key.startsWith('content-') && !key.startsWith('navigation') && !key.startsWith('site') && !key.startsWith('validation-')) {
+      if (data[key] !== undefined && !systemFields.includes(key) && !key.startsWith('app-') && !key.startsWith('component-') && !key.startsWith('content-') && !key.startsWith('navigation') && !key.startsWith('site') && !key.startsWith('validation-')) {
         frontmatterData[key] = data[key];
       }
     });

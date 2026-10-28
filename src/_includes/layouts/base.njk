@@ -14,21 +14,22 @@
     <meta name="keywords" content="{{ site.seo.keywords | join(', ') }}">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="canonical" href="{{ page.url | absoluteUrl }}">
     
     <!-- Open Graph / Facebook -->
+    {% set shareImage = (media.og or media.screenshot) if (media and (media.og or media.screenshot)) else site.seo.ogImage %}
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:url" content="{{ page.url | absoluteUrl }}">
     <meta property="og:title" content="{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
     <meta property="og:description" content="{{ description or site.description }}">
-    <meta property="og:image" content="{{ site.url }}{{ site.seo.ogImage }}">
+    <meta property="og:image" content="{{ shareImage | absoluteUrl }}">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="{{ site.seo.twitterCard }}">
-    <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="twitter:url" content="{{ page.url | absoluteUrl }}">
     <meta property="twitter:title" content="{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
     <meta property="twitter:description" content="{{ description or site.description }}">
-    <meta property="twitter:image" content="{{ site.url }}{{ site.seo.ogImage }}">
+    <meta property="twitter:image" content="{{ shareImage | absoluteUrl }}">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ '/static/favicon.ico' | url }}">
@@ -99,7 +100,7 @@
             <nav class="flex items-center justify-between" role="navigation" aria-label="Main navigation">
                 <!-- Site title/logo -->
                 <div class="flex items-center">
-                    <a href="/" class="text-xl font-headline font-bold text-primary hover:text-secondary transition-colors duration-200">
+                    <a href="{{ '/' | url }}" class="text-xl font-headline font-bold text-primary hover:text-secondary transition-colors duration-200">
                         {{ site.title }}
                     </a>
                 </div>
@@ -108,7 +109,7 @@
                 <div class="flex items-center space-x-6">
                     {% for item in navigation.main %}
                         {% if item.active %}
-                            <a href="{{ item.url }}" 
+                            <a href="{{ item.url | url }}" 
                                class="text-text hover:text-primary transition-colors duration-200 font-medium"
                                {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}
                                {% if item.description %}aria-label="{{ item.description }}"{% endif %}>

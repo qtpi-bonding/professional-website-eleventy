@@ -1,0 +1,336 @@
+[
+  {
+    "id": "episutra",
+    "title": "Episutra",
+    "type": "project",
+    "description": "Local-first knowledge-graph notes app with hybrid RAG search, CRDT collaboration, E2EE sync, and your own agent.",
+    "technologies": [
+      "Rust",
+      "Flutter",
+      "PowerSync",
+      "Serverpod"
+    ],
+    "year": 2026,
+    "status": "ongoing",
+    "stage": "beta",
+    "links": {},
+    "bullets": [],
+    "overview": "Episutra is a notes app that keeps your notes on your own device and links them into a graph. You can search them, and ask an AI agent of your choice to read and work with them. Notes can be exported as plain markdown files.",
+    "highlights": [
+      "Search combines keyword matching with meaning-based matching, so you can find notes by exact words or by idea. Typing f: or s: at the start of a query limits it to one of the two.",
+      "Bring your own agent: the app can run Claude Code or Codex as a helper, or use a built-in local model that runs on your device. The agent gets tools to search the note graph, create and rename notes, and comment.",
+      "You stay in control of what an agent does. Each kind of action (read, create, update, delete and so on) can be set to allow, ask or deny, with deletion denied by default. Agent edits arrive as tracked suggestions that you accept or reject one at a time.",
+      "Comments are attached to the quoted text they were made on and follow it as the note changes. If the quote disappears, the comment is kept and marked as orphaned.",
+      "Notes are designed to sync encrypted, so the server stores ciphertext for note content, comments and tasks. Real-time collaborative editing and sync are still early, and sign-in on the server side is groundwork only.",
+      "Tasks are stored with dependencies between them. The app works out which are ready to start and which form the critical path, and draws them as a layered graph."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/episutra.webp",
+      "alt": "Note on dolphin echolocation with AI-suggested edits as tracked changes and a panel to accept or reject them",
+      "width": 1200,
+      "height": 750
+    }
+  },
+  {
+    "id": "pocketcoder",
+    "title": "PocketCoder",
+    "type": "project",
+    "description": "Mobile app that provisions and runs your own self-hosted AI coding agent server, with no terminal needed.",
+    "technologies": [
+      "Flutter",
+      "PocketBase",
+      "NixOS",
+      "Docker",
+      "ACP"
+    ],
+    "year": 2026,
+    "status": "ongoing",
+    "stage": "released",
+    "links": {
+      "external": "https://play.google.com/store/apps/details?id=org.pocketcoder.app",
+      "live": "https://pocketcoder.org/",
+      "github": "https://github.com/qtpi-bonding-org/pocketcoder"
+    },
+    "bullets": [
+      "Builds the backend on PocketBase v0.40.1, used as a Go library rather than a standalone server."
+    ],
+    "overview": "PocketCoder is a mobile app for running an AI coding agent on a server you own. From your phone you set up the server, chat with the agent, and keep it running. The agent runs in containers on your own machine rather than on a third-party service.",
+    "highlights": [
+      "The Pro app signs in to Linode, creates a server and boots the PocketCoder image onto it. Once the server is ready, the app signs in with admin credentials it generated earlier, so you type nothing. Linode is the only provider so far.",
+      "When the agent needs permission for an action, the request appears in the chat and as a push notification. You pick an option from your phone, and unanswered requests expire after a timeout.",
+      "You can choose between several coding agents, including Goose, Claude Code, Codex and OpenCode. Each can use a local Ollama model or a hosted provider with your own API key.",
+      "The server control screen restarts or updates PocketCoder and the host machine. You can also browse and read the agent's workspace files from the app.",
+      "New tools reach the agent only after approval. Approving or revoking a tool server updates the tool catalog the agent sees. A separate memory service stores what the agent learns and supports search.",
+      "The app talks to the server over HTTPS and trusts the server's own certificate authority, which it fetches over SSH. Provisioning can resume after an interruption, and the app pins the server's SSH host key on first use."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/pocketcoder.webp",
+      "alt": "Phone showing server setup progress, with provisioning steps and the headline Deploying PocketCoder",
+      "width": 706,
+      "height": 1400
+    }
+  },
+  {
+    "id": "qtpi",
+    "title": "Qtpi",
+    "type": "project",
+    "description": "Pay-per-match dating app designed to encourage intentional matching.",
+    "technologies": [
+      "DRF",
+      "Keycloak",
+      "Flutter",
+      "Matrix"
+    ],
+    "year": 2024,
+    "status": "paused",
+    "stage": "beta",
+    "links": {},
+    "bullets": [
+      "Production runs as one Docker Compose stack of Django, PostGIS, Dgraph, SeaweedFS, Redis, Keycloak and nginx.",
+      "Django verifies Keycloak sign-in tokens on every request; the API gateway only routes.",
+      "Trust, connect and verify relations live in a graph database that sets matchmaking distance.",
+      "Profile photos and message files are stored in S3-compatible buckets on SeaweedFS.",
+      "Matched and pledged users get push notifications through Firebase Cloud Messaging.",
+      "Creates and logs in Matrix chat users through the Synapse admin API during onboarding.",
+      "Production reports errors to Sentry, sampling 10 percent of traces.",
+      "Adds dating and befriending pledges with ledgers, served through the matchmaking API.",
+      "Adds matching and unmatching as its own Django app, with queries, API endpoints and tests.",
+      "Web of trust is its own Django app, backed by a Dgraph client and graph operations.",
+      "Serves a dating profile preview as a web view for the public website.",
+      "Beta-tested v1 with 25 people, with the app working for them end to end.",
+      "Sends App Store and Google Play purchase data to the backend receipts endpoint for verification."
+    ],
+    "overview": "Qtpi is a dating app with a mobile client and a Django backend. People match through a web of trust and a pledging system, then chat and get notified once they are matched. Its first version was tried by 25 beta testers.",
+    "highlights": [
+      "Matching uses a web of trust. Connections and verifications between people are stored in a graph database and used to work out how close two people are for matchmaking.",
+      "Users can pledge toward dating or befriending, and the app keeps ledgers of those pledges. Matching and unmatching are handled by the backend.",
+      "Matched users can message each other in the app, which sets up chat accounts for them during onboarding. Matched and pledged users also receive push notifications.",
+      "Purchases made through the Apple App Store or Google Play are sent to the backend for verification, and the backend checks Apple transactions against Apple's certificates.",
+      "Sign-in goes through a single identity service, and the backend checks the user's token on every request. Profile photos and message files are kept in self-hosted object storage.",
+      "The app is built with Flutter, with project folders for several platforms. Push setup is currently in place for Android and iOS. Community forum features are early groundwork and depend on a separate forum server."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/qtpi.webp",
+      "alt": "Launch screen rendered from the real UI in a test with mocked state, showing two pie characters and Log In options.",
+      "width": 644,
+      "height": 1400
+    }
+  },
+  {
+    "id": "quanitya",
+    "title": "Quanitya",
+    "type": "project",
+    "description": "Track anything structured: end-to-end encrypted, customizable UI, and private JS scripts to analyze your data.",
+    "technologies": [
+      "Flutter",
+      "PowerSync",
+      "Serverpod"
+    ],
+    "year": 2025,
+    "status": "ongoing",
+    "stage": "prototype",
+    "links": {
+      "live": "https://quanitya.com",
+      "github": "https://github.com/qtpi-bonding-org/quanitya"
+    },
+    "bullets": [
+      "Builds the cloud and cloud admin servers on Serverpod 3.4.1.",
+      "Managed AI calls OpenRouter with fixed models for template generation and for analysis suggestions."
+    ],
+    "overview": "Quanitya is an app for tracking structured data of your own design, such as habits, measurements or any other repeated log. Entries are encrypted on the device before they sync, and you can run your own JavaScript scripts on the data to analyze it. It runs on iOS, Android and web.",
+    "highlights": [
+      "Templates, entries, schedules and analysis scripts are encrypted on the device before syncing. The server stores them as opaque encrypted text tied to an account.",
+      "Analysis scripts are written in JavaScript and run on the device with statistics libraries included. Results can be single values, series or tables, shown as stat values or charts. Support on native desktop platforms is not there yet.",
+      "Sync is optional. The app works locally by default with no server, and can also sync through a self-hosted server or the Quanitya cloud.",
+      "A new device is paired by scanning a QR code from a device that is already set up, which hands over the encryption key. Sign-in needs no email or password, and revoking a device requires a separate recovery key.",
+      "Recurring schedules send local reminders with a Quick Log action. After an entry is saved, the app can also call webhook URLs you set for that template.",
+      "AI help for building templates and writing analysis scripts is optional. You pick the managed Quanitya service, OpenRouter with your own key, or a local Ollama server. Importing from an image with on-device text extraction is at an early stage."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/quanitya.webp",
+      "alt": "Logbook tab on a phone with a two-column grid of tracker tiles, each with edit and quick-log buttons",
+      "width": 644,
+      "height": 1400
+    }
+  },
+  {
+    "id": "achaean",
+    "title": "Achaean",
+    "type": "project",
+    "description": "Social network where mutual trust, not moderators, gates communities, and posts live in your own git repo.",
+    "technologies": [
+      "Flutter",
+      "Serverpod",
+      "PostgreSQL",
+      "Apache AGE",
+      "Git"
+    ],
+    "year": 2026,
+    "status": "paused",
+    "stage": "prototype",
+    "links": {
+      "github": "https://github.com/qtpi-bonding-org/achaean"
+    },
+    "bullets": [
+      "Defines an open protocol for identity, trust, communities and content, which the Achaean platform implements.",
+      "Stores observing apart from trusting; only trust edges feed the graph that computes membership.",
+      "Client and server share one Dart package of protocol models.",
+      "Uses a self-hosted Forgejo instance, run from a compose service backed by PostgreSQL, as the default archive."
+    ],
+    "overview": "Achaean is a social app built on the Koinon protocol, where identity, trust and communities are defined by open rules. People sign in with a git forge account, hold their own keypair, and keep their posts as files in their own repository. Communities are made up of people who trust each other, and the project is still early.",
+    "highlights": [
+      "Community membership comes from mutual trust between signers of a community's README. The server counts those trust links and keeps only people at or above a threshold. This part is still early.",
+      "Posts are files in the author's own git repo, with the signed post, tags and community routing stored together. The app reads them from the author's forge when showing them, and the server index does not store post bodies.",
+      "Following someone is separate from trusting them. Observing a person feeds your personal feed and relationship lists, but only trust counts toward community membership.",
+      "A person can create a community, join one by signing its README, or fork one into a new community. This works in the client, though the community features are still early.",
+      "The default setup runs on a self-hosted Forgejo instance, with a script that mirrors repos to Radicle for peer-to-peer copies. Support for GitHub and GitLab is groundwork only.",
+      "The Flutter client has its own Athenian visual theme with light and dark modes, and it runs in a demo mode without an index server."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/achaean.webp",
+      "alt": "Phone showing a feed of sample posts in the Athenian theme, with the headline Communities gated by mutual trust",
+      "width": 644,
+      "height": 1400
+    }
+  },
+  {
+    "id": "archeglyph",
+    "title": "Archeglyph",
+    "type": "project",
+    "description": "Renders deterministic SVG diagrams from node-and-edge text files, with a visual editor and PR-reviewable diffs.",
+    "technologies": [
+      "TypeScript",
+      "Bun",
+      "SolidJS",
+      "Protobuf",
+      "elkjs"
+    ],
+    "year": 2026,
+    "status": "ongoing",
+    "stage": "released",
+    "links": {
+      "live": "https://qtpi-bonding.github.io/archeglyph/?gh=qtpi-bonding/archeglyph&path=examples/stack-managed.diag.json",
+      "github": "https://github.com/qtpi-bonding/archeglyph"
+    },
+    "bullets": [
+      "CI gives fork pull requests a read-only token and posts comments only on the repo's own pull requests.",
+      "Computes graph layout with elkjs, the JavaScript port of the Eclipse Layout Kernel."
+    ],
+    "overview": "archeglyph turns a plain-text list of nodes and edges into an SVG diagram. The same input always produces the same picture, so a diagram can be committed next to the code and reviewed like any other file. A browser editor lets you arrange the diagram visually.",
+    "highlights": [
+      "Rendering is repeatable: the same diagram, style and theme give byte-identical SVG. Tests compare renders byte for byte, and a pull-request check fails if a committed SVG no longer matches its source.",
+      "A diff command compares two versions of a diagram and draws the changes in place. Added, deleted and modified parts get distinct colors plus a plus, minus or delta marker, and deleted elements are restored into the picture.",
+      "On pull requests that touch a diagram, a GitHub workflow posts one updated comment summarizing the changes. Before and after pictures sit side by side when the base revision has an SVG. Comments appear only on same-repository pull requests.",
+      "The text file holds the graph and the editor never changes it. The editor saves only a separate style file, which holds node positions and sizes, so layout tweaks stay apart from the diagram's content.",
+      "The browser editor opens and saves files on your own machine, has no telemetry, and makes network requests only when asked, such as loading a diagram from a URL. GitHub comment mode is still early.",
+      "Large diagrams can be narrowed to a view. The open command picks elements, how deep to expand them, and optionally how many edges away or which edge kinds to include, and records the choice in the stylesheet, leaving the diagram untouched."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/archeglyph.webp",
+      "alt": "Blueprint-themed stack diagram rendered by archeglyph - Heroku and Django feeding four managed services",
+      "width": 1200,
+      "height": 750
+    }
+  },
+  {
+    "id": "gait",
+    "title": "Gait",
+    "type": "project",
+    "description": "Coding agent harness where each turn is a fresh sandboxed process and state is folded from an append-only log.",
+    "technologies": [
+      "Rust",
+      "Protobuf",
+      "libgit2",
+      "Wasmtime"
+    ],
+    "year": 2026,
+    "status": "ongoing",
+    "stage": "released",
+    "links": {
+      "github": "https://github.com/qtpi-bonding/gait"
+    },
+    "bullets": [
+      "Used as the subagent Claude Code delegates coding work to when building these projects."
+    ],
+    "overview": "gait is a coding agent that works on a project from the command line, in an editor, or from a REPL. Each turn runs in a fresh process, and the conversation is rebuilt from a log saved on disk, so every session can be inspected and rewound. It works with many model providers, including local ones.",
+    "highlights": [
+      "Every session is recorded as an append-only log, with one event per line, kept in its own git branch of a separate workspace repository. The log defines the conversation, the model choice and permission grants, so you can see what happened.",
+      "Undo can restore your code to the state after any earlier run, and can also rewind the session transcript. Snapshots are kept apart from your own repository, which they never write to.",
+      "Tool calls pass through a permission gate where deny rules always win and anything not allowed asks you. On macOS the kernel sandbox also seals the model and tool processes; Linux support is not finished. A sandbox failure pauses the turn so you can unlock access.",
+      "One model string selects among 17 providers, including Ollama and LM Studio for local models. Adding another OpenAI-compatible provider takes one registry entry.",
+      "Larger jobs can be split up. The agent can start sub-agents as separate sandboxed processes, and YAML workflows chain shell commands, model prompts, branches and human approval gates. Skills, modes, hooks and MCP servers let you customize behavior.",
+      "The same turn engine serves the command line, two REPLs and an editor adapter for the Agent Client Protocol. A smaller gait-min build drops workflows, MCP and the rich terminal display. The editor adapter is still early."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/gait.webp",
+      "alt": "Gait REPL listing two turns, undoing to turn 1, and the git diff shrinking from 7 changed lines to 4",
+      "width": 1200,
+      "height": 750
+    }
+  },
+  {
+    "id": "scipipol",
+    "title": "SciPiPol",
+    "type": "project",
+    "description": "Platform that connects scientists to US state legislation, with ORCID sign-in and LegiScan bill data.",
+    "technologies": [
+      "Django",
+      "PostgreSQL",
+      "HTMX",
+      "Docker"
+    ],
+    "year": 2024,
+    "status": "archived",
+    "stage": "prototype",
+    "links": {},
+    "bullets": [],
+    "overview": "SciPiPol is a web application that lets scientists look up US state bills. Bill data comes from LegiScan and is stored in a Postgres database, and scientists sign up using their ORCID identity.",
+    "highlights": [
+      "State legislation is loaded into Postgres by the bundled LegiScan bulk toolkit. 21 unmanaged Django models read those tables, so migrations do not touch them.",
+      "Sign-up uses ORCID through django-allauth. A custom account adapter takes the user's name from the ORCID profile.",
+      "Bills are browsed and searched through server-rendered pages enhanced with HTMX, with no JavaScript framework.",
+      "Production runs on Docker Compose, with an Alpine-based Django image behind Nginx. Settings are split into base, local and production."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/scipipol.webp",
+      "alt": "SciPiPol logo, a pi symbol between the words Science and Policy",
+      "width": 1200,
+      "height": 750
+    }
+  },
+  {
+    "id": "structmux",
+    "title": "Structmux",
+    "type": "project",
+    "description": "A tmux-style workspace; agent, terminal and markdown panes share a typed protobuf API over WebSocket and Zenoh.",
+    "technologies": [
+      "Rust",
+      "GPUI",
+      "Alacritty",
+      "Protocol Buffers",
+      "ACP"
+    ],
+    "year": 2026,
+    "status": "ongoing",
+    "stage": "prototype",
+    "links": {},
+    "bullets": [
+      "Comments on a selected passage go to a coding agent, which edits the document in place."
+    ],
+    "overview": "structmux is a keyboard-driven workspace that tiles terminals, AI agents, markdown notes, nushell and git views in one window. A background daemon keeps the state, so the desktop window can close and reopen without losing the session. Several daemons can also be linked into a fleet.",
+    "highlights": [
+      "Move around and arrange panes from the keyboard. Layouts are nested splits, and directional focus jumps to the nearest pane. The mouse is optional.",
+      "Select passages or rows in a markdown note or agent pane, comment on them, and send them to an agent as one prompt. For a note, the agent gets the file path, section and quoted text and edits it in place. This is early, and drafts last only while the client is open.",
+      "Agent panes host agents over the Agent Client Protocol, with agents defined in global or per-project config. Permission requests appear in the pane, and proposed edits show as red and green lines. This is partly finished, and other tool requests still show raw input.",
+      "Markdown panes follow the file on disk, so edits made elsewhere show up in the pane, and code blocks are syntax highlighted. Terminal panes run a real shell with command grouping, and are keyboard-only for now.",
+      "Content lives in a graph of typed nodes, and the pane layout is only a view onto it. One piece of content can show in several panes or none, and each kind of content is a provider that changes the graph through typed writes.",
+      "Fleet settings are signed with an owner key made at setup, and setup does not finish until the key backup is confirmed. A policy decides whether each caller may read, write or execute, answering allow, ask or deny."
+    ],
+    "media": {
+      "screenshot": "/assets/images/work/structmux.webp",
+      "alt": "Markdown note on the left, agent pane on the right listing two sent comments, its plan and its reply",
+      "width": 1200,
+      "height": 750
+    }
+  }
+]

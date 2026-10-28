@@ -45,7 +45,7 @@
   "work": {
     "description": "Schema for work items (projects and publications)",
     "required": ["title", "description", "type", "tags"],
-    "optional": ["collaborators", "technologies", "journal", "year", "status", "featured", "links", "media"],
+    "optional": ["collaborators", "technologies", "journal", "year", "status", "featured", "links", "media", "youtube", "bullets", "overview", "highlights"],
     "fields": {
       "title": {
         "type": "string",
@@ -108,8 +108,27 @@
         "properties": {
           "screenshot": "Screenshot image path (for projects)",
           "tocImage": "Table of contents image path (for publications)",
-          "alt": "Alt text for accessibility"
+          "alt": "Alt text for accessibility",
+          "og": "Social-sharing image path (defaults to screenshot)",
+          "width": "Image width in pixels (generated)",
+          "height": "Image height in pixels (generated)"
         }
+      },
+      "youtube": {
+        "type": "string",
+        "description": "YouTube video ID for the demo embedded on the project page; empty shows no player"
+      },
+      "bullets": {
+        "type": "array",
+        "description": "Founder-approved detail bullets shown on the project page (generated from worksbase)"
+      },
+      "overview": {
+        "type": "string",
+        "description": "Short overview shown under the header on the project page (generated from worksbase)"
+      },
+      "highlights": {
+        "type": "array",
+        "description": "Highlight list shown on the project page (generated from worksbase)"
       }
     }
   },

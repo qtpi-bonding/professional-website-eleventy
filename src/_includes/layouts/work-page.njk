@@ -1,0 +1,123 @@
+---
+layout: layouts/base.njk
+---
+
+{#
+  Project page layout
+
+  Opt-in: src/content/work/work.11tydata.js applies it to work items that have an
+  entry in src/_data/projects.json. Reads the page's merged front matter: title,
+  description, year, status, technologies, links, youtube, media, overview, highlights
+  (bullets only as a fallback when a project has no highlights).
+#}
+
+{# Highlights are the default list; the older bullets are only a fallback when a project has none #}
+{% set hasHighlights = highlights and highlights.length > 0 %}
+{% set listItems = highlights if hasHighlights else bullets %}
+{% set bulletCap = 8 %}
+{% set bulletCount = listItems.length if listItems else 0 %}
+{% set labels = site.content.labels.workItems %}
+
+<article class="work-page container mx-auto px-4 py-10 max-w-3xl" itemscope itemtype="https://schema.org/CreativeWork">
+
+  <a href="{{ '/#projects-section' | url }}"
+     class="work-page__back inline-flex items-center text-sm text-textSecondary hover:text-primary mb-8">
+    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+    </svg>
+    All work
+  </a>
+
+  <header class="mb-8">
+    <h1 class="text-4xl font-headline font-bold text-text mb-3" itemprop="name">{{ title }}</h1>
+    <p class="text-lg text-textSecondary leading-relaxed" itemprop="description">{{ description }}</p>
+
+    <div class="flex flex-wrap items-center gap-3 mt-4 text-sm text-textSecondary">
+      {% if year %}<span>{{ year }}</span>{% endif %}
+      {% if status %}
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-neutral-100 text-textSecondary">{{ status | capitalize }}</span>
+      {% endif %}
+    </div>
+
+    {% if technologies and technologies.length > 0 %}
+      <div class="flex flex-wrap gap-2 mt-4">
+        {% for tech in technologies %}
+          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-textSecondary" itemprop="keywords">{{ tech }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if links and (links.demo or links.live or links.github or links.external) %}
+      <div class="work-page__links flex flex-wrap gap-3 mt-6">
+        {% if links.live %}
+          <a href="{{ links.live }}" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium border border-neutral-200 text-text hover:text-success hover:bg-neutral-100">{{ labels.viewLiveSite }}</a>
+        {% endif %}
+        {% if links.demo %}
+          <a href="{{ links.demo }}" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium border border-neutral-200 text-text hover:text-primary hover:bg-neutral-100">{{ labels.viewDemo }}</a>
+        {% endif %}
+        {% if links.github %}
+          <a href="{{ links.github }}" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium border border-neutral-200 text-text hover:bg-neutral-100">{{ labels.viewSourceCode }}</a>
+        {% endif %}
+        {% if links.external %}
+          <a href="{{ links.external }}" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium border border-neutral-200 text-text hover:text-info hover:bg-neutral-100">External link</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </header>
+
+  {# Generated overview; the hand-written prose is only the fallback #}
+  {% if overview %}
+    <p class="work-page__overview text-lg text-text leading-relaxed mb-10" itemprop="abstract">{{ overview }}</p>
+  {% elif content | trim %}
+    <div class="work-page__overview prose max-w-none text-textSecondary mb-10">
+      {{ content | safe }}
+    </div>
+  {% endif %}
+
+  {# Demo video if there is one, otherwise the hero image if there is one #}
+  {% if youtube %}
+    <div id="demo" class="work-page__video mb-10 rounded-lg overflow-hidden bg-neutral-100" style="aspect-ratio: 16 / 9;">
+      <iframe class="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/{{ youtube | urlencode }}"
+              title="{{ title }} demo video"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  {% elif media and media.screenshot %}
+    {% set heroW = media.width or 1200 %}
+    {% set heroH = media.height or 750 %}
+    <img src="{{ media.screenshot | url }}"
+         alt="{{ media.alt }}"
+         width="{{ heroW }}" height="{{ heroH }}"
+         class="work-page__hero rounded-lg mb-10 {% if heroH > heroW %}mx-auto w-auto h-auto max-h-[36rem]{% else %}w-full h-auto{% endif %}"
+         itemprop="image">
+  {% endif %}
+
+  {% if bulletCount > 0 %}
+    <section class="work-page__details" aria-labelledby="details-heading">
+      <h2 id="details-heading" class="text-2xl font-headline font-bold text-text mb-4">{{ "Highlights" if hasHighlights else "Details" }}</h2>
+      <ul class="list-disc pl-6 space-y-2 text-textSecondary leading-relaxed">
+        {% for bullet in listItems %}
+          {% if loop.index <= bulletCap %}<li>{{ bullet }}</li>{% endif %}
+        {% endfor %}
+      </ul>
+      {% if bulletCount > bulletCap %}
+        <details class="work-page__more mt-2">
+          <summary class="cursor-pointer text-sm font-medium text-primary py-2">Show {{ bulletCount - bulletCap }} more</summary>
+          <ul class="list-disc pl-6 space-y-2 text-textSecondary leading-relaxed mt-2">
+            {% for bullet in listItems %}
+              {% if loop.index > bulletCap %}<li>{{ bullet }}</li>{% endif %}
+            {% endfor %}
+          </ul>
+        </details>
+      {% endif %}
+    </section>
+  {% endif %}
+
+</article>
