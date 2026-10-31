@@ -530,6 +530,18 @@ class SimpleSidebarManager {
       }
     }
     
+    // Mobile: close the sidebar after following an in-page nav link, so it
+    // doesn't stay open over the section that was just scrolled to
+    if (this.sidebar) {
+      this.sidebar.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+          if (this.isMobile && this.isVisible) {
+            this.hideSidebar();
+          }
+        });
+      });
+    }
+
     // Enhanced keyboard navigation
     document.addEventListener('keydown', (e) => {
       // Escape key to close sidebar

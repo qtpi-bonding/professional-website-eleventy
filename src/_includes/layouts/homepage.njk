@@ -18,7 +18,7 @@ hideHeader: true
   </div>
   
   {# Mobile Hamburger Menu Button #}
-  <button class="mobile-menu-toggle md:hidden" 
+  <button class="mobile-menu-toggle lg:hidden" 
           data-sidebar-toggle
           aria-label="Open navigation menu"
           aria-expanded="false"
@@ -50,7 +50,7 @@ hideHeader: true
   
   {# Left Sidebar - Fixed Navigation #}
   <aside id="main-sidebar"
-         class="sidebar sidebar--visible fixed left-0 top-0 h-screen w-80 bg-nav-background text-nav-text overflow-y-auto z-10 border-r border-secondary border-opacity-20"
+         class="sidebar sidebar--visible fixed left-0 top-0 h-screen w-80 bg-nav-background text-nav-text overflow-y-auto z-40 border-r border-secondary border-opacity-20"
          data-sidebar
          role="navigation"
          aria-label="Main navigation"
@@ -61,7 +61,7 @@ hideHeader: true
       {# Personal Information Header #}
       <header class="sidebar-header mb-12">
         {# Close button for mobile #}
-        <button class="sidebar-close-button md:hidden absolute top-4 right-4 p-2 text-textSecondary hover:text-text transition-colors duration-200"
+        <button class="sidebar-close-button lg:hidden absolute top-4 right-4 p-2 text-textSecondary hover:text-text transition-colors duration-200"
                 data-sidebar-toggle
                 aria-label="Close navigation"
                 role="button"
@@ -72,7 +72,7 @@ hideHeader: true
         </button>
         
         {# Toggle button for tablet/desktop #}
-        <button class="sidebar-toggle-button hidden md:block absolute top-4 right-4 p-2 text-textSecondary hover:text-text transition-colors duration-200"
+        <button class="sidebar-toggle-button hidden lg:block absolute top-4 right-4 p-2 text-textSecondary hover:text-text transition-colors duration-200"
                 data-sidebar-toggle
                 aria-label="Hide navigation sidebar"
                 aria-expanded="true"
